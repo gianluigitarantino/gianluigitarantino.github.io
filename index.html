@@ -1,58 +1,140 @@
-<main style="max-width: 760px; padding: 80px 24px;">
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>work in progress – gianluigi tarantino</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- Pulsante lingua -->
-  <button id="lang-toggle"
-    style="background: none; border: none; padding: 0;
-           font-size: 0.85rem; letter-spacing: 0.15em;
-           color: #8b8478; cursor: pointer; margin-bottom: 40px;">
-    en
-  </button>
+  <!-- IBM Plex Sans da Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400&display=swap" rel="stylesheet">
 
-  <!-- Eyebrow -->
-  <p class="txt-it" style="font-size: 0.9rem; letter-spacing: 0.12em; color: #726d64; margin-bottom: 32px;">
-    lavori in corso
-  </p>
-  <p class="txt-en" style="display:none; font-size: 0.9rem; letter-spacing: 0.12em; color: #726d64; margin-bottom: 32px;">
-    work in progress
-  </p>
-
-  <!-- Titolo -->
-  <h1 class="txt-it" style="font-weight: 400; font-size: 2rem; letter-spacing: 0.04em; color: #5a554e; margin-bottom: 24px;">
-    questa sezione sarà disponibile a breve.
-  </h1>
-  <h1 class="txt-en" style="display:none; font-weight: 400; font-size: 2rem; letter-spacing: 0.04em; color: #5a554e; margin-bottom: 24px;">
-    this section will be available soon.
-  </h1>
-
-  <!-- Corpo -->
-  <p class="txt-it" style="font-weight: 300; font-size: 1rem; color: #5a554e; line-height: 1.7;">
-    presenterà una selezione essenziale di progetti tra architettura e interni.
-  </p>
-
-  <p class="txt-en" style="display:none; font-weight: 300; font-size: 1rem; color: #5a554e; line-height: 1.7;">
-    it will present a concise selection of projects across architecture and interiors.
-  </p>
-
-</main>
-
-<script>
-  const btn = document.getElementById("lang-toggle");
-  let current = "it";
-
-  btn.addEventListener("click", () => {
-    const it = document.querySelectorAll(".txt-it");
-    const en = document.querySelectorAll(".txt-en");
-
-    if (current === "it") {
-      it.forEach(el => el.style.display = "none");
-      en.forEach(el => el.style.display = "block");
-      btn.textContent = "it";
-      current = "en";
-    } else {
-      en.forEach(el => el.style.display = "none");
-      it.forEach(el => el.style.display = "block");
-      btn.textContent = "en";
-      current = "it";
+  <style>
+    :root {
+      --bg-pietra: #f7f5f2;
+      --testo-ferro: #5a554e;
+      --testo-sabbia-scura: #726d64;
+      --lingua: #8b8478;
     }
-  });
-</script>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-pietra);
+      font-family: "IBM Plex Sans", sans-serif;
+      text-transform: lowercase;
+      color: var(--testo-ferro);
+    }
+
+    .wip-wrapper {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+
+    .language-switch {
+      font-weight: 300;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      color: var(--lingua);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      margin-bottom: 40px;
+    }
+
+    .wip-eyebrow {
+      font-weight: 300;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      color: var(--testo-sabbia-scura);
+      margin: 0 0 32px;
+    }
+
+    .wip-title {
+      font-weight: 400;
+      font-size: 2rem; /* 32px */
+      letter-spacing: 0.04em;
+      color: var(--testo-ferro);
+      margin: 0 0 24px;
+    }
+
+    .wip-text {
+      font-weight: 300;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--testo-ferro);
+      margin: 0;
+    }
+
+    .wip-text.secondary {
+      font-size: 0.95rem;
+      color: var(--testo-sabbia-scura);
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <main class="wip-wrapper">
+
+    <!-- toggle lingua -->
+    <button id="lang-toggle" class="language-switch">
+      en
+    </button>
+
+    <!-- eyebrow -->
+    <p class="wip-eyebrow txt-it">
+      lavori in corso
+    </p>
+    <p class="wip-eyebrow txt-en" style="display:none;">
+      work in progress
+    </p>
+
+    <!-- titolo -->
+    <h1 class="wip-title txt-it">
+      questa sezione sarà disponibile a breve.
+    </h1>
+    <h1 class="wip-title txt-en" style="display:none;">
+      this section will be available soon.
+    </h1>
+
+    <!-- testo -->
+    <p class="wip-text txt-it">
+      presenterà una selezione essenziale di progetti di architettura e interni.
+    </p>
+    <p class="wip-text txt-en" style="display:none;">
+      it will present a concise selection of architecture and interior projects.
+    </p>
+
+  </main>
+
+  <script>
+    const btn = document.getElementById("lang-toggle");
+    let current = "it";
+
+    btn.addEventListener("click", () => {
+      const itNodes = document.querySelectorAll(".txt-it");
+      const enNodes = document.querySelectorAll(".txt-en");
+
+      if (current === "it") {
+        itNodes.forEach(el => el.style.display = "none");
+        enNodes.forEach(el => el.style.display = "");
+        btn.textContent = "it";
+        current = "en";
+      } else {
+        enNodes.forEach(el => el.style.display = "none");
+        itNodes.forEach(el => el.style.display = "");
+        btn.textContent = "en";
+        current = "it";
+      }
+    });
+  </script>
+</body>
+</html>
