@@ -16,14 +16,9 @@
       --lingua: #8b8478;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-    }
+    html, body { margin: 0; padding: 0; }
 
     body {
       background-color: var(--bg-pietra);
@@ -60,7 +55,7 @@
 
     .wip-title {
       font-weight: 400;
-      font-size: 2rem; /* 32px */
+      font-size: 2rem;
       letter-spacing: 0.04em;
       color: var(--testo-ferro);
       margin: 0 0 24px;
@@ -71,13 +66,20 @@
       font-size: 1rem;
       line-height: 1.7;
       color: var(--testo-ferro);
-      margin: 0;
+      margin: 0 0 24px;
     }
 
-    .wip-text.secondary {
+    .wip-email {
+      font-weight: 300;
       font-size: 0.95rem;
+      line-height: 1.6;
       color: var(--testo-sabbia-scura);
-      margin-top: 8px;
+      margin-top: 40px;
+    }
+
+    .wip-email a {
+      color: var(--testo-ferro);
+      text-decoration: none;
     }
   </style>
 </head>
@@ -111,6 +113,14 @@
     </p>
     <p class="wip-text txt-en" style="display:none;">
       it will present a concise selection of architecture and interior projects.
+    </p>
+
+    <!-- EMAIL -->
+    <p class="wip-email txt-it">
+      per il portfolio: <a href="mailto:info@gianluigitarantino.com">info@gianluigitarantino.com</a>
+    </p>
+    <p class="wip-email txt-en" style="display:none;">
+      for the portfolio: <a href="mailto:info@gianluigitarantino.com">info@gianluigitarantino.com</a>
     </p>
 
   </main>
