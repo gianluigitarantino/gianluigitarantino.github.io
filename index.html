@@ -1,30 +1,58 @@
 <main style="max-width: 760px; padding: 80px 24px;">
 
-  <p style="font-size: 0.9rem; letter-spacing: 0.12em; color: #726d64; margin-bottom: 32px;">
-    work in progress / lavori in corso
+  <!-- Pulsante lingua -->
+  <button id="lang-toggle"
+    style="background: none; border: none; padding: 0;
+           font-size: 0.85rem; letter-spacing: 0.15em;
+           color: #8b8478; cursor: pointer; margin-bottom: 40px;">
+    en
+  </button>
+
+  <!-- Eyebrow -->
+  <p class="txt-it" style="font-size: 0.9rem; letter-spacing: 0.12em; color: #726d64; margin-bottom: 32px;">
+    lavori in corso
+  </p>
+  <p class="txt-en" style="display:none; font-size: 0.9rem; letter-spacing: 0.12em; color: #726d64; margin-bottom: 32px;">
+    work in progress
   </p>
 
-  <h1 style="font-weight: 400; font-size: 2rem; letter-spacing: 0.04em; color: #5a554e; margin-bottom: 24px;">
+  <!-- Titolo -->
+  <h1 class="txt-it" style="font-weight: 400; font-size: 2rem; letter-spacing: 0.04em; color: #5a554e; margin-bottom: 24px;">
     questa sezione sarà disponibile a breve.
   </h1>
+  <h1 class="txt-en" style="display:none; font-weight: 400; font-size: 2rem; letter-spacing: 0.04em; color: #5a554e; margin-bottom: 24px;">
+    this section will be available soon.
+  </h1>
 
-  <p style="font-weight: 300; font-size: 1rem; color: #5a554e; line-height: 1.7; margin-bottom: 12px;">
-    sarà dedicata a una selezione di lavori commissionati tra architettura, interni e prodotto.
+  <!-- Corpo -->
+  <p class="txt-it" style="font-weight: 300; font-size: 1rem; color: #5a554e; line-height: 1.7;">
+    presenterà una selezione essenziale di progetti tra architettura, interni e prodotto.
   </p>
 
-  <p style="font-weight: 300; font-size: 0.95rem; color: #726d64; line-height: 1.7; margin-bottom: 40px;">
-    this section will soon host a concise selection of commissioned projects.
-  </p>
-
-  <p style="font-weight: 300; font-size: 0.95rem; color: #726d64; line-height: 1.7;">
-    per richieste o portfolio:
-    <a href="mailto:info@gianluigitarantino.com" style="color: #5a554e; text-decoration: none;">
-      info@gianluigitarantino.com
-    </a>,
-    oppure torna alla
-    <a href="index.html" style="color: #5a554e; text-decoration: none;">
-      home
-    </a>.
+  <p class="txt-en" style="display:none; font-weight: 300; font-size: 1rem; color: #5a554e; line-height: 1.7;">
+    it will present a concise selection of projects across architecture, interiors and product.
   </p>
 
 </main>
+
+<script>
+  const btn = document.getElementById("lang-toggle");
+  let current = "it";
+
+  btn.addEventListener("click", () => {
+    const it = document.querySelectorAll(".txt-it");
+    const en = document.querySelectorAll(".txt-en");
+
+    if (current === "it") {
+      it.forEach(el => el.style.display = "none");
+      en.forEach(el => el.style.display = "block");
+      btn.textContent = "it";
+      current = "en";
+    } else {
+      en.forEach(el => el.style.display = "none");
+      it.forEach(el => el.style.display = "block");
+      btn.textContent = "en";
+      current = "it";
+    }
+  });
+</script>
