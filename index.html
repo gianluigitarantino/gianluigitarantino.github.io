@@ -49,4 +49,353 @@
       backdrop-filter: blur(18px);
       padding: 32px 26px;
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0,
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 32px;
+    }
+
+    @media (max-width: 800px) {
+      .wp-card {
+        grid-template-columns: 1fr;
+        padding: 24px 20px;
+      }
+    }
+
+    .wp-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 11px;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .wp-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(245, 193, 92, 0.9);
+      animation: pulse 1.4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(0.7);
+        opacity: 0.5;
+      }
+    }
+
+    .wp-title {
+      font-size: clamp(32px, 4vw, 40px);
+      line-height: 1.05;
+      margin: 0 0 14px;
+    }
+
+    .wp-subtitle {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      max-width: 34rem;
+    }
+
+    .wp-subtitle span {
+      opacity: 0.85;
+    }
+
+    .wp-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-subtle);
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .wp-badge-pill {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(245, 193, 92, 0.4);
+      box-shadow: 0 0 10px rgba(245, 193, 92, 0.6);
+    }
+
+    .wp-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 26px;
+      display: grid;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .wp-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .wp-bullet {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.25);
+      margin-top: 6px;
+    }
+
+    .wp-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .wp-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .wp-meta-item strong {
+      color: var(--fg);
+      font-weight: 500;
+    }
+
+    .wp-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .wp-button-main,
+    .wp-button-ghost {
+      border-radius: 999px;
+      font-size: 13px;
+      padding: 9px 16px;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: transform 0.14s ease, box-shadow 0.14s ease,
+                  background 0.14s ease, border-color 0.14s ease,
+                  color 0.14s ease;
+      white-space: nowrap;
+    }
+
+    .wp-button-main {
+      background: var(--accent);
+      color: #171717;
+      box-shadow: 0 10px 30px rgba(245, 193, 92, 0.35);
+    }
+
+    .wp-button-main:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 40px rgba(245, 193, 92, 0.5);
+    }
+
+    .wp-button-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .wp-button-ghost:hover {
+      border-color: rgba(245, 193, 92, 0.6);
+      color: var(--fg);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .wp-chevron {
+      font-size: 13px;
+      translate: 0 0;
+      transition: translate 0.16s ease;
+    }
+
+    .wp-button-main:hover .wp-chevron,
+    .wp-button-ghost:hover .wp-chevron {
+      translate: 2px 0;
+    }
+
+    /* Colonna destra: “timeline” semplificata */
+    .wp-right {
+      border-radius: 18px;
+      border: 1px dashed rgba(255, 255, 255, 0.08);
+      padding: 18px 18px 16px;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.04) 0, transparent 60%);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .wp-right-title {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .wp-steps {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .wp-step {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .wp-step-marker {
+      margin-top: 4px;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      flex-shrink: 0;
+    }
+
+    .wp-step.active .wp-step-marker {
+      background: var(--accent);
+      border-color: rgba(245, 193, 92, 0.8);
+      box-shadow: 0 0 12px rgba(245, 193, 92, 0.9);
+    }
+
+    .wp-step-label {
+      font-size: 12px;
+      color: var(--fg);
+    }
+
+    .wp-step-caption {
+      font-size: 11px;
+      color: var(--muted);
+      opacity: 0.85;
+    }
+
+    .wp-right-footer {
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--muted);
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="wp-wrapper">
+    <main class="wp-card">
+      <section>
+        <div class="wp-eyebrow">
+          <span class="wp-dot"></span>
+          <span>Work in progress</span>
+        </div>
+
+        <h1 class="wp-title">
+          Questa pagina è in costruzione.
+        </h1>
+
+        <p class="wp-subtitle">
+          Sto definendo i contenuti e la selezione dei lavori per questa sezione.
+          <span>Preferisco pubblicarla quando racconta davvero qualcosa di utile, non solo per riempire spazio.</span>
+        </p>
+
+        <div class="wp-badge">
+          <span class="wp-badge-pill"></span>
+          <span>Coming soon</span>
+        </div>
+
+        <ul class="wp-list">
+          <li>
+            <span class="wp-bullet"></span>
+            <span>Nuovi case study con immagini prima/dopo e dettagli tecnici.</span>
+          </li>
+          <li>
+            <span class="wp-bullet"></span>
+            <span>Progetti selezionati tra architettura, interni e prodotto.</span>
+          </li>
+          <li>
+            <span class="wp-bullet"></span>
+            <span>Versione bilingue IT / EN, come il resto del sito.</span>
+          </li>
+        </ul>
+
+        <div class="wp-label">Nel frattempo</div>
+        <div class="wp-meta-row">
+          <div class="wp-meta-item">
+            <strong>Portfolio</strong> su richiesta via email.
+          </div>
+          <div class="wp-meta-item">
+            <strong>Shoot</strong> disponibili in Italia e UK.
+          </div>
+        </div>
+
+        <div class="wp-actions">
+          <a href="index.html" class="wp-button-main">
+            Torna alla home
+            <span class="wp-chevron">↗</span>
+          </a>
+          <a href="mailto:info@gianluigitarantino.com?subject=Richiesta%20portfolio"
+             class="wp-button-ghost">
+            Chiedi il portfolio completo
+            <span class="wp-chevron">↗</span>
+          </a>
+        </div>
+      </section>
+
+      <aside class="wp-right">
+        <div class="wp-right-title">Stato della pagina</div>
+        <ul class="wp-steps">
+          <li class="wp-step active">
+            <div class="wp-step-marker"></div>
+            <div>
+              <div class="wp-step-label">Struttura definita</div>
+              <div class="wp-step-caption">Layout e gerarchia dei contenuti pronti.</div>
+            </div>
+          </li>
+          <li class="wp-step active">
+            <div class="wp-step-marker"></div>
+            <div>
+              <div class="wp-step-label">Selezione lavori</div>
+              <div class="wp-step-caption">Curando i progetti che hanno più senso mostrare.</div>
+            </div>
+          </li>
+          <li class="wp-step">
+            <div class="wp-step-marker"></div>
+            <div>
+              <div class="wp-step-label">Pubblicazione</div>
+              <div class="wp-step-caption">La pagina andrà online quando i contenuti sono solidi.</div>
+            </div>
+          </li>
+        </ul>
+
+        <div class="wp-right-footer">
+          Se sei curioso di qualcosa in particolare, scrivimi pure: posso mandarti esempi mirati.
+        </div>
+      </aside>
+    </main>
+  </div>
+</body>
+</html>
