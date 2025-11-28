@@ -1,97 +1,52 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sito in costruzione</title>
-  <meta name="description" content="Pagina di cortesia: sito in costruzione" />
+  <meta charset="UTF-8" />
+  <title>Work in progress – Gianluigi Tarantino</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Se hai già un main.css, lascia solo questo link -->
+  <link rel="stylesheet" href="main.css" />
+
   <style>
-    :root{
-      --bg:#0f1724; /* dark navy */
-      --card:#0b1220;
-      --accent:#38bdf8; /* sky */
-      --muted:#94a3b8;
-      --glass: rgba(255,255,255,0.03);
-      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-    }
-    html,body{height:100%;}
-    body{
-      margin:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:linear-gradient(180deg,var(--bg) 0%, #071028 100%);
-      color: #e6eef8;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:24px;
-    }
-    .card{
-      width:100%;
-      max-width:720px;
-      background:linear-gradient(180deg,var(--card), rgba(10,14,20,0.85));
-      border-radius:14px;
-      padding:28px;
-      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
-      text-align:center;
-      backdrop-filter: blur(6px);
-    }
-    h1{margin:0 0 8px;font-size:1.9rem;letter-spacing:-0.02em}
-    p.lead{margin:0 0 18px;color:var(--muted)}
+    /* Rimuovi questo blocco se il tuo stile globale gestisce già tutto */
 
-    /* spinner */
-    .spinner{
-      margin:18px auto 20px;
-      width:72px;height:72px;
-      border-radius:50%;
-      display:grid;place-items:center;
-      background:conic-gradient(var(--accent), transparent 40%);
-      mask: radial-gradient(farthest-side, transparent 60%, black 61%);
-      animation: spin 1.6s linear infinite;
-    }
-    @keyframes spin{to{transform:rotate(360deg)}}
-
-    /* progress bar (decorative) */
-    .progress{
-      height:10px;border-radius:999px;background:var(--glass);overflow:hidden;margin:18px 0 12px;
-    }
-    .progress > i{
-      display:block;height:100%;width:36%;background:linear-gradient(90deg,var(--accent), #60a5fa);
-      border-radius:999px;transform-origin:left center;animation:grow 3s ease-in-out infinite;
-    }
-    @keyframes grow{
-      0%{width:6%}
-      50%{width:66%}
-      100%{width:6%}
+    :root {
+      --bg: #050608;
+      --fg: #f5f5f5;
+      --muted: #8b8b8b;
+      --accent: #f5c15c;
+      --accent-soft: rgba(245, 193, 92, 0.12);
+      --border-subtle: rgba(255, 255, 255, 0.06);
     }
 
-    .meta{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:16px;flex-wrap:wrap}
-    .meta a{color:var(--accent);text-decoration:none;font-weight:600}
-
-    footer{margin-top:18px;color:var(--muted);font-size:0.9rem}
-
-    /* small responsive tweaks */
-    @media (max-width:420px){
-      .card{padding:20px}
-      h1{font-size:1.4rem}
+    * {
+      box-sizing: border-box;
     }
-  </style>
-</head>
-<body>
-  <main class="card" role="main">
-    <h1>Sito in costruzione</h1>
-    <p class="lead">Stiamo lavorando su qualcosa di nuovo. Torna a trovarci tra poco!</p>
 
-    <div class="spinner" aria-hidden="true"></div>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Inter", sans-serif;
+      background: radial-gradient(circle at top, #101018 0, var(--bg) 50%);
+      color: var(--fg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-    <div class="progress" aria-hidden="true"><i></i></div>
+    .wp-wrapper {
+      width: 100%;
+      max-width: 960px;
+      padding: 24px;
+    }
 
-    
-      <div>•</div>
-      <div>🔧 Versione: <strong>WIP — 0.1</strong></div>
-    </div>
-
-    
-  </main>
-</body>
-</html>
+    .wp-card {
+      border-radius: 24px;
+      border: 1px solid var(--border-subtle);
+      background: radial-gradient(circle at top left, var(--accent-soft) 0, transparent 55%),
+                  rgba(5, 6, 8, 0.92);
+      backdrop-filter: blur(18px);
+      padding: 32px 26px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0,
