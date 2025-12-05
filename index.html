@@ -159,26 +159,40 @@
 
   </main>
 
-  <script>
-    const btn = document.getElementById("lang-toggle");
-    let current = "it";
+<script>
+  const btn = document.getElementById("lang-toggle");
+  let current = "it";
 
-    btn.addEventListener("click", () => {
-      const itNodes = document.querySelectorAll(".txt-it");
-      const enNodes = document.querySelectorAll(".txt-en");
+  function switchTo(lang) {
+    const itNodes = document.querySelectorAll(".txt-it");
+    const enNodes = document.querySelectorAll(".txt-en");
 
-      if (current === "it") {
-        itNodes.forEach(el => el.style.display = "none");
-        enNodes.forEach(el => el.style.display = "");
-        btn.textContent = "it";
-        current = "en";
-      } else {
-        enNodes.forEach(el => el.style.display = "none");
-        itNodes.forEach(el => el.style.display = "");
-        btn.textContent = "en";
-        current = "it";
-      }
-    });
-  </script>
+    if (lang === "en") {
+      itNodes.forEach(el => el.style.display = "none");
+      enNodes.forEach(el => el.style.display = "");
+      btn.textContent = "it";
+      current = "en";
+    } else {
+      enNodes.forEach(el => el.style.display = "none");
+      itNodes.forEach(el => el.style.display = "");
+      btn.textContent = "en";
+      current = "it";
+    }
+  }
+
+  // 1️⃣ AUTO-DETECTION della lingua browser
+  const userLang = navigator.language || navigator.userLanguage;
+  if (userLang && !userLang.toLowerCase().startsWith("it")) {
+    switchTo("en"); // se NON è italiano → inglese
+  } else {
+    switchTo("it"); // se è italiano → italiano
+  }
+
+  // 2️⃣ TOGGLE MANUALE
+  btn.addEventListener("click", () => {
+    switchTo(current === "it" ? "en" : "it");
+  });
+</script>
+
 </body>
 </html>
