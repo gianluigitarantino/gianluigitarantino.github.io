@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="it">
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7FKM8548N"></script>
@@ -59,7 +61,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400&display=swap" rel="stylesheet">
-
 
   <style>
     :root {
@@ -145,13 +146,17 @@
         if (!stored) {
           const userLang = (navigator.language || navigator.userLanguage || '').toLowerCase();
           if (userLang && !userLang.startsWith('it')) {
+            // prima visita, browser NON italiano → passa a EN
             localStorage.setItem(KEY, 'en');
             window.location.href = '/en/';
           } else {
+            // prima visita, browser italiano → resta qui
             localStorage.setItem(KEY, 'it');
           }
         }
-      } catch (e) {}
+      } catch (e) {
+        // se localStorage non è disponibile, ignora
+      }
     })();
   </script>
 
@@ -173,3 +178,39 @@
   </script>
 
 </head>
+<body>
+  <main class="wip-wrapper">
+
+    <!-- switch lingua -->
+    <button class="language-switch" id="switch-to-en">
+      en
+    </button>
+
+    <p class="wip-eyebrow">gianluigi tarantino</p>
+
+    <h1 class="wip-title">spazio in allestimento</h1>
+
+    <p class="wip-text">grazie per l'attesa</p>
+
+    <p class="wip-email">
+      per informazioni o portfolio: <a href="mailto:info@gianluigitarantino.com">info@gianluigitarantino.com</a>
+    </p>
+
+  </main>
+
+  <script>
+    (function () {
+      const KEY = 'gt_lang';
+      const btn = document.getElementById('switch-to-en');
+      if (!btn) return;
+
+      btn.addEventListener('click', function () {
+        try {
+          localStorage.setItem(KEY, 'en');
+        } catch (e) {}
+        window.location.href = '/en/';
+      });
+    })();
+  </script>
+</body>
+</html>
