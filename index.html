@@ -32,7 +32,7 @@
   <link rel="alternate" href="https://www.gianluigitarantino.com/en/" hreflang="en">
   <link rel="alternate" href="https://www.gianluigitarantino.com/en/" hreflang="x-default">
 
-  <!-- Open Graph -->
+  <!-- OG -->
   <meta property="og:title" content="Gianluigi Tarantino – Fotografo di architettura e interni">
   <meta property="og:description" content="Fotografo di architettura e interni tra Salento e Londra. Portfolio disponibile su richiesta.">
   <meta property="og:type" content="website">
@@ -40,11 +40,9 @@
   <meta property="og:image" content="https://www.gianluigitarantino.com/og-image.jpg">
   <meta property="og:locale" content="it_IT">
 
-  <!-- Preconnect font -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <!-- IBM Plex Sans da Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400&display=swap" rel="stylesheet">
 
   <style>
@@ -56,7 +54,6 @@
     }
 
     * { box-sizing: border-box; }
-
     html, body { margin: 0; padding: 0; }
 
     body {
@@ -72,6 +69,7 @@
       padding: 80px 24px;
     }
 
+    /* Questo è lo stile ORIGINALE del tuo toggle */
     .language-switch {
       font-weight: 300;
       font-size: 0.85rem;
@@ -82,6 +80,7 @@
       padding: 0;
       cursor: pointer;
       margin-bottom: 40px;
+      text-transform: lowercase;
     }
 
     .wip-eyebrow {
@@ -120,40 +119,21 @@
       color: var(--testo-ferro);
       text-decoration: none;
     }
-
-    .lang-link {
-      margin-top: 24px;
-      font-size: 0.85rem;
-      letter-spacing: 0.12em;
-    }
-
-    .lang-link a {
-      color: var(--lingua);
-      text-decoration: none;
-    }
   </style>
 </head>
 <body>
   <main class="wip-wrapper">
 
-    <!-- link alla versione EN -->
+    <!-- Version switcher -->
     <button class="language-switch" onclick="window.location.href='/en/'">
       en
     </button>
 
+    <p class="wip-eyebrow">gianluigi tarantino</p>
 
-    <!-- contenuto IT -->
-    <p class="wip-eyebrow">
-      gianluigi tarantino
-    </p>
+    <h1 class="wip-title">spazio in allestimento</h1>
 
-    <h1 class="wip-title">
-      spazio in allestimento
-    </h1>
-
-    <p class="wip-text">
-      grazie per l'attesa
-    </p>
+    <p class="wip-text">grazie per l'attesa</p>
 
     <p class="wip-email">
       per informazioni o portfolio: <a href="mailto:info@gianluigitarantino.com">info@gianluigitarantino.com</a>
