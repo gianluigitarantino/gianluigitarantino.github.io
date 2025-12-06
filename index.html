@@ -2,40 +2,45 @@
 <html lang="it">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-K7FKM8548N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-K7FKM8548N');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-K7FKM8548N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-K7FKM8548N');
+  </script>
   
   <!-- Microsoft Clarity -->
-<script type="text/javascript">
+  <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "ugvgl8hf8z");
-</script>
+  </script>
+
   <meta charset="UTF-8">
   <title>gianluigi tarantino – fotografo di architettura e interni</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- SEO base -->
+  <!-- SEO base IT -->
   <meta name="description" content="Fotografo di architettura e interni tra Salento e Londra. Spazi, luce e precisione visiva. Sito in aggiornamento, per informazioni o portfolio: info@gianluigitarantino.com">
   <link rel="canonical" href="https://www.gianluigitarantino.com/">
 
-  <!-- Open Graph (quando condividi il link in chat/social) -->
-  <meta property="og:title" content="Gianluigi Tarantino – Architecture & Interiors Photographer">
+  <!-- hreflang -->
+  <link rel="alternate" href="https://www.gianluigitarantino.com/" hreflang="it">
+  <link rel="alternate" href="https://www.gianluigitarantino.com/en/" hreflang="en">
+  <link rel="alternate" href="https://www.gianluigitarantino.com/en/" hreflang="x-default">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Gianluigi Tarantino – Fotografo di architettura e interni">
   <meta property="og:description" content="Fotografo di architettura e interni tra Salento e Londra. Portfolio disponibile su richiesta.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.gianluigitarantino.com/">
-  <!-- quando avrai un'immagine di anteprima, aggiorni questo -->
   <meta property="og:image" content="https://www.gianluigitarantino.com/og-image.jpg">
+  <meta property="og:locale" content="it_IT">
 
-  <!-- Preconnect font per performance leggermente migliori -->
+  <!-- Preconnect font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -115,84 +120,44 @@
       color: var(--testo-ferro);
       text-decoration: none;
     }
+
+    .lang-link {
+      margin-top: 24px;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+    }
+
+    .lang-link a {
+      color: var(--lingua);
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
   <main class="wip-wrapper">
 
-    <!-- toggle lingua -->
-    <button id="lang-toggle" class="language-switch">
-      en
-    </button>
-
-    <!-- eyebrow -->
-    <p class="wip-eyebrow txt-it">
-      gianluigi tarantino
+    <!-- link alla versione EN -->
+    <p class="lang-link">
+      <a href="/en/">english version</a>
     </p>
-    <p class="wip-eyebrow txt-en" style="display:none;">
+
+    <!-- contenuto IT -->
+    <p class="wip-eyebrow">
       gianluigi tarantino
     </p>
 
-    <!-- titolo -->
-    <h1 class="wip-title txt-it">
+    <h1 class="wip-title">
       spazio in allestimento
     </h1>
-    <h1 class="wip-title txt-en" style="display:none;">
-      space under construction
-    </h1>
 
-    <!-- testo -->
-    <p class="wip-text txt-it">
+    <p class="wip-text">
       grazie per l'attesa
     </p>
-    <p class="wip-text txt-en" style="display:none;">
-      thank you for waiting
-    </p>
 
-    <!-- EMAIL -->
-    <p class="wip-email txt-it">
+    <p class="wip-email">
       per informazioni o portfolio: <a href="mailto:info@gianluigitarantino.com">info@gianluigitarantino.com</a>
-    </p>
-    <p class="wip-email txt-en" style="display:none;">
-      for inquiries or portfolio: <a href="mailto:info@gianluigitarantino.com">info@gianluigitarantino.com</a>
     </p>
 
   </main>
-
-<script>
-  const btn = document.getElementById("lang-toggle");
-  let current = "it";
-
-  function switchTo(lang) {
-    const itNodes = document.querySelectorAll(".txt-it");
-    const enNodes = document.querySelectorAll(".txt-en");
-
-    if (lang === "en") {
-      itNodes.forEach(el => el.style.display = "none");
-      enNodes.forEach(el => el.style.display = "");
-      btn.textContent = "it";
-      current = "en";
-    } else {
-      enNodes.forEach(el => el.style.display = "none");
-      itNodes.forEach(el => el.style.display = "");
-      btn.textContent = "en";
-      current = "it";
-    }
-  }
-
-  // 1️⃣ AUTO-DETECTION della lingua browser
-  const userLang = navigator.language || navigator.userLanguage;
-  if (userLang && !userLang.toLowerCase().startsWith("it")) {
-    switchTo("en"); // se NON è italiano → inglese
-  } else {
-    switchTo("it"); // se è italiano → italiano
-  }
-
-  // 2️⃣ TOGGLE MANUALE
-  btn.addEventListener("click", () => {
-    switchTo(current === "it" ? "en" : "it");
-  });
-</script>
-
 </body>
 </html>
