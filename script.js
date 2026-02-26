@@ -471,8 +471,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Disabilita tasto destro
 
-<script>
     document.addEventListener('contextmenu', function (e) {
         e.preventDefault();
     });
-</script>
