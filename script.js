@@ -468,3 +468,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Esponiamo i manager se necessario debug o estensioni future, altrimenti rimangono scoped
     window.app = { layoutManager, cursorManager, sliderManager };
 });
+
+// Disabilita tasto destro
+
+<script>
+    document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+    });
+</script>
