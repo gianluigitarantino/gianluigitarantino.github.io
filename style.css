@@ -1,0 +1,491 @@
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("fonts/IBM_Plex_Sans/IBMPlexSans-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 700;
+  font-stretch: 75% 100%;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("fonts/IBM_Plex_Sans/IBMPlexSans-Italic-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 700;
+  font-stretch: 75% 100%;
+  font-style: italic;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+::selection {
+  background: #e4e1dc;
+}
+
+html {
+  overscroll-behavior: none;
+}
+
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 14px;
+  background: #f7f5f2;
+}
+
+#wrapper {
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  height: 100%;
+}
+
+#menu {
+  width: 30%;
+  padding-left: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#logo {
+  display: flex;
+  flex-direction: column;
+  row-gap: 6px;
+  color: #5a554e;
+}
+
+#logo a {
+  color: #5a554e;
+  text-decoration: none;
+}
+
+#logo a:visited {
+  color: #5a554e;
+  text-decoration: none;
+}
+
+#logo a:active {
+  color: #5a554e;
+  text-decoration: none;
+}
+
+#logo>span:first-child {
+  font-size: 32px;
+  letter-spacing: 0.04em;
+}
+
+#logo>span:last-child {
+  font-size: 16px;
+  letter-spacing: 0.12em;
+  color: #726d64;
+  font-weight: 300;
+}
+
+#voci_menu {
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  line-height: 1.9;
+}
+
+#voci_menu a {
+  display: inline-block;
+  transition: color 0.3s;
+  color: #5a554e;
+}
+
+#voci_menu a:focus,
+#voci_menu a:visited,
+#voci_menu a:active {
+  text-decoration: none;
+  color: #5a554e;
+}
+
+#voci_menu a:hover,
+#voci_menu a.active {
+  color: #cbbfa5;
+}
+
+#lingua {
+  margin-top: 48px;
+}
+
+#lingua>span {
+  font-weight: 300;
+  color: #8b8478;
+  font-size: 14px;
+  line-height: 1.6;
+  letter-spacing: 0.15em;
+}
+
+#lingua a {
+  transform: scale(1);
+  transition: color 0.3s;
+  display: inline-block;
+  color: #8b8478;
+  font-weight: 300;
+}
+
+#lingua a:focus,
+#lingua a:visited,
+#lingua a:active {
+  color: #8b8478;
+  text-decoration: none;
+}
+
+#lingua a:hover {
+  color: #cbbfa5;
+}
+
+#contatti {
+  display: flex;
+  flex-direction: column;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.6;
+  letter-spacing: 0.15em;
+}
+
+#contatti a {
+  transition: color 0.3s;
+  display: inline-block;
+  color: #726d64;
+}
+
+#contatti a:active,
+#contatti a:visited,
+#contatti a:focus {
+  text-decoration: none;
+  color: #726d64;
+}
+
+#contatti a:hover {
+  color: #cbbfa5;
+}
+
+#piva_policy {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  color: #756e62;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+/*slider*/
+
+#slide_counter {
+  margin-top: 48px;
+  font-size: 14.5px;
+  font-weight: 300;
+  color: #726d64;
+  letter-spacing: 0.1em;
+}
+
+.slider {
+  position: relative;
+  width: 70vw;
+  height: auto;
+  margin: 0 auto;
+  overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
+  cursor: none !important;
+}
+
+.slides {
+  display: flex;
+  height: 100%;
+  transition: transform 0.4s ease;
+  margin-left: -0.5px;
+  margin-right: -0.5px;
+}
+
+.slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+}
+
+/*cursore generale*/
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  border: 1px solid #5a554e;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: width 0.25s ease, height 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+  z-index: 9999;
+  opacity: 1;
+  display: none;
+  /* Nascondi inizialmente finché il mouse non si muove */
+}
+
+.custom-cursor.active {
+  width: 20px;
+  height: 20px;
+  background-color: #cbbfa5;
+  border-color: transparent;
+  opacity: 0.7;
+}
+
+/*cursore per slider*/
+
+.custom-cursor.directional {
+  width: 20px;
+  height: 14px;
+  border-radius: 999px;
+  border: 1px solid #5a554e;
+  background-color: transparent;
+  transition: width 0.30s ease, height 0.30s ease, transform 0.30s ease;
+}
+
+.custom-cursor.directional.left {
+  transform: translate(-50%, -50%) translateX(-2px);
+}
+
+.custom-cursor.directional.right {
+  transform: translate(-50%, -50%) translateX(2px);
+}
+
+.custom-cursor.directional.left::after,
+.custom-cursor.directional.right::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 4px;
+  height: 4px;
+  background-color: #cbbfa5;
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.custom-cursor.directional.left::after {
+  left: 1px;
+}
+
+.custom-cursor.directional.right::after {
+  right: 1px;
+}
+
+body,
+a,
+button {
+  cursor: none !important;
+}
+
+/*pagina profilo*/
+
+.profile-content {
+  width: 70vw;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: #5a554e;
+}
+
+.profile-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.profile-text {
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.6;
+  max-width: 500px;
+  letter-spacing: 0.5px;
+}
+
+.profile-text>p {
+  margin: 0;
+}
+
+#privacy_policy {
+  margin-top:40px;
+  font-size:11px;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+}
+
+/*CSS mobile*/
+
+@media (max-width: 1200px) {
+
+  #menu {
+    padding-left: 20px;
+  }
+
+  #logo>span:first-child {
+    font-size: 30px;
+  }
+
+  #logo>span:last-child {
+    font-size: 15px;
+  }
+
+  #voci_menu {
+    font-size: 15px;
+  }
+
+  #slide_counter {
+    font-size: 13.5px;
+  }
+
+  #lingua>span {
+    font-size: 13px;
+  }
+
+  #contatti {
+    font-size: 13px;
+  }
+
+  #piva_policy {
+    font-size: 11px;
+  }
+
+}
+
+@media (max-width: 1024px) {
+
+  #wrapper {
+    flex-direction: column;
+    /* Changed from space-between to allow top-down flow, but let's see. space-between pushed menu to top and other things? Actually stick to space-between if it was there, or changing it might affect menu pos. Menu is top. */
+    /* original was justify-content: space-between */
+    justify-content: space-between;
+    padding: 0;
+    height: 100vh;
+    height: 100dvh;
+    /* Reverted to fixed height */
+    overflow: hidden;
+    /* Reverted to hidden */
+  }
+
+  #topbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px 0 10px;
+    z-index: 10;
+  }
+
+  #lingua {
+    margin: 0;
+  }
+
+  #slide_counter {
+    display: none;
+  }
+
+  #menu {
+    text-align: end;
+    width: auto;
+    flex: 0 0 auto;
+    /* Stop menu from growing */
+  }
+
+  #contatti {
+    margin-bottom: 30px;
+  }
+
+  .slider {
+    margin: 10px 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+    padding: 0 10px;
+  }
+
+  #piva_policy {
+    padding: 0 10px 10px 10px;
+  }
+
+  .slides {
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.4s ease;
+  }
+
+  .slide {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    flex: 0 0 100%;
+    padding: 2px 0;
+  }
+
+  /*pagina profilo*/
+
+  .profile-content {
+    width: 100%;
+    padding: 20px 10px;
+    align-items: center;
+    flex: 1;
+    min-height: 0;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .profile-text {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding-bottom: 40px;
+    /* Space for gradient */
+    mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
+    scrollbar-width: none;
+    /* Firefox */
+    padding-right: 0px;
+    /* formatting */
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .profile-text::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari */
+  }
+
+}
+
+/* Scroll Mode (Active when slider height < 380px) */
+body.scroll-mode #wrapper {
+  height: auto !important;
+  min-height: 100vh;
+}
+
+body.scroll-mode .slides {
+  flex-direction: column !important;
+  transform: none !important;
+  /* Force reset JS transform */
+}
+
+body.scroll-mode .slide {
+  flex: 0 0 auto !important;
+  /* Allow natural height */
+  width: 100%;
+  margin-bottom: 10px;
+}
