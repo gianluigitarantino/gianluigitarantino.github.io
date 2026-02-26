@@ -35,7 +35,7 @@ Per ogni nuova pagina/section:
 
 ## 3. Cosa PUOI modificare liberamente
 
-Puoi:
+Puoi :
 
 - Aggiornare testi in entrambe le lingue.
 - Lavorare su layout e CSS:
