@@ -18,7 +18,9 @@ const CONFIG = {
         pivaPolicy: '#piva_policy',
         contatti: '#contatti',
         topbar: '#topbar',
-        customCursor: '.custom-cursor'
+        customCursor: '.custom-cursor',
+        navArrowUp: '.nav-arrow.up',
+        navArrowDown: '.nav-arrow.down'
     }
 };
 
@@ -115,8 +117,22 @@ class LayoutManager {
         // Menu is moved to topbar. So wrapper contains profile-content.
         // We append piva at the end.
 
-        if (this.els.slider) this.els.wrapper.appendChild(this.els.slider);
-        // Note: Profile content usually stays flowing in wrapper.
+        if (this.els.slider) {
+            // Create navigation arrows
+            const arrowUp = document.createElement('button');
+            arrowUp.className = 'nav-arrow up';
+            arrowUp.innerHTML = '<span></span>';
+            arrowUp.setAttribute('aria-label', 'Previous slide');
+
+            const arrowDown = document.createElement('button');
+            arrowDown.className = 'nav-arrow down';
+            arrowDown.innerHTML = '<span></span>';
+            arrowDown.setAttribute('aria-label', 'Next slide');
+
+            this.els.wrapper.appendChild(arrowUp);
+            this.els.wrapper.appendChild(this.els.slider);
+            this.els.wrapper.appendChild(arrowDown);
+        }
 
         this.els.wrapper.appendChild(this.els.piva);
     }
@@ -139,6 +155,10 @@ class LayoutManager {
         if (!this.els.wrapper || !this.els.menu || !this.els.lingua || !this.els.piva) return;
         const topbar = document.querySelector(CONFIG.selectors.topbar);
         if (!topbar) return;
+
+        // Remove navigation arrows
+        const arrows = this.els.wrapper.querySelectorAll('.nav-arrow');
+        arrows.forEach(arrow => arrow.remove());
 
         this.els.wrapper.insertBefore(this.els.menu, this.els.wrapper.firstChild);
         this.els.menu.appendChild(this.els.piva);
@@ -250,6 +270,9 @@ class SliderManager {
 
         // Touch variables
         this.touchStartVals = { x: 0, y: 0 };
+        // Navigation arrows (Mobile)
+        this.navUp = document.querySelector(CONFIG.selectors.navArrowUp);
+        this.navDown = document.querySelector(CONFIG.selectors.navArrowDown);
 
         this.init();
     }
@@ -277,10 +300,28 @@ class SliderManager {
         this.slider.addEventListener('wheel', (e) => this.handleWheel(e), { passive: false });
 
         // Gestione Resize per aggiornare transform (X vs Y)
-        window.addEventListener('resize', () => this.update());
+        window.addEventListener('resize', () => {
+            this.refreshArrows();
+            this.update();
+        });
 
         // Inizializzazione stato (es. contatore)
+        this.refreshArrows();
         this.update();
+    }
+
+    refreshArrows() {
+        this.navUp = document.querySelector(CONFIG.selectors.navArrowUp);
+        this.navDown = document.querySelector(CONFIG.selectors.navArrowDown);
+
+        if (this.navUp && !this.navUp.hasListener) {
+            this.navUp.addEventListener('click', () => this.prev());
+            this.navUp.hasListener = true;
+        }
+        if (this.navDown && !this.navDown.hasListener) {
+            this.navDown.addEventListener('click', () => this.next());
+            this.navDown.hasListener = true;
+        }
     }
 
     // --- LOGICA DI NAVIGAZIONE ---
@@ -322,6 +363,14 @@ class SliderManager {
 
         if (this.counter) {
             this.counter.textContent = `${this.currentIndex + 1} / ${this.totalSlides}`;
+        }
+
+        // Aggiorna stato frecce
+        if (this.navUp) {
+            this.navUp.classList.toggle('disabled', this.currentIndex === 0);
+        }
+        if (this.navDown) {
+            this.navDown.classList.toggle('disabled', this.currentIndex === this.totalSlides - 1);
         }
     }
 
