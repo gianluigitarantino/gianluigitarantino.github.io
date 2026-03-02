@@ -232,7 +232,7 @@ body {
   transition: opacity 0.3s;
   background: transparent;
   border: none;
-  padding: 0;
+  padding: 0 10px;
   flex-shrink: 0;
 }
 
@@ -267,6 +267,7 @@ body {
 @media (max-width: 1024px) {
   .nav-arrow {
     display: flex;
+    justify-content: flex-start;
   }
 }
 
