@@ -278,6 +278,9 @@ class SliderManager {
 
         // Gestione Resize per aggiornare transform (X vs Y)
         window.addEventListener('resize', () => this.update());
+
+        // Inizializzazione stato (es. contatore)
+        this.update();
     }
 
     // --- LOGICA DI NAVIGAZIONE ---
@@ -315,8 +318,10 @@ class SliderManager {
         } else {
             // Orizzontale su desktop
             if (this.slidesContainer) this.slidesContainer.style.transform = `translateX(-${this.currentIndex * 100}%)`;
-            // Aggiorna counter solo desktop (come da script originale/richiesta)
-            if (this.counter) this.counter.textContent = `${this.currentIndex + 1} / ${this.totalSlides}`;
+        }
+
+        if (this.counter) {
+            this.counter.textContent = `${this.currentIndex + 1} / ${this.totalSlides}`;
         }
     }
 
