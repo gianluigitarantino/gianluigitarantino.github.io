@@ -374,9 +374,10 @@ button {
   margin: 0;
 }
 
-#privacy_policy {
-  margin-top:40px;
-  font-size:11px;
+#privacy_policy_it,
+#privacy_policy_en {
+  margin-top: 40px;
+  font-size: 11px;
   line-height: 1.6;
   letter-spacing: 0.5px;
 }
