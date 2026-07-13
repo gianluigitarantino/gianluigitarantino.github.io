@@ -16,8 +16,9 @@ Portfolio statico di Gianluigi Tarantino, fotografo di architettura, interni e h
 - `/architettura/`
 - `/interior/`
 - `/personale/`
-- `/servizi/`
 - `/profilo/`
+
+I precedenti indirizzi dei servizi reindirizzano a `/profilo/`.
 
 ## Regole
 
