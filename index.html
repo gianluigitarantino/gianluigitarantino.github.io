@@ -4,12 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no,address=no,email=no,date=no">
-    <script id="clean-home-url">
-        if (window.location.pathname.endsWith('/index.html')) {
-            const cleanPath = window.location.pathname.slice(0, -'index.html'.length) || '/';
-            window.history.replaceState(null, '', cleanPath + window.location.search + window.location.hash);
-        }
-    </script>
     <meta name="description"
         content="Fotografo di architettura e interni tra Salento e Londra. Architecture and interiors photographer working between Salento and London. info@gianluigitarantino.com">
     <link rel="canonical" href="https://www.gianluigitarantino.com/">
@@ -63,22 +57,22 @@
     <meta name="twitter:image" content="https://www.gianluigitarantino.com/og-image.jpg">
     <meta name="twitter:site" content="@tarantinogianlu">
 
-    <link rel="preload" as="image" href="/immagini/home-01-cortile-1440.webp"
-        imagesrcset="/immagini/home-01-cortile-960.webp 960w, /immagini/home-01-cortile-1440.webp 1440w, /immagini/home-01-cortile-2048.webp 2048w"
+    <link rel="preload" as="image" href="immagini/home-01-cortile-1440.webp"
+        imagesrcset="immagini/home-01-cortile-960.webp 960w, immagini/home-01-cortile-1440.webp 1440w, immagini/home-01-cortile-2048.webp 2048w"
         imagesizes="(max-width: 1024px) 100vw, 70vw" fetchpriority="high">
 
-    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 
-    <link rel="icon" href="/immagini/favicon.ico" sizes="32x32">
-    <link rel="icon" href="/immagini/favicon-light.svg" type="image/svg+xml" id="dynamic-favicon">
-    <link rel="apple-touch-icon" href="/immagini/apple-touch-icon.png">
-    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" href="immagini/favicon.ico" sizes="32x32">
+    <link rel="icon" href="immagini/favicon-light.svg" type="image/svg+xml" id="dynamic-favicon">
+    <link rel="apple-touch-icon" href="immagini/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.webmanifest">
 
     <script>
         const favicon = document.getElementById('dynamic-favicon');
         function updateFavicon(theme) {
             if (favicon) {
-                favicon.href = theme === 'dark' ? '/immagini/favicon-dark.svg' : '/immagini/favicon-light.svg';
+                favicon.href = theme === 'dark' ? 'immagini/favicon-dark.svg' : 'immagini/favicon-light.svg';
             }
         }
         const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -127,13 +121,13 @@
                                 class="lang-en">photography and space</span></span>
                 </div>
                 <div id="voci_menu">
-                    <span><a href="/architettura/"><span class="lang-it">architettura</span><span
+                    <span><a href="/architettura"><span class="lang-it">architettura</span><span
                                 class="lang-en">architecture</span></a></span>
-                    <span><a href="/interior/"><span class="lang-it">interior</span><span
+                    <span><a href="/interior"><span class="lang-it">interior</span><span
                                 class="lang-en">interior</span></a></span>
-                    <span><a href="/personale/"><span class="lang-it">personale</span><span
+                    <span><a href="/personale"><span class="lang-it">personale</span><span
                                 class="lang-en">personal</span></a></span>
-                    <span><a href="/profilo/"><span class="lang-it">profilo</span><span
+                    <span><a href="/profilo"><span class="lang-it">profilo</span><span
                                 class="lang-en">about</span></a></span>
                 </div>
 
@@ -165,41 +159,41 @@
             <div class="slides">
                 <picture class="slide-frame">
                     <source type="image/webp"
-                        srcset="/immagini/home-01-cortile-960.webp 960w, /immagini/home-01-cortile-1440.webp 1440w, /immagini/home-01-cortile-2048.webp 2048w"
+                        srcset="immagini/home-01-cortile-960.webp 960w, immagini/home-01-cortile-1440.webp 1440w, immagini/home-01-cortile-2048.webp 2048w"
                         sizes="(max-width: 1024px) 100vw, 70vw">
-                    <img src="/immagini/home-01-cortile.jpg" width="2048" height="1365"
+                    <img src="immagini/home-01-cortile.jpg" width="2048" height="1365"
                         alt="Courtyard framed by vegetation and warm walls, with a blurred figure crossing the space"
                         class="slide" fetchpriority="high" decoding="async">
                 </picture>
                 <picture class="slide-frame">
                     <source type="image/webp"
-                        srcset="/immagini/home-02-barbican-960.webp 960w, /immagini/home-02-barbican-1440.webp 1440w, /immagini/home-02-barbican-2048.webp 2048w"
+                        srcset="immagini/home-02-barbican-960.webp 960w, immagini/home-02-barbican-1440.webp 1440w, immagini/home-02-barbican-2048.webp 2048w"
                         sizes="(max-width: 1024px) 100vw, 70vw">
-                    <img src="/immagini/home-02-barbican.jpg" width="1365" height="2048"
+                    <img src="immagini/home-02-barbican.jpg" width="1365" height="2048"
                         alt="Shakespeare Tower at the Barbican, with a woman in pink crossing the sunlit plaza"
                         class="slide" loading="lazy" decoding="async">
                 </picture>
                 <picture class="slide-frame">
                     <source type="image/webp"
-                        srcset="/immagini/home-03-le-capase-960.webp 960w, /immagini/home-03-le-capase-1440.webp 1440w, /immagini/home-03-le-capase-2048.webp 2048w"
+                        srcset="immagini/home-03-le-capase-960.webp 960w, immagini/home-03-le-capase-1440.webp 1440w, immagini/home-03-le-capase-2048.webp 2048w"
                         sizes="(max-width: 1024px) 100vw, 70vw">
-                    <img src="/immagini/home-03-le-capase.jpg" width="2048" height="1365"
+                    <img src="immagini/home-03-le-capase.jpg" width="2048" height="1365"
                         alt="Pool terrace at Le Capase framed by a pergola, overlooking Mediterranean vegetation and sea"
                         class="slide" loading="lazy" decoding="async">
                 </picture>
                 <picture class="slide-frame">
                     <source type="image/webp"
-                        srcset="/immagini/home-04-interno-legno-960.webp 960w, /immagini/home-04-interno-legno-1440.webp 1440w, /immagini/home-04-interno-legno-2048.webp 2048w"
+                        srcset="immagini/home-04-interno-legno-960.webp 960w, immagini/home-04-interno-legno-1440.webp 1440w, immagini/home-04-interno-legno-2048.webp 2048w"
                         sizes="(max-width: 1024px) 100vw, 70vw">
-                    <img src="/immagini/home-04-interno-legno.jpg" width="2048" height="1365"
+                    <img src="immagini/home-04-interno-legno.jpg" width="2048" height="1365"
                         alt="Interior with timber ceiling, textured walls and a precise rectangle of sunlight"
                         class="slide" loading="lazy" decoding="async">
                 </picture>
                 <picture class="slide-frame">
                     <source type="image/webp"
-                        srcset="/immagini/home-05-macedonia-960.webp 960w, /immagini/home-05-macedonia-1440.webp 1440w, /immagini/home-05-macedonia-2048.webp 2048w"
+                        srcset="immagini/home-05-macedonia-960.webp 960w, immagini/home-05-macedonia-1440.webp 1440w, immagini/home-05-macedonia-2048.webp 2048w"
                         sizes="(max-width: 1024px) 100vw, 70vw">
-                    <img src="/immagini/home-05-macedonia.jpg" width="2048" height="1365"
+                    <img src="immagini/home-05-macedonia.jpg" width="2048" height="1365"
                         alt="Isolated wooden lookout structure facing a lake and distant mountains in North Macedonia"
                         class="slide" loading="lazy" decoding="async">
                 </picture>
@@ -207,7 +201,7 @@
         </div>
     </div>
 
-    <script src="/script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 

@@ -140,20 +140,12 @@ class LayoutManager {
     /* ... setupActiveLink ... */
     setupActiveLink() {
         if (!this.els.menu) return;
-        const normalizePath = (value) => {
-            let path = new URL(value, window.location.origin).pathname;
-            if (path.endsWith('/index.html')) {
-                path = path.slice(0, -'index.html'.length);
-            }
-            if (!path) path = '/';
-            if (path !== '/' && !path.endsWith('/')) path += '/';
-            return path;
-        };
-
+        const normalizePath = (path) => path.replace(/\/+$/, '') || '/';
         const currentPath = normalizePath(window.location.pathname);
         const links = this.els.menu.querySelectorAll('#voci_menu a');
+
         links.forEach(link => {
-            const linkPath = normalizePath(link.getAttribute('href'));
+            const linkPath = normalizePath(new URL(link.href).pathname);
             link.classList.toggle('active', currentPath === linkPath);
         });
     }

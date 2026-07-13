@@ -1,9 +1,18 @@
-/index.html / 301!
-/architettura.html /architettura/ 301!
-/interior.html /interior/ 301!
-/personale.html /personale/ 301!
-/profilo.html /profilo/ 301!
-/architettura /architettura/ 301!
-/interior /interior/ 301!
-/personale /personale/ 301!
-/profilo /profilo/ 301!
+# Old public URLs -> clean public URLs
+/index.html        /              301!
+/architettura.html /architettura 301!
+/interior.html     /interior     301!
+/personale.html    /personale    301!
+/profilo.html      /profilo      301!
+
+# Remove trailing slashes, so relative assets keep resolving from the root
+/architettura/ /architettura 301!
+/interior/     /interior     301!
+/personale/    /personale    301!
+/profilo/      /profilo      301!
+
+# Serve the existing flat HTML files without changing the address bar
+/architettura /architettura.html 200!
+/interior     /interior.html     200!
+/personale    /personale.html    200!
+/profilo      /profilo.html      200!

@@ -8,25 +8,25 @@
   </url>
 
   <url>
-    <loc>https://www.gianluigitarantino.com/architettura/</loc>
+    <loc>https://www.gianluigitarantino.com/architettura</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://www.gianluigitarantino.com/interior/</loc>
+    <loc>https://www.gianluigitarantino.com/interior</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://www.gianluigitarantino.com/personale/</loc>
+    <loc>https://www.gianluigitarantino.com/personale</loc>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://www.gianluigitarantino.com/profilo/</loc>
+    <loc>https://www.gianluigitarantino.com/profilo</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
