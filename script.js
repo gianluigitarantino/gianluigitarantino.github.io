@@ -247,6 +247,7 @@ class SliderManager {
     }
 
     updateCursorDirection(event) {
+        if (event.target?.closest?.('a, button')) return this.cursorManager.setDirectional(null);
         if (window.innerWidth <= CONFIG.breakpoints.mobile || this.isScrollMode()) return this.cursorManager.setDirectional(null);
         const rect = this.slider.getBoundingClientRect();
         const leftHalf = event.clientX - rect.left < rect.width / 2;
@@ -262,6 +263,7 @@ class SliderManager {
     }
     handleMouseLeave() { this.cursorManager.setDirectional(null); this.isDragging = false; }
     handleMouseDown(event) {
+        if (event.target?.closest?.('a, button')) return;
         if (window.innerWidth <= CONFIG.breakpoints.mobile || this.isScrollMode()) return;
         this.isDragging = true;
         this.isClick = true;
@@ -276,6 +278,7 @@ class SliderManager {
         if (event.target?.closest?.(CONFIG.selectors.slider)) this.updateCursorDirection(event);
     }
     handleClick(event) {
+        if (event.target?.closest?.('a, button')) return;
         if (window.innerWidth <= CONFIG.breakpoints.mobile || this.isScrollMode()) return;
         if (!this.isClick) { this.isClick = true; return; }
         const rect = this.slider.getBoundingClientRect();
