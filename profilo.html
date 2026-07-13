@@ -4,11 +4,9 @@ redirect_from:
   - /profilo.html
   - /servizi/
   - /servizi.html
-  - /en/services/
-  - /en/services.html
 ---
 <!DOCTYPE html>
-<html lang="it" data-title-it="Gianluigi Tarantino | Profilo e approccio fotografico" data-title-en="Gianluigi Tarantino | Profile and photographic approach">
+<html lang="it">
 
 <head>
     <meta charset="UTF-8">
@@ -20,7 +18,10 @@ redirect_from:
     <meta name="robots" content="index,follow,max-image-preview:large">
     <meta name="theme-color" content="#f7f5f2">
     <link rel="canonical" href="https://www.gianluigitarantino.com/profilo/">
-    <link rel="sitemap" type="application/xml" href="https://www.gianluigitarantino.com/sitemap.xml">
+    <link rel="alternate" hreflang="it" href="https://www.gianluigitarantino.com/profilo/">
+<link rel="alternate" hreflang="en" href="https://www.gianluigitarantino.com/en/about/">
+<link rel="alternate" hreflang="x-default" href="https://www.gianluigitarantino.com/profilo/">
+<link rel="sitemap" type="application/xml" href="https://www.gianluigitarantino.com/sitemap.xml">
 
     <meta property="og:site_name" content="Gianluigi Tarantino">
     <meta property="og:title" content="Gianluigi Tarantino | Profilo e approccio fotografico">
@@ -41,33 +42,6 @@ redirect_from:
     <meta name="twitter:image:alt" content="Interno materico con soffitto in legno e luce naturale">
     <meta name="twitter:site" content="@tarantinogianlu">
     <meta name="twitter:creator" content="@tarantinogianlu">
-
-    <style>
-        html[lang="it"] .lang-en { display: none !important; }
-        html[lang="en"] .lang-it { display: none !important; }
-    </style>
-    <script>
-        function applyLanguage(lang) {
-            const selected = lang === 'en' ? 'en' : 'it';
-            const root = document.documentElement;
-            root.setAttribute('lang', selected);
-            localStorage.setItem('language', selected);
-            const title = selected === 'en' ? root.dataset.titleEn : root.dataset.titleIt;
-            if (title) document.title = title;
-        }
-
-        function setLanguage(lang) {
-            applyLanguage(lang);
-        }
-
-        (function () {
-            const stored = localStorage.getItem('language');
-            applyLanguage(stored === 'en' ? 'en' : 'it');
-            if (window.location.pathname.endsWith('/index.html')) {
-                history.replaceState(null, '', '/');
-            }
-        })();
-    </script>
 
     <link rel="preload" href="/fonts/IBM_Plex_Sans/IBMPlexSans-VariableFont_wdth,wght.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/style.css">
@@ -165,10 +139,7 @@ redirect_from:
       "mainEntity": {
         "@id": "https://www.gianluigitarantino.com/#person"
       },
-      "inLanguage": [
-        "it",
-        "en"
-      ],
+      "inLanguage": "it",
       "primaryImageOfPage": {
         "@type": "ImageObject",
         "url": "https://www.gianluigitarantino.com/immagini/og-profilo.jpg",
@@ -207,33 +178,32 @@ redirect_from:
             <div>
                 <div id="logo">
                     <span><a href="/">gianluigi tarantino</a></span>
-                    <span><span class="lang-it">fotografia e spazio</span><span class="lang-en" lang="en">photography and space</span></span>
+                    <span><span>fotografia e spazio</span></span>
                 </div>
                 <div id="voci_menu">
-                    <span><a href="/architettura/"><span class="lang-it">architettura</span><span class="lang-en" lang="en">architecture</span></a></span>
-                    <span><a href="/interior/"><span class="lang-it">interior</span><span class="lang-en" lang="en">interiors</span></a></span>
-                    <span><a href="/personale/"><span class="lang-it">personale</span><span class="lang-en" lang="en">personal</span></a></span>
-                    <span><a href="/profilo/"><span class="lang-it">profilo</span><span class="lang-en" lang="en">about</span></a></span>
+                    <span><a href="/architettura/"><span>architettura</span></a></span>
+                    <span><a href="/interior/"><span>interior</span></a></span>
+                    <span><a href="/personale/"><span>personale</span></a></span>
+                    <span><a href="/profilo/"><span>profilo</span></a></span>
                 </div>
                 
                 <div id="lingua" aria-label="Selezione lingua">
-                    <span class="lang-it"><a href="#" onclick="setLanguage('en'); return false;" lang="en" aria-label="View site in English">en</a></span>
-                    <span class="lang-en" lang="en"><a href="#" onclick="setLanguage('it'); return false;" lang="it" aria-label="Visualizza il sito in italiano">it</a></span>
-                </div>
+                    <span><a href="/en/about/" lang="en" aria-label="View site in English" hreflang="en">en</a></span>
+                    </div>
                 <div id="contatti">
                     <span><a href="mailto:info@gianluigitarantino.com">info@gianluigitarantino.com</a></span>
                     <span><a href="https://www.instagram.com/gianluigitarantino/" target="_blank" rel="me noopener noreferrer">instagram</a></span>
                 </div>
             </div>
             <div id="piva_policy">
-                <span>&copy;2026 Gianluigi Tarantino</span>
-                <span><span class="lang-it">p.iva 05175870756</span><span class="lang-en" lang="en">vat no. it05175870756</span></span>
+                <span>©2026 Gianluigi Tarantino</span>
+                <span><span>p.iva 05175870756</span></span>
             </div>
         </nav>
 
         <main class="content-page profile-content">
             <div class="content-scroll profile-text">
-                <article class="lang-it">
+                <article>
                     <header class="content-header">
                         <h1>Gianluigi Tarantino</h1>
                         <p class="content-kicker">Fotografo di architettura e interni</p>
@@ -249,22 +219,7 @@ redirect_from:
                     </section>
                 </article>
 
-                <article class="lang-en" lang="en">
-                    <header class="content-header">
-                        <h1>Gianluigi Tarantino</h1>
-                        <p class="content-kicker">Architecture and interiors photographer</p>
-                    </header>
-                    <p>I am a photographer specialising in architecture, interiors and hospitality, based in Salento, Southern Italy. My work focuses on the relationship between light, space and materiality, creating images for architecture practices, interior designers, hotels, masserias, brands and publications.</p>
-                    <p>After studying Graphic Design and Visual Communication, I continued my photographic training at City Academy in London, at LINEA — a centre dedicated to contemporary photography and visual research — and at the Istituto Italiano di Fotografia in Milan, where I specialised in architecture and interiors photography.</p>
-                    <p>Alongside commissions I pursue personal research into image-making, landscape geometries and traces of human presence. In 2020 I founded spazio_141, a coworking and creative space in Salento.</p>
-                    <p>I work on commission for architecture practices, interior designers and hospitality projects across Puglia, the rest of Italy and the United Kingdom. For commissions and enquiries, write to <a href="mailto:info@gianluigitarantino.com">info@gianluigitarantino.com</a>.</p>
-                    <section class="privacy-policy" aria-labelledby="privacy-title-en">
-                        <h2 id="privacy-title-en">Privacy</h2>
-                        <p>This website does not use profiling cookies or tracking tools. During normal browsing, technical data required to publish and secure the website, such as IP address, browser and device information, may be processed at hosting level by GitHub Pages. Google Search Console provides the owner with aggregated data about the website’s presence in search results and does not install tracking tools on these pages.</p>
-                        <p>Data controller: Gianluigi Tarantino — <a href="mailto:info@gianluigitarantino.com">info@gianluigitarantino.com</a>.</p>
-                    </section>
-                </article>
-            </div>
+                </div>
         </main>
     </div>
     <script src="/script.js" defer></script>
