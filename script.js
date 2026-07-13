@@ -78,15 +78,16 @@ class LayoutManager {
         if (this.els.contatti) this.els.piva.insertBefore(this.els.contatti, this.els.piva.firstChild);
 
         if (this.els.slider) {
+            const isEnglish = document.documentElement.lang === 'en';
             const arrowUp = document.createElement('button');
             arrowUp.className = 'nav-arrow up';
             arrowUp.innerHTML = '<span aria-hidden="true"></span>';
-            arrowUp.setAttribute('aria-label', 'Slide precedente');
+            arrowUp.setAttribute('aria-label', isEnglish ? 'Previous slide' : 'Slide precedente');
 
             const arrowDown = document.createElement('button');
             arrowDown.className = 'nav-arrow down';
             arrowDown.innerHTML = '<span aria-hidden="true"></span>';
-            arrowDown.setAttribute('aria-label', 'Slide successiva');
+            arrowDown.setAttribute('aria-label', isEnglish ? 'Next slide' : 'Slide successiva');
 
             this.els.wrapper.appendChild(arrowUp);
             this.els.wrapper.appendChild(this.els.slider);
