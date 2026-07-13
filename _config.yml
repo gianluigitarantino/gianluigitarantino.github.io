@@ -1,0 +1,12 @@
+title: Gianluigi Tarantino
+description: Fotografo di architettura, interni e hospitality con base nel Salento.
+url: https://www.gianluigitarantino.com
+baseurl: ""
+lang: it
+plugins:
+  - jekyll-redirect-from
+redirect_from:
+  json: false
+exclude:
+  - README.md
+  - SEO-AZIONI-ESTERNE.md

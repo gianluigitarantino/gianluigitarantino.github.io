@@ -1,12 +1,23 @@
 {
   "name": "Gianluigi Tarantino — fotografia e spazio",
   "short_name": "Gianluigi Tarantino",
+  "description": "Portfolio di fotografia di architettura, interni e hospitality.",
+  "lang": "it",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#f7f5f2",
   "theme_color": "#f7f5f2",
   "icons": [
-    { "src": "/immagini/icon-192.png", "type": "image/png", "sizes": "192x192" },
-    { "src": "/immagini/icon-512.png", "type": "image/png", "sizes": "512x512" }
+    {
+      "src": "/immagini/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/immagini/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
   ]
 }

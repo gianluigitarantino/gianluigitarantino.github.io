@@ -1,202 +1,269 @@
 ---
 permalink: /profilo/
+redirect_from:
+  - /profilo.html
 ---
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" data-title-it="Gianluigi Tarantino | Profilo e approccio fotografico" data-title-en="Gianluigi Tarantino | Profile and photographic approach">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="format-detection" content="telephone=no,address=no,email=no,date=no">
-	<meta name="description"
-		content="Fotografo di architettura e interni tra Salento e Londra. Architecture and interiors photographer working between Salento and London. info@gianluigitarantino.com">
-	<link rel="canonical" href="https://www.gianluigitarantino.com/profilo/">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no">
+    <title>Gianluigi Tarantino | Profilo e approccio fotografico</title>
+    <meta name="description" content="Profilo di Gianluigi Tarantino, fotografo di architettura e interni con base nel Salento. Formazione, approccio, servizi e contatti.">
+    <meta name="author" content="Gianluigi Tarantino">
+    <meta name="robots" content="index,follow,max-image-preview:large">
+    <meta name="theme-color" content="#f7f5f2">
+    <link rel="canonical" href="https://www.gianluigitarantino.com/profilo/">
+    <link rel="sitemap" type="application/xml" href="https://www.gianluigitarantino.com/sitemap.xml">
 
-	<style>
-		html[lang="it"] .lang-en {
-			display: none !important;
-		}
+    <meta property="og:site_name" content="Gianluigi Tarantino">
+    <meta property="og:title" content="Gianluigi Tarantino | Profilo e approccio fotografico">
+    <meta property="og:description" content="Profilo di Gianluigi Tarantino, fotografo di architettura e interni con base nel Salento. Formazione, approccio, servizi e contatti.">
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://www.gianluigitarantino.com/profilo/">
+    <meta property="og:image" content="https://www.gianluigitarantino.com/immagini/og-profilo.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Interno materico con soffitto in legno e luce naturale">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:locale:alternate" content="en_GB">
 
-		html[lang="en"] .lang-it {
-			display: none !important;
-		}
-	</style>
-	<script>
-		// Questa funzione cambia il titolo della scheda del browser
-		function updatePageTitle(lang) {
-			const titles = {
-				'it': 'gianluigi tarantino - fotografo di architettura e interni',
-				'en': 'gianluigi tarantino - architecture & interiors photographer'
-			};
-			document.title = titles[lang] || titles['it'];
-		}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Gianluigi Tarantino | Profilo e approccio fotografico">
+    <meta name="twitter:description" content="Profilo di Gianluigi Tarantino, fotografo di architettura e interni con base nel Salento. Formazione, approccio, servizi e contatti.">
+    <meta name="twitter:image" content="https://www.gianluigitarantino.com/immagini/og-profilo.jpg">
+    <meta name="twitter:image:alt" content="Interno materico con soffitto in legno e luce naturale">
+    <meta name="twitter:site" content="@tarantinogianlu">
+    <meta name="twitter:creator" content="@tarantinogianlu">
 
-		(function () {
-			// 1. Recupera la lingua salvata o usa l'italiano come base
-			const lang = localStorage.getItem('language') || 'it';
-			// 2. Applica la lingua al tag HTML (fa funzionare il CSS sopra)
-			document.documentElement.setAttribute('lang', lang);
-			// 3. Aggiorna il titolo della scheda
-			updatePageTitle(lang);
-		})();
+    <style>
+        html[lang="it"] .lang-en { display: none !important; }
+        html[lang="en"] .lang-it { display: none !important; }
+    </style>
+    <script>
+        function applyLanguage(lang) {
+            const selected = lang === 'en' ? 'en' : 'it';
+            const root = document.documentElement;
+            root.setAttribute('lang', selected);
+            localStorage.setItem('language', selected);
+            const title = selected === 'en' ? root.dataset.titleEn : root.dataset.titleIt;
+            if (title) document.title = title;
+        }
 
-		// Funzione da richiamare sui tuoi pulsanti IT/EN
-		function setLanguage(lang) {
-			document.documentElement.setAttribute('lang', lang);
-			localStorage.setItem('language', lang);
-			updatePageTitle(lang);
-		}
-	</script>
+        function setLanguage(lang) {
+            applyLanguage(lang);
+        }
 
-	<meta property="og:title" content="Gianluigi Tarantino – Architecture & Interiors Photographer">
-	<meta property="og:description"
-		content="Fotografo di architettura e interni tra Salento e Londra. Spazi, luce e precisione visiva.">
-	<meta property="og:type" content="website">
-	<meta property="og:url" content="https://www.gianluigitarantino.com/profilo/">
-	<meta property="og:image" content="https://www.gianluigitarantino.com/og-image.jpg">
-	<meta property="og:locale" content="it_IT">
-	<meta property="og:locale:alternate" content="en_GB">
-	<meta name="twitter:card" content="summary_large_image">
-	<meta name="twitter:title" content="Gianluigi Tarantino – Architecture & Interiors Photographer">
-	<meta name="twitter:image" content="https://www.gianluigitarantino.com/og-image.jpg">
-	<meta name="twitter:site" content="@tarantinogianlu">
+        (function () {
+            const stored = localStorage.getItem('language');
+            applyLanguage(stored === 'en' ? 'en' : 'it');
+            if (window.location.pathname.endsWith('/index.html')) {
+                history.replaceState(null, '', '/');
+            }
+        })();
+    </script>
 
-	<link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="preload" href="/fonts/IBM_Plex_Sans/IBMPlexSans-VariableFont_wdth,wght.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/style.css">
 
-	<link rel="icon" href="/immagini/favicon.ico" sizes="32x32">
-	<link rel="icon" href="/immagini/favicon-light.svg" type="image/svg+xml" id="dynamic-favicon">
-	<link rel="apple-touch-icon" href="/immagini/apple-touch-icon.png">
-	<link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" href="/immagini/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/immagini/favicon-light.svg" type="image/svg+xml" id="dynamic-favicon">
+    <link rel="apple-touch-icon" href="/immagini/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.webmanifest">
 
-	<script>
-		const favicon = document.getElementById('dynamic-favicon');
-		function updateFavicon(theme) {
-			if (favicon) {
-				favicon.href = theme === 'dark' ? '/immagini/favicon-dark.svg' : '/immagini/favicon-light.svg';
-			}
-		}
-		const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-		updateFavicon(isDark ? 'dark' : 'light');
-		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-			updateFavicon(e.matches ? 'dark' : 'light');
-		});
-	</script>
-
-	<script type="application/ld+json">
+    <script>
+        const favicon = document.getElementById('dynamic-favicon');
+        function updateFavicon(theme) {
+            if (favicon) favicon.href = theme === 'dark' ? '/immagini/favicon-dark.svg' : '/immagini/favicon-light.svg';
+        }
+        const themeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        updateFavicon(themeQuery.matches ? 'dark' : 'light');
+        themeQuery.addEventListener('change', event => updateFavicon(event.matches ? 'dark' : 'light'));
+    </script>
+    <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Gianluigi Tarantino",
-  "jobTitle": [
-    { "@language": "it", "@value": "Fotografo di Architettura e Interni" },
-    { "@language": "en", "@value": "Architecture and Interiors Photographer" }
-  ],
-  "url": "https://www.gianluigitarantino.com/",
-  "image": "https://www.gianluigitarantino.com/og-image.jpg",
-  "description": [
-    { "@language": "it", "@value": "Fotografo specializzato in architettura e interni, attivo tra il Salento e Londra." },
-    { "@language": "en", "@value": "Photographer specialised in architecture and interiors, working between Salento and London." }
-  ],
-  "sameAs": [
-    "https://www.instagram.com/gianluigitarantino/",
-    "https://www.linkedin.com/in/gianluigitarantino/"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://www.gianluigitarantino.com/#website",
+      "url": "https://www.gianluigitarantino.com/",
+      "name": "Gianluigi Tarantino",
+      "alternateName": "Gianluigi Tarantino — fotografia e spazio",
+      "inLanguage": [
+        "it",
+        "en"
+      ],
+      "publisher": {
+        "@id": "https://www.gianluigitarantino.com/#person"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.gianluigitarantino.com/#person",
+      "name": "Gianluigi Tarantino",
+      "url": "https://www.gianluigitarantino.com/profilo/",
+      "image": "https://www.gianluigitarantino.com/immagini/og-profilo.jpg",
+      "email": "mailto:info@gianluigitarantino.it",
+      "jobTitle": "Fotografo di architettura e interni",
+      "description": "Fotografo di architettura, interni e hospitality con base nel Salento, attivo in Puglia, in Italia e nel Regno Unito.",
+      "knowsAbout": [
+        "Fotografia di architettura",
+        "Fotografia di interni",
+        "Fotografia hospitality",
+        "Fotografia editoriale",
+        "Post-produzione fotografica"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/gianluigitarantino/",
+        "https://www.linkedin.com/in/gianluigitarantino/"
+      ],
+      "makesOffer": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Fotografia di architettura",
+            "url": "https://www.gianluigitarantino.com/architettura/",
+            "areaServed": [
+              "Puglia",
+              "Italia",
+              "Regno Unito"
+            ]
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Fotografia di interni e hospitality",
+            "url": "https://www.gianluigitarantino.com/interior/",
+            "areaServed": [
+              "Puglia",
+              "Italia",
+              "Regno Unito"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://www.gianluigitarantino.com/profilo/#webpage",
+      "url": "https://www.gianluigitarantino.com/profilo/",
+      "name": "Gianluigi Tarantino | Profilo e approccio fotografico",
+      "description": "Profilo di Gianluigi Tarantino, fotografo di architettura e interni con base nel Salento. Formazione, approccio, servizi e contatti.",
+      "isPartOf": {
+        "@id": "https://www.gianluigitarantino.com/#website"
+      },
+      "mainEntity": {
+        "@id": "https://www.gianluigitarantino.com/#person"
+      },
+      "inLanguage": [
+        "it",
+        "en"
+      ],
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://www.gianluigitarantino.com/immagini/og-profilo.jpg",
+        "width": 1200,
+        "height": 630
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.gianluigitarantino.com/profilo/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://www.gianluigitarantino.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Profilo",
+          "item": "https://www.gianluigitarantino.com/profilo/"
+        }
+      ]
+    }
   ]
 }
-</script>
+    </script>
+
 </head>
 
 <body>
-	<div class="custom-cursor"></div>
-	<div id="wrapper">
-		<div id="menu">
-			<div>
-				<div id="logo">
-					<span><a href="/">gianluigi tarantino</a></span>
-					<span><span class="lang-it">fotografia e spazio</span><span
-                                class="lang-en">photography and space</span></span>
-				</div>
-				<div id="voci_menu">
-					<span><a href="/architettura/"><span class="lang-it">architettura</span><span
-								class="lang-en">architecture</span></a></span>
-					<span><a href="/interior/"><span class="lang-it">interior</span><span
-								class="lang-en">interior</span></a></span>
-					<span><a href="/personale/"><span class="lang-it">personale</span><span
-								class="lang-en">personal</span></a></span>
-					<span><a href="/profilo/"><span class="lang-it">profilo</span><span
-								class="lang-en">about</span></a></span>
-				</div>
+    <div class="custom-cursor" aria-hidden="true"></div>
+    <div id="wrapper">
+        <nav id="menu" aria-label="Navigazione principale">
+            <div>
+                <div id="logo">
+                    <span><a href="/">gianluigi tarantino</a></span>
+                    <span><span class="lang-it">fotografia e spazio</span><span class="lang-en" lang="en">photography and space</span></span>
+                </div>
+                <div id="voci_menu">
+                    <span><a href="/architettura/"><span class="lang-it">architettura</span><span class="lang-en" lang="en">architecture</span></a></span>
+                    <span><a href="/interior/"><span class="lang-it">interior</span><span class="lang-en" lang="en">interiors</span></a></span>
+                    <span><a href="/personale/"><span class="lang-it">personale</span><span class="lang-en" lang="en">personal</span></a></span>
+                    <span><a href="/servizi/"><span class="lang-it">servizi</span><span class="lang-en" lang="en">services</span></a></span>
+                    <span><a href="/profilo/"><span class="lang-it">profilo</span><span class="lang-en" lang="en">about</span></a></span>
+                </div>
+                
+                <div id="lingua" aria-label="Selezione lingua">
+                    <span class="lang-it"><a href="#" onclick="setLanguage('en'); return false;" lang="en" aria-label="View site in English">en</a></span>
+                    <span class="lang-en" lang="en"><a href="#" onclick="setLanguage('it'); return false;" lang="it" aria-label="Visualizza il sito in italiano">it</a></span>
+                </div>
+                <div id="contatti">
+                    <span><a href="mailto:info@gianluigitarantino.it">info@gianluigitarantino.it</a></span>
+                    <span><a href="https://www.instagram.com/gianluigitarantino/" target="_blank" rel="me noopener noreferrer">instagram</a></span>
+                </div>
+            </div>
+            <div id="piva_policy">
+                <span>&copy;2026 Gianluigi Tarantino</span>
+                <span><span class="lang-it">p.iva 05175870756</span><span class="lang-en" lang="en">vat no. it05175870756</span></span>
+            </div>
+        </nav>
 
-				<div id="slide_counter" style="opacity: 0;">1 / 3</div>
+        <main class="content-page profile-content">
+            <div class="content-scroll profile-text">
+                <article class="lang-it">
+                    <header class="content-header">
+                        <h1>Gianluigi Tarantino</h1>
+                        <p class="content-kicker">Fotografo di architettura e interni</p>
+                    </header>
+                    <p>Sono un fotografo specializzato in architettura, interni e hospitality, con base nel Salento. Il mio lavoro si concentra sulla relazione tra luce, spazio e materia, con immagini pensate per studi di architettura, interior designer, hotel, masserie, brand e pubblicazioni.</p>
+                    <p>Dopo gli studi in Graphic Design and Visual Communication, ho proseguito la formazione fotografica alla City Academy di Londra, a LINEA — centro dedicato alla fotografia contemporanea e alla ricerca visiva — e all’Istituto Italiano di Fotografia di Milano, dove mi sono specializzato nella fotografia di architettura e interni.</p>
+                    <p>Accanto alle commissioni porto avanti una ricerca personale sulla costruzione dell’immagine, sulle geometrie del paesaggio e sulle tracce della presenza umana. Nel 2020 ho aperto spazio_141, coworking e spazio creativo nel Salento.</p>
+                    <p>Lavoro in Puglia, nel resto d’Italia e nel Regno Unito. Per informazioni su produzione, utilizzi e consegna delle immagini consulta i <a href="/servizi/">servizi fotografici</a> o scrivi a <a href="mailto:info@gianluigitarantino.it">info@gianluigitarantino.it</a>.</p>
+                    <section class="privacy-policy" aria-labelledby="privacy-title-it">
+                        <h2 id="privacy-title-it">Privacy</h2>
+                        <p>Questo sito non utilizza cookie di profilazione né strumenti di tracciamento. Durante la normale navigazione possono essere trattati dati tecnici necessari alla pubblicazione e alla sicurezza del sito, come indirizzo IP, browser e dispositivo, a livello del servizio di hosting GitHub Pages. Google Search Console fornisce al titolare dati aggregati sulla presenza del sito nei risultati di ricerca e non installa strumenti di tracciamento su queste pagine.</p>
+                        <p>Titolare del trattamento: Gianluigi Tarantino — <a href="mailto:info@gianluigitarantino.it">info@gianluigitarantino.it</a>.</p>
+                    </section>
+                </article>
 
-				<div id="lingua">
-					<span class="lang-it"><a href="#" onclick="setLanguage('en'); return false;">en</a></span>
-					<span class="lang-en"><a href="#" onclick="setLanguage('it'); return false;">it</a></span>
-				</div>
-				<div id="contatti">
-					<span><a href="mailto:info@gianluigitarantino.it">info@gianluigitarantino.it</a></span>
-					<span><a href="https://www.instagram.com/gianluigitarantino" target="_blank">instagram</a></span>
-				</div>
-
-			</div>
-
-			<div id="piva_policy">
-				<span>&copy;2026 Gianluigi Tarantino</span>
-				<span><span class="lang-it">p.iva 05175870756</span><span class="lang-en">vat no.
-						it05175870756</span></span>
-			</div>
-		</div>
-
-		<!-- Profile Content -->
-		<div class="profile-content">
-			<div class="profile-text">
-				<p class="lang-it">Sono un fotografo specializzato in architettura e interni. Il mio lavoro si concentra
-					su luce, spazio
-					e precisione visiva.
-					Dopo aver completato gli studi in Graphic Design and Visual Communication, ho proseguito la
-					formazione fotografica presso la City Academy di Londra.<br>
-					In seguito ho frequentato LINEA a Lecce, un centro dedicato alla fotografia contemporanea e alla
-					ricerca visiva.<br>
-					Mi sono poi specializzato in fotografia di architettura e interni presso l’Istituto Italiano di
-					Fotografia di Milano.<br>
-					Accanto alle collaborazioni con studi di architettura, interior designer e diversi brand, porto
-					avanti una ricerca personale orientata alla materia e alla costruzione dell’immagine.<br>
-					Nel 2020 ho aperto spazio_141, un coworking space.<br>
-					Lavoro tra Italia e Regno Unito.</p>
-				<p class="lang-en">I am a photographer specialised in architecture and interiors. My work focuses on
-					light, space and visual precision.<br>
-					After completing my studies in Graphic Design and Visual Communication, I continued my
-					photographic training at City Academy in London.<br>
-					I later attended LINEA in Lecce, Italy, a centre dedicated to contemporary photography and
-					visual research.<br>
-					I then specialised in architectural and interior photography at the Istituto Italiano di
-					Fotografia in Milan.<br>
-					Alongside collaborations with architecture studios, interior designers and various brands, I
-					carry out personal research projects exploring materiality and the construction of the image.<br>
-					In 2020 I opened spazio_141, a creative coworking space.<br>
-					I work between Italy and the United Kingdom.</p>
-				<p class="lang-it" id="privacy_policy">
-					Questo sito non utilizza cookie di profilazione n&eacute; strumenti di tracciamento.<br>
-					Durante la normale navigazione possono essere raccolti dati tecnici necessari al funzionamento del sito (ad esempio indirizzo IP, tipo di browser e dispositivo), gestiti esclusivamente a livello di hosting.<br>
-					Il sito &egrave; ospitato su infrastruttura Netlify, che pu&ograve; trattare dati tecnici secondo le proprie policy.<br>
-					Per monitorare la presenza del sito nei risultati di ricerca viene utilizzato Google Search Console, che fornisce esclusivamente dati aggregati.<br>
-					<br>
-					Titolare del trattamento:<br>
-					Gianluigi Tarantino<br>
-					info@gianluigitarantino.it</p>
-				<p class="lang-en" id="privacy_policy">
-					This website does not use profiling cookies or tracking tools.<br>
-					During normal browsing, technical data necessary for website functionality (such as IP address, browser type and device information) may be processed at hosting level only.<br>
-					The website is hosted on Netlify infrastructure, which may process technical data according to its own policies.<br>
-					To monitor the website&rsquo;s presence in search results, Google Search Console is used. It provides aggregated data only.<br>
-                    <br>
-					Data Controller:<br>
-					Gianluigi Tarantino<br>
-					info@gianluigitarantino.it</p>
-			</div>
-		</div>
-	</div>
-
-	<script src="/script.js"></script>
+                <article class="lang-en" lang="en">
+                    <header class="content-header">
+                        <h1>Gianluigi Tarantino</h1>
+                        <p class="content-kicker">Architecture and interiors photographer</p>
+                    </header>
+                    <p>I am a photographer specialising in architecture, interiors and hospitality, based in Salento, Southern Italy. My work focuses on the relationship between light, space and materiality, creating images for architecture practices, interior designers, hotels, masserias, brands and publications.</p>
+                    <p>After studying Graphic Design and Visual Communication, I continued my photographic training at City Academy in London, at LINEA — a centre dedicated to contemporary photography and visual research — and at the Istituto Italiano di Fotografia in Milan, where I specialised in architecture and interiors photography.</p>
+                    <p>Alongside commissions I pursue personal research into image-making, landscape geometries and traces of human presence. In 2020 I founded spazio_141, a coworking and creative space in Salento.</p>
+                    <p>I work across Puglia, the rest of Italy and the United Kingdom. For information about production, usage and image delivery, see the <a href="/servizi/">photography services</a> or write to <a href="mailto:info@gianluigitarantino.it">info@gianluigitarantino.it</a>.</p>
+                    <section class="privacy-policy" aria-labelledby="privacy-title-en">
+                        <h2 id="privacy-title-en">Privacy</h2>
+                        <p>This website does not use profiling cookies or tracking tools. During normal browsing, technical data required to publish and secure the website, such as IP address, browser and device information, may be processed at hosting level by GitHub Pages. Google Search Console provides the owner with aggregated data about the website’s presence in search results and does not install tracking tools on these pages.</p>
+                        <p>Data controller: Gianluigi Tarantino — <a href="mailto:info@gianluigitarantino.it">info@gianluigitarantino.it</a>.</p>
+                    </section>
+                </article>
+            </div>
+        </main>
+    </div>
+    <script src="/script.js" defer></script>
 </body>
-
 </html>

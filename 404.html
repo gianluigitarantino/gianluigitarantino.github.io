@@ -1,0 +1,136 @@
+---
+permalink: /404.html
+---
+<!DOCTYPE html>
+<html lang="it" data-title-it="Pagina non trovata | Gianluigi Tarantino" data-title-en="Page not found | Gianluigi Tarantino">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no,address=no,email=no,date=no">
+    <title>Pagina non trovata | Gianluigi Tarantino</title>
+    <meta name="description" content="Pagina non trovata sul sito di Gianluigi Tarantino.">
+    <meta name="author" content="Gianluigi Tarantino">
+    <meta name="robots" content="noindex,follow">
+    <meta name="theme-color" content="#f7f5f2">
+    <link rel="canonical" href="https://www.gianluigitarantino.com/404.html">
+    <link rel="sitemap" type="application/xml" href="https://www.gianluigitarantino.com/sitemap.xml">
+
+    <meta property="og:site_name" content="Gianluigi Tarantino">
+    <meta property="og:title" content="Pagina non trovata | Gianluigi Tarantino">
+    <meta property="og:description" content="Pagina non trovata sul sito di Gianluigi Tarantino.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.gianluigitarantino.com/404.html">
+    <meta property="og:image" content="https://www.gianluigitarantino.com/immagini/og-home.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Cortile alberato con architettura color ocra">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:locale:alternate" content="en_GB">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Pagina non trovata | Gianluigi Tarantino">
+    <meta name="twitter:description" content="Pagina non trovata sul sito di Gianluigi Tarantino.">
+    <meta name="twitter:image" content="https://www.gianluigitarantino.com/immagini/og-home.jpg">
+    <meta name="twitter:image:alt" content="Cortile alberato con architettura color ocra">
+    <meta name="twitter:site" content="@tarantinogianlu">
+    <meta name="twitter:creator" content="@tarantinogianlu">
+
+    <style>
+        html[lang="it"] .lang-en { display: none !important; }
+        html[lang="en"] .lang-it { display: none !important; }
+    </style>
+    <script>
+        function applyLanguage(lang) {
+            const selected = lang === 'en' ? 'en' : 'it';
+            const root = document.documentElement;
+            root.setAttribute('lang', selected);
+            localStorage.setItem('language', selected);
+            const title = selected === 'en' ? root.dataset.titleEn : root.dataset.titleIt;
+            if (title) document.title = title;
+        }
+
+        function setLanguage(lang) {
+            applyLanguage(lang);
+        }
+
+        (function () {
+            const stored = localStorage.getItem('language');
+            applyLanguage(stored === 'en' ? 'en' : 'it');
+            if (window.location.pathname.endsWith('/index.html')) {
+                history.replaceState(null, '', '/');
+            }
+        })();
+    </script>
+
+    <link rel="preload" href="/fonts/IBM_Plex_Sans/IBMPlexSans-VariableFont_wdth,wght.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/style.css">
+
+    <link rel="icon" href="/immagini/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/immagini/favicon-light.svg" type="image/svg+xml" id="dynamic-favicon">
+    <link rel="apple-touch-icon" href="/immagini/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.webmanifest">
+
+    <script>
+        const favicon = document.getElementById('dynamic-favicon');
+        function updateFavicon(theme) {
+            if (favicon) favicon.href = theme === 'dark' ? '/immagini/favicon-dark.svg' : '/immagini/favicon-light.svg';
+        }
+        const themeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        updateFavicon(themeQuery.matches ? 'dark' : 'light');
+        themeQuery.addEventListener('change', event => updateFavicon(event.matches ? 'dark' : 'light'));
+    </script>
+    <script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "WebPage", "name": "Pagina non trovata", "url": "https://www.gianluigitarantino.com/404.html"}
+    </script>
+
+</head>
+
+<body>
+    <div class="custom-cursor" aria-hidden="true"></div>
+    <div id="wrapper">
+        <nav id="menu" aria-label="Navigazione principale">
+            <div>
+                <div id="logo">
+                    <span><a href="/">gianluigi tarantino</a></span>
+                    <span><span class="lang-it">fotografia e spazio</span><span class="lang-en" lang="en">photography and space</span></span>
+                </div>
+                <div id="voci_menu">
+                    <span><a href="/architettura/"><span class="lang-it">architettura</span><span class="lang-en" lang="en">architecture</span></a></span>
+                    <span><a href="/interior/"><span class="lang-it">interior</span><span class="lang-en" lang="en">interiors</span></a></span>
+                    <span><a href="/personale/"><span class="lang-it">personale</span><span class="lang-en" lang="en">personal</span></a></span>
+                    <span><a href="/servizi/"><span class="lang-it">servizi</span><span class="lang-en" lang="en">services</span></a></span>
+                    <span><a href="/profilo/"><span class="lang-it">profilo</span><span class="lang-en" lang="en">about</span></a></span>
+                </div>
+                
+                <div id="lingua" aria-label="Selezione lingua">
+                    <span class="lang-it"><a href="#" onclick="setLanguage('en'); return false;" lang="en" aria-label="View site in English">en</a></span>
+                    <span class="lang-en" lang="en"><a href="#" onclick="setLanguage('it'); return false;" lang="it" aria-label="Visualizza il sito in italiano">it</a></span>
+                </div>
+                <div id="contatti">
+                    <span><a href="mailto:info@gianluigitarantino.it">info@gianluigitarantino.it</a></span>
+                    <span><a href="https://www.instagram.com/gianluigitarantino/" target="_blank" rel="me noopener noreferrer">instagram</a></span>
+                </div>
+            </div>
+            <div id="piva_policy">
+                <span>&copy;2026 Gianluigi Tarantino</span>
+                <span><span class="lang-it">p.iva 05175870756</span><span class="lang-en" lang="en">vat no. it05175870756</span></span>
+            </div>
+        </nav>
+
+        <main class="content-page not-found-content">
+            <div class="content-scroll">
+                <article class="lang-it">
+                    <header class="content-header"><h1>Pagina non trovata</h1></header>
+                    <p>L’indirizzo potrebbe essere cambiato. Torna alla <a href="/">homepage</a> o consulta il portfolio di <a href="/architettura/">architettura</a> e <a href="/interior/">interni</a>.</p>
+                </article>
+                <article class="lang-en" lang="en">
+                    <header class="content-header"><h1>Page not found</h1></header>
+                    <p>The address may have changed. Return to the <a href="/">homepage</a> or browse the <a href="/architettura/">architecture</a> and <a href="/interior/">interiors</a> portfolios.</p>
+                </article>
+            </div>
+        </main>
+    </div>
+    <script src="/script.js" defer></script>
+</body>
+</html>

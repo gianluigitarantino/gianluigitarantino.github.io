@@ -1,34 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.gianluigitarantino.com/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-07-13</lastmod>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/home-01-cortile.jpg</image:loc>
+      <image:title>Cortile con architettura e vegetazione</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/home-02-barbican.jpg</image:loc>
+      <image:title>Shakespeare Tower al Barbican di Londra</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/home-03-le-capase.jpg</image:loc>
+      <image:title>Hotel Le Capase nel Salento</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/home-04-interno-legno.jpg</image:loc>
+      <image:title>Interno con soffitto in legno e luce naturale</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/home-05-macedonia.jpg</image:loc>
+      <image:title>Paesaggio lacustre in Macedonia del Nord</image:title>
+    </image:image>
   </url>
-
   <url>
     <loc>https://www.gianluigitarantino.com/architettura/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-07-13</lastmod>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/architettura-01-barbican-facciate.jpg</image:loc>
+      <image:title>Dettaglio di facciate brutaliste al Barbican Estate di Londra</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/architettura-02-barbican-spazio-pubblico.jpg</image:loc>
+      <image:title>Spazio pubblico e volumi del Barbican Estate a Londra</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/architettura-03-barbican-finestre.jpg</image:loc>
+      <image:title>Finestre verticali su una facciata in cemento del Barbican Estate</image:title>
+    </image:image>
   </url>
-
   <url>
     <loc>https://www.gianluigitarantino.com/interior/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-07-13</lastmod>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/interior-01-pareti-terracotta.jpg</image:loc>
+      <image:title>Interno contemporaneo con pareti color terracotta e illuminazione lineare</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/interior-02-finestra-ad-arco.jpg</image:loc>
+      <image:title>Grande finestra ad arco con sedute affacciate sul verde</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/interior-03-lampade-sferiche.jpg</image:loc>
+      <image:title>Lampade sferiche e struttura a vista in un interno contemporaneo</image:title>
+    </image:image>
   </url>
-
   <url>
     <loc>https://www.gianluigitarantino.com/personale/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-07-13</lastmod>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/personale-01-geometrie-industriali.jpg</image:loc>
+      <image:title>Geometrie di coperture industriali contro il cielo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/personale-02-facciata-aperture.jpg</image:loc>
+      <image:title>Tre aperture quadrate su una facciata chiara</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/personale-03-materia-minerale.jpg</image:loc>
+      <image:title>Frammenti di roccia e materia minerale</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/personale-04-parapetto-cielo.jpg</image:loc>
+      <image:title>Parapetto geometrico in cemento contro il cielo azzurro</image:title>
+    </image:image>
   </url>
-
+  <url>
+    <loc>https://www.gianluigitarantino.com/servizi/</loc>
+    <lastmod>2026-07-13</lastmod>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/home-02-barbican.jpg</image:loc>
+      <image:title>Fotografia di architettura</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/home-04-interno-legno.jpg</image:loc>
+      <image:title>Fotografia di interni</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.gianluigitarantino.com/immagini/home-03-le-capase.jpg</image:loc>
+      <image:title>Fotografia hospitality in Puglia</image:title>
+    </image:image>
+  </url>
   <url>
     <loc>https://www.gianluigitarantino.com/profilo/</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-07-13</lastmod>
   </url>
-
 </urlset>
