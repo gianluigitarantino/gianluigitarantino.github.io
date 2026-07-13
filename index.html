@@ -2,7 +2,6 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Gianluigi Tarantino | Fotografo di architettura e interni</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="format-detection" content="telephone=no,address=no,email=no,date=no">
     <meta name="description"
@@ -22,9 +21,9 @@
         // Questa funzione cambia il titolo della scheda del browser
         function updatePageTitle(lang) {
             const titles = {
-    'it': 'gianluigi tarantino - fotografo di architettura e interni',
-    'en': 'gianluigi tarantino - architecture and interiors photographer'
-};
+                'it': 'gianluigi tarantino - fotografo di architettura e interni',
+                'en': 'gianluigi tarantino - architecture & interiors photographer'
+            };
             document.title = titles[lang] || titles['it'];
         }
 
@@ -57,6 +56,10 @@
     <meta name="twitter:title" content="Gianluigi Tarantino – Architecture & Interiors Photographer">
     <meta name="twitter:image" content="https://www.gianluigitarantino.com/og-image.jpg">
     <meta name="twitter:site" content="@tarantinogianlu">
+
+    <link rel="preload" as="image" href="immagini/home-01-cortile-1440.webp"
+        imagesrcset="immagini/home-01-cortile-960.webp 960w, immagini/home-01-cortile-1440.webp 1440w, immagini/home-01-cortile-2048.webp 2048w"
+        imagesizes="(max-width: 1024px) 100vw, 70vw" fetchpriority="high">
 
     <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -103,14 +106,17 @@
 
 </head>
 
+
+<!-- cursore generale -->
+
+<div class="custom-cursor"></div>
+
 <body>
-    <div class="custom-cursor"></div>
     <div id="wrapper">
-        <h1 class="visually-hidden">Gianluigi Tarantino, fotografo di architettura e interni</h1>
         <div id="menu">
             <div>
                 <div id="logo">
-                    <span><a href="/">gianluigi tarantino</a></span>
+                    <span><a href="index.html">gianluigi tarantino</a></span>
                     <span><span class="lang-it">fotografia e spazio</span><span
                                 class="lang-en">photography and space</span></span>
                 </div>
@@ -128,7 +134,7 @@
 
                 <!-- contatore slider -->
 
-                <div id="slide_counter">1 / 3</div>
+                <div id="slide_counter" aria-live="polite">1 / 5</div>
 
                 <div id="lingua">
                     <span class="lang-it"><a href="#" onclick="setLanguage('en'); return false;">en</a></span>
@@ -136,7 +142,7 @@
                 </div>
                 <div id="contatti">
                     <span><a href="mailto:info@gianluigitarantino.it">info@gianluigitarantino.it</a></span>
-                    <span><a href="https://www.instagram.com/gianluigitarantino" target="_blank" rel="noopener noreferrer">instagram</a></span>
+                    <span><a href="https://www.instagram.com/gianluigitarantino" target="_blank">instagram</a></span>
                 </div>
 
             </div>
@@ -149,13 +155,48 @@
         </div>
 
         <!-- slider -->
-
-        <div class="slider" id="slider">
+        <div class="slider" id="slider" role="region" aria-label="Selected photography" tabindex="0">
             <div class="slides">
-                <img src="immagini/Locale_Real_Estate-143.jpg" alt="Fotografia di architettura e interni di Gianluigi Tarantino" class="slide" fetchpriority="high" decoding="async">
-                <img src="immagini/Locale_Real_Estate-235.jpg" alt="Portfolio fotografico di architettura e interni" class="slide" loading="lazy" decoding="async">
-                <img src="immagini/Locale_Real_Estate-209.jpg" alt="Fotografia di spazi, luce e architettura" class="slide" loading="lazy" decoding="async">
-                <img src="immagini/Locale_Real_Estate-217.jpg" alt="Fotografia di interni e strutture ricettive" class="slide" loading="lazy" decoding="async">
+                <picture class="slide-frame">
+                    <source type="image/webp"
+                        srcset="immagini/home-01-cortile-960.webp 960w, immagini/home-01-cortile-1440.webp 1440w, immagini/home-01-cortile-2048.webp 2048w"
+                        sizes="(max-width: 1024px) 100vw, 70vw">
+                    <img src="immagini/home-01-cortile.jpg" width="2048" height="1365"
+                        alt="Courtyard framed by vegetation and warm walls, with a blurred figure crossing the space"
+                        class="slide" fetchpriority="high" decoding="async">
+                </picture>
+                <picture class="slide-frame">
+                    <source type="image/webp"
+                        srcset="immagini/home-02-barbican-960.webp 960w, immagini/home-02-barbican-1440.webp 1440w, immagini/home-02-barbican-2048.webp 2048w"
+                        sizes="(max-width: 1024px) 100vw, 70vw">
+                    <img src="immagini/home-02-barbican.jpg" width="1365" height="2048"
+                        alt="Shakespeare Tower at the Barbican, with a woman in pink crossing the sunlit plaza"
+                        class="slide" loading="lazy" decoding="async">
+                </picture>
+                <picture class="slide-frame">
+                    <source type="image/webp"
+                        srcset="immagini/home-03-le-capase-960.webp 960w, immagini/home-03-le-capase-1440.webp 1440w, immagini/home-03-le-capase-2048.webp 2048w"
+                        sizes="(max-width: 1024px) 100vw, 70vw">
+                    <img src="immagini/home-03-le-capase.jpg" width="2048" height="1365"
+                        alt="Pool terrace at Le Capase framed by a pergola, overlooking Mediterranean vegetation and sea"
+                        class="slide" loading="lazy" decoding="async">
+                </picture>
+                <picture class="slide-frame">
+                    <source type="image/webp"
+                        srcset="immagini/home-04-interno-legno-960.webp 960w, immagini/home-04-interno-legno-1440.webp 1440w, immagini/home-04-interno-legno-2048.webp 2048w"
+                        sizes="(max-width: 1024px) 100vw, 70vw">
+                    <img src="immagini/home-04-interno-legno.jpg" width="2048" height="1365"
+                        alt="Interior with timber ceiling, textured walls and a precise rectangle of sunlight"
+                        class="slide" loading="lazy" decoding="async">
+                </picture>
+                <picture class="slide-frame">
+                    <source type="image/webp"
+                        srcset="immagini/home-05-macedonia-960.webp 960w, immagini/home-05-macedonia-1440.webp 1440w, immagini/home-05-macedonia-2048.webp 2048w"
+                        sizes="(max-width: 1024px) 100vw, 70vw">
+                    <img src="immagini/home-05-macedonia.jpg" width="2048" height="1365"
+                        alt="Isolated wooden lookout structure facing a lake and distant mountains in North Macedonia"
+                        class="slide" loading="lazy" decoding="async">
+                </picture>
             </div>
         </div>
     </div>

@@ -13,7 +13,7 @@ const CONFIG = {
         slider: '#slider',
         profileContent: '.profile-content', // Added selector
         slides: '.slides',
-        slideImages: 'img.slide',
+        slideImages: '.slide-frame',
         slideCounter: '#slide_counter',
         pivaPolicy: '#piva_policy',
         contatti: '#contatti',
@@ -294,7 +294,7 @@ class SliderManager {
         this.slider.addEventListener('touchend', (e) => this.handleTouchEnd(e));
 
         // Tastiera
-        document.addEventListener('keydown', (e) => this.handleKey(e));
+        this.slider.addEventListener('keydown', (e) => this.handleKey(e));
 
         // Wheel (Touchpad)
         this.slider.addEventListener('wheel', (e) => this.handleWheel(e), { passive: false });
@@ -308,6 +308,7 @@ class SliderManager {
         // Inizializzazione stato (es. contatore)
         this.refreshArrows();
         this.update();
+        this.preloadAdjacent();
     }
 
     refreshArrows() {
@@ -336,6 +337,7 @@ class SliderManager {
         if (this.currentIndex < this.totalSlides - 1) {
             this.currentIndex++;
             this.update();
+            this.preloadAdjacent();
         }
     }
 
@@ -344,6 +346,7 @@ class SliderManager {
         if (this.currentIndex > 0) {
             this.currentIndex--;
             this.update();
+            this.preloadAdjacent();
         }
     }
 
@@ -371,6 +374,14 @@ class SliderManager {
         }
         if (this.navDown) {
             this.navDown.classList.toggle('disabled', this.currentIndex === this.totalSlides - 1);
+        }
+    }
+
+    preloadAdjacent() {
+        const nextFrame = this.slides[this.currentIndex + 1];
+        const image = nextFrame ? nextFrame.querySelector('img') : null;
+        if (image && image.loading === 'lazy') {
+            image.loading = 'eager';
         }
     }
 
@@ -523,8 +534,3 @@ document.addEventListener('DOMContentLoaded', () => {
     window.app = { layoutManager, cursorManager, sliderManager };
 });
 
-// Disabilita tasto destro
-
-    document.addEventListener('contextmenu', function (e) {
-        e.preventDefault();
-    });
