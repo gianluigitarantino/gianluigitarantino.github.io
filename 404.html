@@ -45,9 +45,15 @@ permalink: /404.html
             const selected = lang === 'en' ? 'en' : 'it';
             const root = document.documentElement;
             root.setAttribute('lang', selected);
-            localStorage.setItem('language', selected);
             const title = selected === 'en' ? root.dataset.titleEn : root.dataset.titleIt;
             if (title) document.title = title;
+            document.querySelectorAll('[data-href-it][data-href-en]').forEach(link => {
+                link.setAttribute('href', selected === 'en' ? link.dataset.hrefEn : link.dataset.hrefIt);
+            });
+            const menu = document.getElementById('menu');
+            const language = document.getElementById('lingua');
+            if (menu) menu.setAttribute('aria-label', selected === 'en' ? 'Main navigation' : 'Navigazione principale');
+            if (language) language.setAttribute('aria-label', selected === 'en' ? 'Language selection' : 'Selezione lingua');
         }
 
         function setLanguage(lang) {
@@ -55,11 +61,9 @@ permalink: /404.html
         }
 
         (function () {
-            const stored = localStorage.getItem('language');
-            applyLanguage(stored === 'en' ? 'en' : 'it');
-            if (window.location.pathname.endsWith('/index.html')) {
-                history.replaceState(null, '', '/');
-            }
+            const selected = window.location.pathname.startsWith('/en/') ? 'en' : 'it';
+            document.documentElement.setAttribute('lang', selected);
+            document.addEventListener('DOMContentLoaded', () => applyLanguage(selected));
         })();
     </script>
 
@@ -92,14 +96,14 @@ permalink: /404.html
         <nav id="menu" aria-label="Navigazione principale">
             <div>
                 <div id="logo">
-                    <span><a href="/">gianluigi tarantino</a></span>
+                    <span><a href="/" data-href-it="/" data-href-en="/en/">gianluigi tarantino</a></span>
                     <span><span class="lang-it">fotografia e spazio</span><span class="lang-en" lang="en">photography and space</span></span>
                 </div>
                 <div id="voci_menu">
-                    <span><a href="/architettura/"><span class="lang-it">architettura</span><span class="lang-en" lang="en">architecture</span></a></span>
-                    <span><a href="/interior/"><span class="lang-it">interior</span><span class="lang-en" lang="en">interiors</span></a></span>
-                    <span><a href="/personale/"><span class="lang-it">personale</span><span class="lang-en" lang="en">personal</span></a></span>
-                    <span><a href="/profilo/"><span class="lang-it">profilo</span><span class="lang-en" lang="en">about</span></a></span>
+                    <span><a href="/architettura/" data-href-it="/architettura/" data-href-en="/en/architecture/"><span class="lang-it">architettura</span><span class="lang-en" lang="en">architecture</span></a></span>
+                    <span><a href="/interior/" data-href-it="/interior/" data-href-en="/en/interiors/"><span class="lang-it">interior</span><span class="lang-en" lang="en">interiors</span></a></span>
+                    <span><a href="/personale/" data-href-it="/personale/" data-href-en="/en/personal/"><span class="lang-it">personale</span><span class="lang-en" lang="en">personal</span></a></span>
+                    <span><a href="/profilo/" data-href-it="/profilo/" data-href-en="/en/about/"><span class="lang-it">profilo</span><span class="lang-en" lang="en">about</span></a></span>
                 </div>
                 
                 <div id="lingua" aria-label="Selezione lingua">
@@ -125,7 +129,7 @@ permalink: /404.html
                 </article>
                 <article class="lang-en" lang="en">
                     <header class="content-header"><h1>Page not found</h1></header>
-                    <p>The address may have changed. Return to the <a href="/">homepage</a> or browse the <a href="/architettura/">architecture</a> and <a href="/interior/">interiors</a> portfolios.</p>
+                    <p>The address may have changed. Return to the <a href="/en/">homepage</a> or browse the <a href="/en/architecture/">architecture</a> and <a href="/en/interiors/">interiors</a> portfolios.</p>
                 </article>
             </div>
         </main>
