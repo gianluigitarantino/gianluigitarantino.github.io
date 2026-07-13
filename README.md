@@ -12,15 +12,22 @@ Obiettivo: sito **veloce, stabile, facile da mantenere** e con forte attenzione 
 - Nessun bundler (niente Webpack/Vite/Parcel, ecc.) salvo accordi.
 - Hosting: **Netlify**, deploy automatico da questa repo.
 - Dominio: `gianluigitarantino.com` (root) + `/en/` per la versione inglese.
-- File principali:
-  - `index.html` → home italiana
-  - `en/index.html` → home inglese
-  - `/assets/css/…` → stili
-  - `/assets/js/…` → script
-  - `/assets/img/…` → immagini e icone
+- File e URL principali:
+  - `index.html` → `/` (homepage; il nome del file non appare nell’URL)
+  - `architettura/index.html` → `/architettura/`
+  - `interior/index.html` → `/interior/`
+  - `personale/index.html` → `/personale/`
+  - `profilo/index.html` → `/profilo/`
+  - `style.css` → stili condivisi
+  - `script.js` → JavaScript condiviso
+  - `/immagini/…` → immagini e icone
 
 
 ## 2. Regole sugli URL (IMPORTANTISSIMO)
+
+- I link interni devono usare esclusivamente URL puliti con slash finale.
+- Non inserire mai `.html` negli `href`, nelle canonical o nella sitemap.
+- Il logo/home deve puntare sempre a `/`, mai a `/index.html`.
 
 Queste **non devono essere modificate** senza autorizzazione:
 

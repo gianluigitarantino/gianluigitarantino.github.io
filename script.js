@@ -140,13 +140,21 @@ class LayoutManager {
     /* ... setupActiveLink ... */
     setupActiveLink() {
         if (!this.els.menu) return;
-        const currentPath = window.location.pathname;
+        const normalizePath = (value) => {
+            let path = new URL(value, window.location.origin).pathname;
+            if (path.endsWith('/index.html')) {
+                path = path.slice(0, -'index.html'.length);
+            }
+            if (!path) path = '/';
+            if (path !== '/' && !path.endsWith('/')) path += '/';
+            return path;
+        };
+
+        const currentPath = normalizePath(window.location.pathname);
         const links = this.els.menu.querySelectorAll('#voci_menu a');
         links.forEach(link => {
-            const href = link.getAttribute('href');
-            if (currentPath.endsWith(href) || (currentPath === '/' && href === 'index.html')) {
-                link.classList.add('active');
-            }
+            const linkPath = normalizePath(link.getAttribute('href'));
+            link.classList.toggle('active', currentPath === linkPath);
         });
     }
 
