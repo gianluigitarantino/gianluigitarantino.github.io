@@ -29,6 +29,8 @@ const MESI_ITALIANI = Object.freeze([
  * Verifica l'accesso, invia subito un primo rapporto e crea il trigger mensile.
  */
 function configuraRapportoMensile() {
+  ScriptApp.requireAllScopes(ScriptApp.AuthMode.FULL);
+
   const rapporto = creaRapportoMensile_();
   inviaRapporto_(rapporto, true);
 

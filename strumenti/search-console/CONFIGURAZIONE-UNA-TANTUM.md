@@ -35,8 +35,10 @@ Non inserire password, chiavi o altri dati personali nel repository GitHub.
 3. Seleziona il tuo account Google e autorizza soltanto i permessi richiesti:
    lettura Search Console, connessione alle API, invio email e gestione del
    trigger automatico del progetto.
-4. Attendi il messaggio `Esecuzione completata`.
-5. Controlla la posta: deve arrivare un rapporto con `[PROVA]` nell'oggetto.
+4. Se la prima esecuzione termina dopo aver mostrato la richiesta dei permessi,
+   premi nuovamente **Esegui**.
+5. Attendi il messaggio `Esecuzione completata`.
+6. Controlla la posta: deve arrivare un rapporto con `[PROVA]` nell'oggetto.
 
 La configurazione elimina eventuali trigger duplicati e ne crea uno solo. Il
 rapporto verrà inviato automaticamente il giorno 5 di ogni mese, intorno alle
