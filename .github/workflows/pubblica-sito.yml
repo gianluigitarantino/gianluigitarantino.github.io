@@ -73,6 +73,7 @@ jobs:
       - name: Controlla tecnicamente il sito
         run: |
           node --check script.js
+          node --check strumenti/controlla-sito-online.mjs
           node strumenti/controlla-sito.mjs
 
       - name: Genera il rapporto sui file inutilizzati
@@ -110,10 +111,27 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     permissions:
+      contents: read
       pages: write
       id-token: write
 
     steps:
+      - name: Scarica gli strumenti di controllo
+        uses: actions/checkout@v6
+
+      - name: Prepara Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          package-manager-cache: false
+
       - name: Pubblica su GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Controlla il sito realmente online
+        env:
+          SITE_CHECK_ATTEMPTS: "8"
+          SITE_CHECK_DELAY_MS: "10000"
+          SITE_CHECK_VERSION: ${{ github.sha }}
+        run: node strumenti/controlla-sito-online.mjs
