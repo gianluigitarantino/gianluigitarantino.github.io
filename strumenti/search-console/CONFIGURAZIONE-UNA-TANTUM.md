@@ -20,15 +20,33 @@ Non inserire password, chiavi o altri dati personali nel repository GitHub.
    `strumenti/search-console/appsscript.json` presente nel repository.
 5. Salva il progetto.
 
-## 3. Abilitare Search Console API
+## 3. Creare e configurare il progetto Google Cloud
 
-1. Nelle impostazioni del progetto Apps Script, apri il collegamento al progetto
-   Google Cloud associato.
-2. In Google Cloud apri **API e servizi → Libreria**.
-3. Cerca **Google Search Console API** e premi **Abilita**.
-4. Torna all'editor Apps Script.
+Search Console API non compare nell'elenco **Servizi** di Apps Script. Serve un
+progetto Google Cloud standard:
 
-## 4. Attivare il rapporto
+1. apri https://console.cloud.google.com/projectcreate;
+2. crea un progetto chiamato `Rapporto Search Console`, senza fatturazione;
+3. con quel progetto selezionato, apri
+   https://console.cloud.google.com/apis/library/searchconsole.googleapis.com;
+4. premi **Abilita** e non creare credenziali;
+5. apri https://console.cloud.google.com/auth/overview e configura Google Auth
+   Platform;
+6. usa `Rapporto mensile Search Console` come nome, la tua email per assistenza
+   e contatto e **Esterno** come pubblico;
+7. in **Pubblico → Utenti di test**, aggiungi lo stesso account Google;
+8. apri https://console.cloud.google.com/iam-admin/settings e copia il **Numero
+   progetto**, composto soltanto da cifre.
+
+Non pubblicare l'applicazione e non creare client o chiavi OAuth.
+
+## 4. Collegare Cloud ad Apps Script
+
+1. Torna in Apps Script e apri **Impostazioni progetto**.
+2. In **Progetto Google Cloud Platform (GCP)** premi **Cambia progetto**.
+3. Incolla il numero del progetto e premi **Imposta progetto**.
+
+## 5. Attivare il rapporto
 
 1. In alto, scegli la funzione `configuraRapportoMensile`.
 2. Premi **Esegui**.
@@ -39,6 +57,9 @@ Non inserire password, chiavi o altri dati personali nel repository GitHub.
    premi nuovamente **Esegui**.
 5. Attendi il messaggio `Esecuzione completata`.
 6. Controlla la posta: deve arrivare un rapporto con `[PROVA]` nell'oggetto.
+
+In **Trigger** deve essere presente una sola riga per la funzione
+`inviaRapportoMensileSearchConsole`.
 
 La configurazione elimina eventuali trigger duplicati e ne crea uno solo. Il
 rapporto verrà inviato automaticamente il giorno 5 di ogni mese, intorno alle
