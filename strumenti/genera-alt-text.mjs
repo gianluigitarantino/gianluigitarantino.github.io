@@ -17,6 +17,7 @@ const cachePath = path.join(rootDirectory, "dati", "alt-text.json");
 const apiKey = process.env.OPENAI_API_KEY?.trim();
 const model = process.env.OPENAI_ALT_MODEL?.trim() || "gpt-5.6-luna";
 const useExistingImages = process.env.PORTFOLIO_EXISTING_IMAGES === "1";
+const preserveExistingAlt = process.env.PORTFOLIO_PRESERVE_EXISTING_ALT === "1";
 const responsesEndpoint =
   process.env.OPENAI_RESPONSES_ENDPOINT?.trim() || "https://api.openai.com/v1/responses";
 
@@ -119,15 +120,26 @@ function slideImageTags(html) {
 }
 
 async function readExistingSources(sectionName) {
-  const pagePath = path.join(rootDirectory, sections[sectionName].pages.it);
-  if (!(await exists(pagePath))) fail(`Manca la pagina ${sections[sectionName].pages.it}.`);
+  const pageTags = {};
+  for (const [language, pageName] of Object.entries(sections[sectionName].pages)) {
+    const pagePath = path.join(rootDirectory, pageName);
+    if (!(await exists(pagePath))) fail(`Manca la pagina ${pageName}.`);
+    pageTags[language] = slideImageTags(await readFile(pagePath, "utf8"));
+    if (!pageTags[language].length) fail(`Non trovo fotografie nella pagina ${pageName}.`);
+  }
 
-  const tags = slideImageTags(await readFile(pagePath, "utf8"));
-  if (!tags.length) fail(`Non trovo fotografie nella pagina ${sections[sectionName].pages.it}.`);
+  if (pageTags.it.length !== pageTags.en.length) {
+    fail(`Il numero di fotografie italiane e inglesi non coincide nella sezione ${sectionName}.`);
+  }
 
   const sources = [];
-  for (const [index, tag] of tags.entries()) {
-    const sourceUrl = attributeFromTag(tag, "src");
+  for (const [index, italianTag] of pageTags.it.entries()) {
+    const englishTag = pageTags.en[index];
+    const sourceUrl = attributeFromTag(italianTag, "src");
+    const englishSourceUrl = attributeFromTag(englishTag, "src");
+    if (sourceUrl !== englishSourceUrl) {
+      fail(`L'ordine delle fotografie italiane e inglesi non coincide nella sezione ${sectionName}.`);
+    }
     const match = sourceUrl.match(/^\/immagini\/([^/]+\.jpe?g)$/i);
     if (!match) fail(`Percorso JPEG non valido in ${sections[sectionName].pages.it}: ${sourceUrl}`);
 
@@ -149,10 +161,23 @@ async function readExistingSources(sectionName) {
       orderNumber,
       path: filePath,
       sha256: await sha256(filePath),
+      existingAlt: {
+        it: decodeAttribute(attributeFromTag(italianTag, "alt")),
+        en: decodeAttribute(attributeFromTag(englishTag, "alt")),
+      },
     });
   }
 
   return sources;
+}
+
+function decodeAttribute(value) {
+  return String(value)
+    .replace(/&quot;/gi, '"')
+    .replace(/&#(?:39|x27);/gi, "'")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&amp;/gi, "&");
 }
 
 function emptyCache() {
@@ -388,6 +413,19 @@ async function main() {
       ? await readExistingSources(sectionName)
       : await readUploadedSources(sectionName);
     if (!sources.length) continue;
+
+    if (useExistingImages && preserveExistingAlt) {
+      for (const source of sources) {
+        if (!cachedAltIsValid(cache[sectionName]?.[source.orderKey], source)) {
+          cache[sectionName][source.orderKey] = {
+            sha256: source.sha256,
+            it: cleanAltText(source.existingAlt.it, "italiano"),
+            en: cleanAltText(source.existingAlt.en, "inglese"),
+            model: "existing-reviewed",
+          };
+        }
+      }
+    }
 
     const pending = sources.filter(
       (source) => !cachedAltIsValid(cache[sectionName]?.[source.orderKey], source),

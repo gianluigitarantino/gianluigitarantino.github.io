@@ -56,6 +56,7 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_ALT_MODEL: gpt-5.6-luna
           PORTFOLIO_EXISTING_IMAGES: "1"
+          PORTFOLIO_PRESERVE_EXISTING_ALT: "1"
         run: node strumenti/genera-alt-text.mjs
 
       - name: Ottimizza e inserisce le fotografie

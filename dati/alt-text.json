@@ -1,7 +1,101 @@
 {
   "_version": 1,
-  "home": {},
-  "architettura": {},
-  "interior": {},
-  "personale": {}
+  "home": {
+    "01": {
+      "sha256": "708ebfb07c7214a5e62e0250d45e5aba142f7d2dae6ca694e51cfd583dbfd32b",
+      "it": "Cortile con vegetazione e pareti color ocra attraversato da una figura in movimento",
+      "en": "Courtyard with vegetation and ochre walls crossed by a figure in motion",
+      "model": "existing-reviewed"
+    },
+    "02": {
+      "sha256": "161c9ef235f090cab4ef66aa097e6015cc841f0741ab7b5c7a9ab8a54cf27606",
+      "it": "Shakespeare Tower al Barbican di Londra con una donna in abito rosa nella piazza",
+      "en": "Shakespeare Tower at the Barbican in London with a woman in a pink dress in the square",
+      "model": "existing-reviewed"
+    },
+    "03": {
+      "sha256": "274d250187f84a1f48af7611440c2b336e2c89bc89e8e13faef7f01975f80deb",
+      "it": "Terrazza con piscina dell'hotel Le Capase affacciata sulla vegetazione mediterranea e sul mare",
+      "en": "Pool terrace at Hotel Le Capase overlooking Mediterranean vegetation and the sea",
+      "model": "existing-reviewed"
+    },
+    "04": {
+      "sha256": "e2c0e0d95c30045a09cfe099fb406902dc8a82057623e67e1a70dc1a5739f165",
+      "it": "Interno con soffitto in legno, pareti materiche e un rettangolo di luce naturale",
+      "en": "Interior with a timber ceiling, textured walls and a rectangle of natural light",
+      "model": "existing-reviewed"
+    },
+    "05": {
+      "sha256": "863cf579d7ee4dfbe13a0dcd8931633a20789ff4d99c597ed1b66a0fae8027d6",
+      "it": "Struttura in legno isolata davanti a un lago e alle montagne della Macedonia del Nord",
+      "en": "Isolated timber structure overlooking a lake and the mountains of North Macedonia",
+      "model": "existing-reviewed"
+    }
+  },
+  "architettura": {
+    "01": {
+      "sha256": "cea3513928fc796a6a27cbea8f3f379b71e6a3774eb4a4beb699263c49d807c8",
+      "it": "Dettaglio di facciate brutaliste al Barbican Estate di Londra",
+      "en": "Detail of Brutalist façades at the Barbican Estate in London",
+      "model": "existing-reviewed"
+    },
+    "02": {
+      "sha256": "84745410dd736490d1730fb473100b9a688f7a8ba6fca4a5f52549a3e474f611",
+      "it": "Spazio pubblico e volumi del Barbican Estate a Londra",
+      "en": "Public space and architectural volumes at the Barbican Estate in London",
+      "model": "existing-reviewed"
+    },
+    "03": {
+      "sha256": "e31d6de7c7a4d9bc85c42faa60ba93c33c9ba06e55eaf92e414598db397a5875",
+      "it": "Finestre verticali su una facciata in cemento del Barbican Estate",
+      "en": "Vertical windows on a concrete façade at the Barbican Estate",
+      "model": "existing-reviewed"
+    }
+  },
+  "interior": {
+    "01": {
+      "sha256": "68026c5d7b0297d14f62f66a1e65e6e8405c3ac7e5bd3a8bd3573d4e22407601",
+      "it": "Interno contemporaneo con pareti color terracotta e illuminazione lineare",
+      "en": "Contemporary interior with terracotta walls and linear lighting",
+      "model": "existing-reviewed"
+    },
+    "02": {
+      "sha256": "50fbafde61b84d042008f54846555b85f436d3892f0f5ace8bc5bdfba858f435",
+      "it": "Grande finestra ad arco con sedute affacciate sul verde",
+      "en": "Large arched window with seating overlooking greenery",
+      "model": "existing-reviewed"
+    },
+    "03": {
+      "sha256": "0c261e50e8d1fc84932bbd4b08a7ebe2147ce3a8815232081f01c66aa5a82d3f",
+      "it": "Lampade sferiche e struttura a vista in un interno contemporaneo",
+      "en": "Spherical lights and exposed structure in a contemporary interior",
+      "model": "existing-reviewed"
+    }
+  },
+  "personale": {
+    "01": {
+      "sha256": "79d8496a1d07c475a9ad81195e43b55ccee003b036fd3c8eb3202b04e53b5112",
+      "it": "Geometrie di coperture industriali contro il cielo",
+      "en": "Industrial roof geometries against the sky",
+      "model": "existing-reviewed"
+    },
+    "02": {
+      "sha256": "8a3ccf792efca08debad21918b4b6ecdad51cdc57d6e360eeeeff75d27ebf1bc",
+      "it": "Tre aperture quadrate su una facciata chiara",
+      "en": "Three square openings on a pale façade",
+      "model": "existing-reviewed"
+    },
+    "03": {
+      "sha256": "2200a6a4b63ef925ab47a55c87876f9b30388f5bec1e78cac490e56458a8a617",
+      "it": "Frammenti di roccia e materia minerale",
+      "en": "Rock fragments and mineral material",
+      "model": "existing-reviewed"
+    },
+    "04": {
+      "sha256": "47d617337633016d7aef313943a2e11949bcbf03e7f22c7e4ee0d5e6f13eac64",
+      "it": "Parapetto geometrico in cemento contro il cielo azzurro",
+      "en": "Geometric concrete parapet against the blue sky",
+      "model": "existing-reviewed"
+    }
+  }
 }
