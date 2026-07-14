@@ -1,4 +1,4 @@
-# GUIDA — Come pubblicare le fotografie
+# GUIDA — Come pubblicare o rimuovere le fotografie
 
 Questa è la procedura da seguire per sostituire le fotografie del sito da un
 computer o da iPhone. Non servono Codex, Terminale o GitHub Desktop.
@@ -46,7 +46,40 @@ Dentro la cartella scelta:
 Il resto viene eseguito automaticamente.
 Non occorre scrivere didascalie o alt text, né modificare le pagine del sito.
 
-## 4. Controllare la pubblicazione
+## 4. Aggiungere o rimuovere fotografie
+
+L'automazione sostituisce sempre l'intera galleria della sezione scelta.
+
+Per aggiungere fotografie:
+
+1. preparare tutte le fotografie già presenti che si vogliono conservare;
+2. aggiungere le nuove fotografie;
+3. numerare nuovamente l'intera selezione da `01.jpg` in poi, senza salti;
+4. caricare tutta la selezione finale nella cartella corretta.
+
+Per rimuovere una fotografia:
+
+1. preparare tutte le fotografie che devono rimanere, escludendo quella da rimuovere;
+2. numerarle nuovamente da `01.jpg` in poi, senza salti;
+3. caricare tutta la selezione finale nella cartella corretta.
+
+Se non si hanno più tutti i JPG della selezione completa, fermarsi e chiedere a
+Codex di recuperare la galleria esistente.
+
+Non eliminare manualmente file dalla cartella `immagini` e non modificare le
+pagine HTML: le vecchie versioni JPEG, WebP e AVIF vengono rimosse
+automaticamente.
+
+### Correggere un caricamento appena fatto
+
+Se i JPG errati sono ancora visibili dentro `carica-foto`, aprire ogni file,
+premere l'icona del cestino (**Delete this file**) e confermare con **Commit
+changes**. Poi effettuare il caricamento corretto.
+
+Se i file non sono più visibili, la pubblicazione è già iniziata o terminata:
+non fare altre modifiche e chiedere a Codex di ripristinare la galleria.
+
+## 5. Controllare la pubblicazione
 
 Aprire:
 
