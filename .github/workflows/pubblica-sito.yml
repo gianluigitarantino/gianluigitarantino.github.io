@@ -33,7 +33,6 @@ jobs:
           fi
 
       - name: Prepara Node.js
-        if: steps.uploads.outputs.present == 'true'
         uses: actions/setup-node@v6
         with:
           node-version: 24
@@ -51,6 +50,14 @@ jobs:
           PORTFOLIO_SOURCES_DIR: carica-foto
         run: node strumenti/genera-alt-text.mjs
 
+      - name: Genera alt text per le fotografie già pubblicate
+        if: steps.uploads.outputs.present == 'false'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_ALT_MODEL: gpt-5.6-luna
+          PORTFOLIO_EXISTING_IMAGES: "1"
+        run: node strumenti/genera-alt-text.mjs
+
       - name: Ottimizza e inserisce le fotografie
         if: steps.uploads.outputs.present == 'true'
         env:
@@ -59,8 +66,7 @@ jobs:
           PORTFOLIO_RECOMMENDED_MINIMUM_EDGE: "2048"
         run: node strumenti/prepara-portfolio.mjs
 
-      - name: Salva le gallerie generate
-        if: steps.uploads.outputs.present == 'true'
+      - name: Salva fotografie e alt text generati
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
@@ -69,7 +75,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "Nessuna modifica da salvare."
           else
-            git commit -m "Pubblica fotografie caricate online [skip ci]"
+            git commit -m "Aggiorna fotografie e alt text [skip ci]"
             git push origin main
           fi
 

@@ -16,14 +16,27 @@ const sourcesDirectory = configuredSourcesDirectory
 const cachePath = path.join(rootDirectory, "dati", "alt-text.json");
 const apiKey = process.env.OPENAI_API_KEY?.trim();
 const model = process.env.OPENAI_ALT_MODEL?.trim() || "gpt-5.6-luna";
+const useExistingImages = process.env.PORTFOLIO_EXISTING_IMAGES === "1";
 const responsesEndpoint =
   process.env.OPENAI_RESPONSES_ENDPOINT?.trim() || "https://api.openai.com/v1/responses";
 
 const sections = {
-  home: "selezione generale della homepage di un portfolio fotografico",
-  architettura: "portfolio di fotografia di architettura",
-  interior: "portfolio di fotografia di interni e hospitality",
-  personale: "ricerca fotografica personale su spazio, paesaggio e materia",
+  home: {
+    context: "selezione generale della homepage di un portfolio fotografico",
+    pages: { it: "index.html", en: "en-home.html" },
+  },
+  architettura: {
+    context: "portfolio di fotografia di architettura",
+    pages: { it: "architettura.html", en: "en-architecture.html" },
+  },
+  interior: {
+    context: "portfolio di fotografia di interni e hospitality",
+    pages: { it: "interior.html", en: "en-interiors.html" },
+  },
+  personale: {
+    context: "ricerca fotografica personale su spazio, paesaggio e materia",
+    pages: { it: "personale.html", en: "en-personal.html" },
+  },
 };
 
 function fail(message) {
@@ -72,7 +85,7 @@ async function sha256(filePath) {
   return createHash("sha256").update(buffer).digest("hex");
 }
 
-async function readSources(sectionName) {
+async function readUploadedSources(sectionName) {
   const directory = path.join(sourcesDirectory, sectionName);
   await mkdir(directory, { recursive: true });
 
@@ -89,6 +102,54 @@ async function readSources(sectionName) {
     seen.add(source.orderNumber);
     source.path = path.join(directory, source.filename);
     source.sha256 = await sha256(source.path);
+  }
+
+  return sources;
+}
+
+function attributeFromTag(tag, attribute) {
+  const match = tag.match(new RegExp(`\\b${attribute}="([^"]*)"`, "i"));
+  return match?.[1] ?? "";
+}
+
+function slideImageTags(html) {
+  return [...html.matchAll(/<img\b(?=[^>]*\bclass="[^"]*\bslide\b[^"]*")[^>]*>/gi)].map(
+    (match) => match[0],
+  );
+}
+
+async function readExistingSources(sectionName) {
+  const pagePath = path.join(rootDirectory, sections[sectionName].pages.it);
+  if (!(await exists(pagePath))) fail(`Manca la pagina ${sections[sectionName].pages.it}.`);
+
+  const tags = slideImageTags(await readFile(pagePath, "utf8"));
+  if (!tags.length) fail(`Non trovo fotografie nella pagina ${sections[sectionName].pages.it}.`);
+
+  const sources = [];
+  for (const [index, tag] of tags.entries()) {
+    const sourceUrl = attributeFromTag(tag, "src");
+    const match = sourceUrl.match(/^\/immagini\/([^/]+\.jpe?g)$/i);
+    if (!match) fail(`Percorso JPEG non valido in ${sections[sectionName].pages.it}: ${sourceUrl}`);
+
+    const filename = match[1];
+    const orderNumber = index + 1;
+    const orderKey = String(orderNumber).padStart(2, "0");
+    const filenameContext = slugToContext(
+      filename
+        .replace(/\.jpe?g$/i, "")
+        .replace(new RegExp(`^${sectionName}-${orderKey}-?`, "i"), ""),
+    );
+    const filePath = path.join(rootDirectory, "immagini", filename);
+    if (!(await exists(filePath))) fail(`Manca la fotografia immagini/${filename}.`);
+
+    sources.push({
+      filename,
+      filenameContext,
+      orderKey,
+      orderNumber,
+      path: filePath,
+      sha256: await sha256(filePath),
+    });
   }
 
   return sources;
@@ -174,7 +235,7 @@ function promptFor(sectionName, source) {
     ? `\nIl nome del file fornisce questo possibile contesto: “${source.filenameContext}”. Usalo soltanto se è coerente con ciò che vedi e non trasformarlo in un fatto non verificabile.`
     : "";
 
-  return `Analizza questa fotografia destinata a un ${sections[sectionName]}.
+  return `Analizza questa fotografia destinata a un ${sections[sectionName].context}.
 Scrivi due alt text equivalenti: uno in italiano e uno in inglese britannico naturale.
 
 Regole:
@@ -266,6 +327,56 @@ async function atomicWrite(filePath, content) {
   await rename(temporaryPath, filePath);
 }
 
+function escapeAttribute(value) {
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+async function prepareExistingPageUpdates(cache, selections) {
+  const updates = [];
+
+  for (const { sectionName, sources } of selections) {
+    for (const [language, pageName] of Object.entries(sections[sectionName].pages)) {
+      const pagePath = path.join(rootDirectory, pageName);
+      const original = await readFile(pagePath, "utf8");
+      let imageIndex = 0;
+
+      const updated = original.replace(
+        /<img\b(?=[^>]*\bclass="[^"]*\bslide\b[^"]*")[^>]*>/gi,
+        (tag) => {
+          const source = sources[imageIndex];
+          if (!source) fail(`Ci sono troppe fotografie nella pagina ${pageName}.`);
+
+          const sourceUrl = attributeFromTag(tag, "src");
+          if (sourceUrl !== `/immagini/${source.filename}`) {
+            fail(`L'ordine delle fotografie non coincide nella pagina ${pageName}.`);
+          }
+
+          const entry = cache[sectionName]?.[source.orderKey];
+          if (!cachedAltIsValid(entry, source)) {
+            fail(`Manca un alt text valido per ${source.filename}.`);
+          }
+
+          const alt = escapeAttribute(entry[language]);
+          imageIndex += 1;
+          if (!/\balt="[^"]*"/i.test(tag)) fail(`Manca l'attributo alt in ${pageName}.`);
+          return tag.replace(/\balt="[^"]*"/i, `alt="${alt}"`);
+        },
+      );
+
+      if (imageIndex !== sources.length) {
+        fail(`Il numero di fotografie non coincide nella pagina ${pageName}.`);
+      }
+      updates.push({ pagePath, updated });
+    }
+  }
+
+  return updates;
+}
+
 async function main() {
   console.log("Generazione automatica degli alt text");
   const cache = await readCache();
@@ -273,7 +384,9 @@ async function main() {
   let newAnalyses = 0;
 
   for (const sectionName of Object.keys(sections)) {
-    const sources = await readSources(sectionName);
+    const sources = useExistingImages
+      ? await readExistingSources(sectionName)
+      : await readUploadedSources(sectionName);
     if (!sources.length) continue;
 
     const pending = sources.filter(
@@ -312,8 +425,14 @@ async function main() {
     cache[sectionName] = updatedSection;
   }
 
+  const pageUpdates = useExistingImages
+    ? await prepareExistingPageUpdates(cache, selections)
+    : [];
+
   await atomicWrite(cachePath, `${JSON.stringify(cache, null, 2)}\n`);
+  await Promise.all(pageUpdates.map(({ pagePath, updated }) => atomicWrite(pagePath, updated)));
   console.log(`\nAlt text pronti. Nuove fotografie analizzate: ${newAnalyses}.`);
+  if (useExistingImages) console.log("Pagine italiane e inglesi aggiornate senza ricomprimere le fotografie.");
 }
 
 main().catch((error) => {
