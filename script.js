@@ -169,6 +169,10 @@ class SliderManager {
         this.wheelAccumulator = 0;
         this.wheelGestureLocked = false;
         this.wheelResetTimeout = null;
+        this.wheelLastEventAt = 0;
+        this.wheelLastMagnitude = 0;
+        this.wheelNavigatedAt = 0;
+        this.wheelMomentumWasLow = false;
         this.navUp = null;
         this.navDown = null;
         this.init();
@@ -295,15 +299,40 @@ class SliderManager {
         if (Math.abs(deltaX) <= Math.abs(deltaY) || Math.abs(deltaX) < 2) return;
 
         if (event.cancelable) event.preventDefault();
+        const now = performance.now();
+        const magnitude = Math.abs(deltaX);
+        const eventGap = now - this.wheelLastEventAt;
+        const directionChanged = this.wheelAccumulator !== 0
+            && Math.sign(deltaX) !== Math.sign(this.wheelAccumulator);
+        const newIntentionalSwipe = this.wheelGestureLocked
+            && magnitude >= 6
+            && (this.wheelMomentumWasLow
+                || directionChanged
+                || (now - this.wheelNavigatedAt > 160
+                    && magnitude > this.wheelLastMagnitude * 1.8));
+
+        if (eventGap > 100 || newIntentionalSwipe) {
+            this.wheelAccumulator = 0;
+            this.wheelGestureLocked = false;
+            this.wheelMomentumWasLow = false;
+        }
+
+        this.wheelLastEventAt = now;
+        this.wheelLastMagnitude = magnitude;
+        if (this.wheelGestureLocked && magnitude <= 4) this.wheelMomentumWasLow = true;
         this.wheelAccumulator += deltaX;
         clearTimeout(this.wheelResetTimeout);
         this.wheelResetTimeout = setTimeout(() => {
             this.wheelAccumulator = 0;
             this.wheelGestureLocked = false;
-        }, 180);
+            this.wheelLastMagnitude = 0;
+            this.wheelMomentumWasLow = false;
+        }, 100);
 
         if (this.wheelGestureLocked || Math.abs(this.wheelAccumulator) < 30) return;
         this.wheelGestureLocked = true;
+        this.wheelNavigatedAt = now;
+        this.wheelMomentumWasLow = false;
         this.wheelAccumulator > 0 ? this.next() : this.prev();
     }
 }
