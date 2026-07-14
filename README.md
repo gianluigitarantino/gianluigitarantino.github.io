@@ -65,10 +65,14 @@ immagini, aggiorna le pagine in entrambe le lingue, salva i risultati e distribu
 direttamente GitHub Pages. I JPG temporanei vengono rimossi dopo un'elaborazione
 riuscita. `carica-foto/` è esclusa dalla build Jekyll.
 
-Lo script applica limiti anche ai file pubblicati: 1,5 MiB per il JPG di fallback,
-1,25 MiB per il WebP grande e 400 KiB per il WebP da 960 px. Se necessario riduce
-automaticamente la qualità entro una soglia prudente; se non riesce a rispettare
-il limite, interrompe la pubblicazione senza sostituire la galleria esistente.
+Lo script genera AVIF e WebP responsive con JPG di fallback. Il peso indicato è un
+obiettivo, non un vincolo che prevale sulla resa fotografica: la qualità non scende
+sotto 82 per il JPG e 78 per il WebP. Le fotografie complesse possono superare
+l'obiettivo entro un tetto di sicurezza; oltre quel tetto la pubblicazione si
+interrompe senza sostituire la galleria esistente. I tetti sono 2 MiB per il JPG,
+1,75 MiB per il WebP grande, 600 KiB per il WebP da 960 px, 1,5 MiB per l'AVIF
+grande e 450 KiB per l'AVIF da 960 px. L'AVIF usa una scala distinta e non scende
+sotto qualità 68.
 
 Il flusso locale resta disponibile: gli originali dentro `foto-sorgenti/` sono
 esclusi da Git e possono essere elaborati con Codex o con

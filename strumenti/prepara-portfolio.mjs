@@ -71,22 +71,39 @@ const mebibyte = 1024 * 1024;
 const imageFileLimits = {
   recommendedSourceMaximumBytes: 10 * mebibyte,
   jpeg: {
-    maximumBytes: 1.5 * mebibyte,
+    targetBytes: 1.5 * mebibyte,
+    hardMaximumBytes: 2 * mebibyte,
     initialQuality: 88,
-    minimumQuality: 64,
-    qualityStep: 4,
+    minimumQuality: 82,
+    qualityStep: 2,
   },
   fullWebp: {
-    maximumBytes: 1.25 * mebibyte,
+    targetBytes: 1.25 * mebibyte,
+    hardMaximumBytes: 1.75 * mebibyte,
     initialQuality: 84,
-    minimumQuality: 72,
-    qualityStep: 4,
+    minimumQuality: 78,
+    qualityStep: 2,
   },
   smallWebp: {
-    maximumBytes: 400 * 1024,
+    targetBytes: 400 * 1024,
+    hardMaximumBytes: 600 * 1024,
     initialQuality: 82,
-    minimumQuality: 64,
-    qualityStep: 4,
+    minimumQuality: 78,
+    qualityStep: 2,
+  },
+  fullAvif: {
+    targetBytes: 1 * mebibyte,
+    hardMaximumBytes: 1.5 * mebibyte,
+    initialQuality: 72,
+    minimumQuality: 68,
+    qualityStep: 2,
+  },
+  smallAvif: {
+    targetBytes: 300 * 1024,
+    hardMaximumBytes: 450 * 1024,
+    initialQuality: 70,
+    minimumQuality: 68,
+    qualityStep: 2,
   },
 };
 
@@ -246,7 +263,7 @@ async function encodeWithinLimit({
 
   while (quality >= limits.minimumQuality) {
     const buffer = await encode(createPipeline(), quality);
-    if (buffer.length <= limits.maximumBytes) {
+    if (buffer.length <= limits.targetBytes) {
       await writeFile(destination, buffer);
       if (quality < limits.initialQuality) {
         console.log(
@@ -257,10 +274,21 @@ async function encodeWithinLimit({
     }
 
     if (quality === limits.minimumQuality) {
-      fail(
-        `${label} pesa ${readableFileSize(buffer.length)} anche alla qualità minima. ` +
-          `Il limite è ${readableFileSize(limits.maximumBytes)}: usa un JPG meno complesso o più piccolo.`,
+      if (buffer.length > limits.hardMaximumBytes) {
+        fail(
+          `${label} pesa ${readableFileSize(buffer.length)} anche alla qualità minima. ` +
+            `Il tetto di sicurezza è ${readableFileSize(limits.hardMaximumBytes)}: ` +
+            `usa un JPG meno complesso o più piccolo.`,
+        );
+      }
+
+      await writeFile(destination, buffer);
+      console.warn(
+        `    ${label}: ${readableFileSize(buffer.length)}, sopra l'obiettivo di ` +
+          `${readableFileSize(limits.targetBytes)} ma entro il tetto di sicurezza; ` +
+          `qualità preservata a ${quality}.`,
       );
+      return { bytes: buffer.length, quality };
     }
     quality = Math.max(limits.minimumQuality, quality - limits.qualityStep);
   }
@@ -301,6 +329,8 @@ async function processImage({ sharp, sectionName, source, stagingDirectory }) {
   const jpegName = `${baseName}.jpg`;
   const fullWebpName = `${baseName}-${full.width}.webp`;
   const smallWebpName = `${baseName}-${smallWidth}.webp`;
+  const fullAvifName = `${baseName}-${full.width}.avif`;
+  const smallAvifName = `${baseName}-${smallWidth}.avif`;
 
   const fullPipeline = () =>
     sharp(source.path)
@@ -330,6 +360,16 @@ async function processImage({ sharp, sectionName, source, stagingDirectory }) {
       label: fullWebpName,
       limits: imageFileLimits.fullWebp,
     }),
+    encodeWithinLimit({
+      createPipeline: fullPipeline,
+      destination: path.join(stagingDirectory, fullAvifName),
+      encode: (pipeline, quality) =>
+        pipeline
+          .avif({ quality, effort: 6, chromaSubsampling: "4:4:4" })
+          .toBuffer(),
+      label: fullAvifName,
+      limits: imageFileLimits.fullAvif,
+    }),
   ];
 
   if (smallWidth !== full.width) {
@@ -346,6 +386,20 @@ async function processImage({ sharp, sectionName, source, stagingDirectory }) {
         label: smallWebpName,
         limits: imageFileLimits.smallWebp,
       }),
+      encodeWithinLimit({
+        createPipeline: () =>
+          sharp(source.path)
+            .rotate()
+            .resize({ width: smallWidth, withoutEnlargement: true })
+            .toColourspace("srgb"),
+        destination: path.join(stagingDirectory, smallAvifName),
+        encode: (pipeline, quality) =>
+          pipeline
+            .avif({ quality, effort: 6, chromaSubsampling: "4:4:4" })
+            .toBuffer(),
+        label: smallAvifName,
+        limits: imageFileLimits.smallAvif,
+      }),
     );
   }
 
@@ -358,6 +412,8 @@ async function processImage({ sharp, sectionName, source, stagingDirectory }) {
     jpegName,
     fullWebpName,
     smallWebpName,
+    fullAvifName,
+    smallAvifName,
     fullWidth: full.width,
     fullHeight: full.height,
     smallWidth,
@@ -378,13 +434,15 @@ function altText({ sectionName, image, language, descriptions }) {
   return sections[sectionName].fallbackAlt[language];
 }
 
-function srcsetFor(image) {
+function srcsetFor(image, format) {
+  const fullName = format === "avif" ? image.fullAvifName : image.fullWebpName;
+  const smallName = format === "avif" ? image.smallAvifName : image.smallWebpName;
   if (image.smallWidth === image.fullWidth) {
-    return `/immagini/${image.fullWebpName} ${image.fullWidth}w`;
+    return `/immagini/${fullName} ${image.fullWidth}w`;
   }
   return [
-    `/immagini/${image.smallWebpName} ${image.smallWidth}w`,
-    `/immagini/${image.fullWebpName} ${image.fullWidth}w`,
+    `/immagini/${smallName} ${image.smallWidth}w`,
+    `/immagini/${fullName} ${image.fullWidth}w`,
   ].join(", ");
 }
 
@@ -395,14 +453,15 @@ function pictureMarkup({ sectionName, image, index, language, descriptions }) {
 
   return [
     '<picture class="slide-frame">',
-    `<source sizes="(max-width: 1024px) 100vw, 70vw" srcset="${srcsetFor(image)}" type="image/webp">`,
+    `<source sizes="(max-width: 1024px) 100vw, 70vw" srcset="${srcsetFor(image, "avif")}" type="image/avif">`,
+    `<source sizes="(max-width: 1024px) 100vw, 70vw" srcset="${srcsetFor(image, "webp")}" type="image/webp">`,
     `<img alt="${alt}" class="slide" decoding="async" ${priorityAttributes} height="${image.fullHeight}" src="/immagini/${image.jpegName}" width="${image.fullWidth}">`,
     "</picture>",
   ].join("\n");
 }
 
 function preloadMarkup(image) {
-  return `<link as="image" fetchpriority="high" href="/immagini/${image.fullWebpName}" imagesizes="(max-width: 1024px) 100vw, 70vw" imagesrcset="${srcsetFor(image)}" rel="preload" type="image/webp">`;
+  return `<link as="image" fetchpriority="high" href="/immagini/${image.fullAvifName}" imagesizes="(max-width: 1024px) 100vw, 70vw" imagesrcset="${srcsetFor(image, "avif")}" rel="preload" type="image/avif">`;
 }
 
 function updateGalleryHtml({ html, sectionName, images, language, descriptions, pageName }) {

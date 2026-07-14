@@ -44,9 +44,13 @@ La cartella deve ricevere **tutta la galleria finale**, non soltanto le nuove fo
 L'automazione crea i file ottimizzati, aggiorna italiano e inglese, elimina i JPG
 temporanei dalla cartella di caricamento e pubblica il sito.
 
-Il peso finale è controllato automaticamente: massimo 1,5 MiB per il JPG di
-fallback, 1,25 MiB per il WebP grande e 400 KiB per il WebP da 960 px. Se questi
-limiti non possono essere rispettati, la galleria esistente non viene sostituita.
+L'automazione genera AVIF e WebP responsive con JPG di fallback. La qualità visiva
+viene prima del peso: le soglie sono obiettivi e possono essere superate per
+fotografie complesse, senza scendere sotto qualità 82 per il JPG e 78 per il WebP.
+Solo il superamento del tetto di sicurezza blocca la pubblicazione, lasciando
+intatta la galleria esistente. I tetti sono 2 MiB per il JPG, 1,75 MiB per il WebP
+grande, 600 KiB per il WebP da 960 px, 1,5 MiB per l'AVIF grande e 450 KiB per
+l'AVIF da 960 px.
 
 ## Importante
 

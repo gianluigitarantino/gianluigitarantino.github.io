@@ -73,11 +73,15 @@ GitHub avvia automaticamente il workflow **Pubblica sito e fotografie**, che:
 5. salva le modifiche nel repository;
 6. genera e pubblica GitHub Pages.
 
-I file pubblicati hanno limiti automatici: 1,5 MiB per il JPG di fallback, 1,25 MiB
-per il WebP grande e 400 KiB per il WebP da 960 px. Se una fotografia richiede
-ulteriore compressione, lo script adatta la qualità. Se il limite non può essere
-rispettato senza scendere sotto la qualità minima, la pubblicazione si ferma e la
-galleria online rimane invariata.
+L'automazione genera AVIF e WebP responsive con JPG di fallback. La qualità visiva
+ha priorità sul peso: 1,5 MiB per il JPG, 1,25 MiB per il WebP grande e 400 KiB per
+il WebP da 960 px sono obiettivi, non limiti assoluti. Lo script non scende sotto
+qualità 82 per il JPG e 78 per il WebP; per fotografie complesse tollera un peso
+maggiore entro un tetto di sicurezza. I tetti sono 2 MiB per il JPG, 1,75 MiB per
+il WebP grande, 600 KiB per il WebP da 960 px, 1,5 MiB per l'AVIF grande e 450 KiB
+per l'AVIF da 960 px. L'AVIF usa una scala distinta e non scende sotto qualità 68.
+Se anche il tetto viene superato, la pubblicazione si ferma e la galleria online
+rimane invariata.
 
 Lo stato si vede nella scheda **Actions** del repository. Un segno verde indica che
 l'operazione è riuscita. La pubblicazione del sito può richiedere alcuni minuti.
