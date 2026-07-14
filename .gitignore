@@ -5,3 +5,6 @@ foto-sorgenti/*
 
 # File di servizio creati automaticamente da macOS.
 .DS_Store
+
+# Dipendenze temporanee usate dall'automazione online.
+node_modules/

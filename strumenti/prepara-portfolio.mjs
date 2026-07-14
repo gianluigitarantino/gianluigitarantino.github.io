@@ -9,9 +9,18 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const rootDirectory = path.resolve(scriptDirectory, "..");
-const sourcesDirectory = path.join(rootDirectory, "foto-sorgenti");
+const configuredSourcesDirectory = process.env.PORTFOLIO_SOURCES_DIR?.trim();
+const sourcesDirectory = configuredSourcesDirectory
+  ? path.resolve(rootDirectory, configuredSourcesDirectory)
+  : path.join(rootDirectory, "foto-sorgenti");
 const imagesDirectory = path.join(rootDirectory, "immagini");
 const descriptionsPath = path.join(sourcesDirectory, "descrizioni.json");
+const deleteSourcesAfterProcessing = process.env.PORTFOLIO_CLEAR_SOURCES === "1";
+
+const configuredMinimumEdge = Number.parseInt(
+  process.env.PORTFOLIO_RECOMMENDED_MINIMUM_EDGE ?? "",
+  10,
+);
 
 const sections = {
   home: {
@@ -51,7 +60,10 @@ const sections = {
 const imageSizes = {
   smallWidth: 960,
   maximumEdge: 2048,
-  recommendedMinimumEdge: 2500,
+  recommendedMinimumEdge:
+    Number.isInteger(configuredMinimumEdge) && configuredMinimumEdge > 0
+      ? configuredMinimumEdge
+      : 2500,
   recommendedMaximumEdge: 6000,
 };
 
@@ -69,6 +81,13 @@ async function exists(filePath) {
 }
 
 async function loadSharp() {
+  try {
+    const imported = await import("sharp");
+    return imported.default;
+  } catch {
+    // Nella modalità locale, Sharp può essere fornito dal runtime di Codex.
+  }
+
   const candidates = [
     process.env.CODEX_NODE_MODULES,
     path.join(
@@ -85,7 +104,9 @@ async function loadSharp() {
     }
   }
 
-  fail("Il convertitore immagini incluso in Codex non è disponibile. Apri o aggiorna Codex e riprova.");
+  fail(
+    "Il convertitore immagini Sharp non è disponibile. Apri o aggiorna Codex, oppure installa Sharp con npm.",
+  );
 }
 
 function parseArguments() {
@@ -401,6 +422,9 @@ async function processSection({ sharp, sectionName, sources, descriptions }) {
     const generatedFilenames = await installGeneratedAssets(stagingDirectory);
     await Promise.all(pageUpdates.map(({ pagePath, updated }) => atomicWrite(pagePath, updated)));
     await removeStaleGeneratedAssets(sectionName, generatedFilenames);
+    if (deleteSourcesAfterProcessing) {
+      await Promise.all(sources.map((source) => rm(source.path)));
+    }
     console.log(`  Fatto: pagine italiana e inglese aggiornate.`);
   } finally {
     await rm(stagingDirectory, { recursive: true, force: true });

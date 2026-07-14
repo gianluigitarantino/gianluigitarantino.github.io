@@ -10,3 +10,10 @@ redirect_from:
 exclude:
   - README.md
   - SEO-AZIONI-ESTERNE.md
+  - LEGGIMI-PUBBLICARE-FOTO.md
+  - Aggiorna portfolio.command
+  - carica-foto
+  - foto-sorgenti
+  - strumenti
+  - node_modules
+  - .github

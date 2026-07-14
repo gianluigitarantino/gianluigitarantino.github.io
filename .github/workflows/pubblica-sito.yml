@@ -1,0 +1,93 @@
+name: Pubblica sito e fotografie
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: read
+
+    steps:
+      - name: Scarica il repository
+        uses: actions/checkout@v6
+
+      - name: Cerca fotografie caricate online
+        id: uploads
+        shell: bash
+        run: |
+          first_upload="$(find carica-foto -type f \( -iname '*.jpg' -o -iname '*.jpeg' \) -print -quit)"
+          if [[ -n "$first_upload" ]]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Prepara Node.js
+        if: steps.uploads.outputs.present == 'true'
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - name: Installa il convertitore immagini
+        if: steps.uploads.outputs.present == 'true'
+        run: npm install --no-save --package-lock=false sharp@0.35.3
+
+      - name: Ottimizza e inserisce le fotografie
+        if: steps.uploads.outputs.present == 'true'
+        env:
+          PORTFOLIO_SOURCES_DIR: carica-foto
+          PORTFOLIO_CLEAR_SOURCES: "1"
+          PORTFOLIO_RECOMMENDED_MINIMUM_EDGE: "2048"
+        run: node strumenti/prepara-portfolio.mjs
+
+      - name: Salva le gallerie generate
+        if: steps.uploads.outputs.present == 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica da salvare."
+          else
+            git commit -m "Pubblica fotografie caricate online [skip ci]"
+            git push origin main
+          fi
+
+      - name: Configura GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Genera il sito con Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+
+      - name: Prepara il sito per la pubblicazione
+        uses: actions/upload-pages-artifact@v4
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Pubblica su GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

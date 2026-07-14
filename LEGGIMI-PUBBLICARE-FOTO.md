@@ -1,28 +1,32 @@
 # LEGGIMI — Come pubblicare le fotografie
 
-Questa guida va usata ogni volta che si aggiornano le fotografie su
-`gianluigitarantino.com`.
+Il sito può essere aggiornato da qualsiasi computer con un browser. Il Mac abituale,
+Codex, il Terminale e GitHub Desktop non sono necessari per la procedura online.
 
-## Procedura consigliata: pubblicare con Codex
+## Procedura consigliata: caricamento online
 
-### 1. Preparare i JPG
+### 1. Preparare la galleria
 
-Esportare le fotografie con queste impostazioni:
+Preparare copie già destinate al sito con queste caratteristiche:
 
-- formato: JPG;
-- profilo colore: sRGB;
-- qualità: circa 90;
-- lato lungo: circa 4000 px (minimo consigliato 2500 px);
+- formato JPG;
+- profilo colore sRGB;
+- qualità circa 85–90;
+- lato lungo da 2048 a 3000 px;
 - nomi in ordine: `01.jpg`, `02.jpg`, `03.jpg` e così via.
 
-Non creare WebP o AVIF: vengono prodotti automaticamente.
+La selezione deve essere **completa**. Se si carica un solo JPG, la pagina mostrerà
+una sola fotografia.
 
-### 2. Aprire la cartella delle fotografie
+Questo repository è pubblico: non caricare originali d'archivio, file riservati o
+fotografie alla massima risoluzione.
 
-Nel Finder premere **Comando + Maiuscole + G** e incollare:
+### 2. Aprire il punto di caricamento
+
+Accedere a GitHub e aprire:
 
 ```text
-/Users/gianluigitarantino/Documents/Codex/2026-07-13/ho/gianluigitarantino.github.io/foto-sorgenti
+https://github.com/gianluigitarantino/gianluigitarantino.github.io/tree/main/carica-foto
 ```
 
 Scegliere la cartella corretta:
@@ -32,77 +36,71 @@ Scegliere la cartella corretta:
 - `interior`: pagina Interior;
 - `personale`: pagina Personale.
 
-Non inserire manualmente fotografie nella cartella `immagini`.
+### 3. Caricare i JPG
 
-### 3. Inserire la selezione completa
+Dentro la cartella della sezione:
 
-La cartella della sezione deve contenere **tutta la galleria finale**, non soltanto
-le nuove fotografie. Se contiene un solo JPG, online resterà una sola fotografia.
+1. premere **Add file → Upload files**;
+2. trascinare o selezionare tutti i JPG della galleria finale;
+3. controllare che i nomi inizino con `01`, `02`, `03` e così via;
+4. premere **Commit changes**.
 
-Esempio:
+È preferibile aggiornare una sezione alla volta.
 
-```text
-foto-sorgenti/architettura/
-├── 01.jpg
-├── 02.jpg
-├── 03.jpg
-└── 04.jpg
-```
+### 4. Attendere la pubblicazione
 
-Per cambiare l'ordine basta cambiare i numeri. La homepage è indipendente: se la
-stessa fotografia deve apparire anche lì, inserirne una copia nella cartella `home`.
+GitHub avvia automaticamente il workflow **Pubblica sito e fotografie**, che:
 
-### 4. Chiedere a Codex di pubblicare
+1. controlla nomi, formato e dimensioni;
+2. crea JPG e WebP ottimizzati;
+3. aggiorna le pagine italiane e inglesi;
+4. elimina i file temporanei dalla cartella di caricamento;
+5. salva le modifiche nel repository;
+6. genera e pubblica GitHub Pages.
 
-Dopo aver inserito i JPG, scrivere a Codex indicando la sezione:
+Lo stato si vede nella scheda **Actions** del repository. Un segno verde indica che
+l'operazione è riuscita. La pubblicazione del sito può richiedere alcuni minuti.
 
-```text
-Ho inserito le fotografie in architettura. Controlla e pubblica.
-```
+Se compare un segno rosso, non ripetere il caricamento: i JPG restano disponibili
+e si può chiedere a Codex di controllare e riavviare il processo.
 
-Non è necessario aprire `Aggiorna portfolio.command` o GitHub Desktop.
+## Se il Mac non è disponibile
 
-Codex eseguirà:
+Il sito, l'automazione, le guide e tutte le fotografie già pubblicate rimangono su
+GitHub. Da un altro computer basta accedere al proprio account GitHub e seguire la
+procedura online. Non è necessario ricostruire il sito o installare programmi.
 
-1. controllo del repository e dei nomi dei file;
-2. verifica di formato e dimensioni;
-3. ottimizzazione delle fotografie;
-4. aggiornamento delle pagine italiane e inglesi;
-5. controllo delle modifiche;
-6. commit e push su GitHub;
-7. conferma dell'avvenuta pubblicazione.
+Questa automazione protegge la possibilità di gestire il sito, non sostituisce il
+backup dell'archivio fotografico originale. Conservare gli originali anche su un
+servizio cloud o su un secondo disco.
 
-### 5. Controllare il sito
+## Procedura alternativa con Codex sul Mac
 
-Dopo la conferma di Codex, attendere qualche minuto e controllare la sezione online.
-Se qualcosa non convince, chiedere a Codex di correggerla.
+Se si usa il Mac abituale:
 
-## Procedura alternativa senza Codex
+1. esportare JPG in sRGB, qualità 90 e lato lungo di circa 4000 px;
+2. inserirli nella sezione corretta dentro `foto-sorgenti`;
+3. scrivere a Codex, per esempio:
+   `Ho inserito le fotografie in architettura. Controlla e pubblica.`
 
-Se si desidera procedere autonomamente:
+Codex eseguirà ottimizzazione, verifica, commit e push.
 
-1. fare doppio clic su `Aggiorna portfolio.command`;
-2. attendere il messaggio **Operazione completata**;
-3. aprire GitHub Desktop;
-4. scrivere un titolo nel campo **Summary**;
-5. premere **Commit to main**;
-6. premere **Push origin**;
-7. controllare il sito dopo qualche minuto.
+## Procedura manuale con GitHub Desktop
 
-## Da ricordare
+In assenza di Codex ma usando il Mac configurato:
 
-- I JPG dentro `foto-sorgenti` restano solo sul Mac: conservarne anche un backup.
-- La cartella della sezione deve sempre contenere la selezione completa.
-- Non caricare immagini o modificare le gallerie dal sito web di GitHub.
-- Se qualcosa è stato modificato da GitHub web, segnalarlo a Codex prima di pubblicare.
-- GitHub Desktop è facoltativo: serve solo per lavorare autonomamente senza Codex.
-- La scorciatoia alla guida si trova anche in `Documenti/Codex`.
+1. inserire la selezione completa dentro `foto-sorgenti`;
+2. fare doppio clic su `Aggiorna portfolio.command`;
+3. attendere **Operazione completata**;
+4. aprire GitHub Desktop;
+5. eseguire **Commit to main** e **Push origin**.
 
-## Controllo rapido consigliato
+## Controllo rapido online
 
-- [ ] JPG in sRGB, circa 4000 px sul lato lungo
-- [ ] Sezione corretta e selezione completa
-- [ ] Numerazione nell'ordine desiderato
-- [ ] Messaggio a Codex con il nome della sezione
-- [ ] Conferma di pubblicazione ricevuta
+- [ ] JPG in sRGB, lato lungo da 2048 a 3000 px
+- [ ] Selezione completa della sezione
+- [ ] File numerati nell'ordine desiderato
+- [ ] Cartella online corretta
+- [ ] Commit changes
+- [ ] Workflow verde nella scheda Actions
 - [ ] Controllo del sito online

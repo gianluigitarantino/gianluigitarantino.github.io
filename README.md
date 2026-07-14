@@ -9,6 +9,7 @@ Portfolio statico di Gianluigi Tarantino, fotografo di architettura, interni e h
 
 - HTML, CSS e JavaScript vanilla
 - GitHub Pages con Jekyll
+- GitHub Actions per elaborazione immagini e pubblicazione
 - Dominio pubblico: `https://www.gianluigitarantino.com`
 - URL puliti gestiti tramite front matter `permalink`
 - Redirect dai precedenti URL `.html` tramite `jekyll-redirect-from`
@@ -46,24 +47,21 @@ I precedenti indirizzi dei servizi reindirizzano a `/profilo/` in italiano e a `
 
 ## Aggiornare le fotografie
 
-Il sito include un flusso locale che prepara le immagini e aggiorna automaticamente
-le gallerie italiane e inglesi.
+La procedura principale funziona online da qualsiasi computer:
 
-1. Esportare JPG in sRGB, qualità 90 e lato lungo di circa 4000 px.
-2. Inserirli nella cartella corrispondente dentro `foto-sorgenti/`:
-   `home`, `architettura`, `interior` oppure `personale`.
-3. Numerare i file nell'ordine desiderato: `01.jpg`, `02.jpg`, `03.jpg`.
-   È possibile aggiungere un nome, per esempio `01-cortile.jpg`.
-4. Scrivere a Codex indicando la sezione e chiedere: `Controlla e pubblica`.
+1. Esportare la selezione completa in JPG sRGB, lato lungo da 2048 a 3000 px.
+2. Numerare i file nell'ordine desiderato: `01.jpg`, `02.jpg`, `03.jpg`.
+3. Caricarli nella sezione corretta dentro `carica-foto/` usando GitHub web.
+4. Premere `Commit changes`.
 
-Lo script crea un JPG di fallback e due WebP responsive, applica l'orientamento,
-converte in sRGB, elimina i metadati superflui, aggiorna dimensioni, preload,
-lazy loading e pagine in entrambe le lingue. I file dentro `foto-sorgenti/` sono
-esclusi da Git e restano soltanto sul computer.
+Il workflow `.github/workflows/pubblica-sito.yml` installa Sharp, ottimizza le
+immagini, aggiorna le pagine in entrambe le lingue, salva i risultati e distribuisce
+direttamente GitHub Pages. I JPG temporanei vengono rimossi dopo un'elaborazione
+riuscita. `carica-foto/` è esclusa dalla build Jekyll.
 
-Codex controlla i file, esegue lo script, verifica le modifiche e completa commit e
-push. GitHub Desktop e `Aggiorna portfolio.command` restano disponibili come
-procedura alternativa per lavorare autonomamente.
+Il flusso locale resta disponibile: gli originali dentro `foto-sorgenti/` sono
+esclusi da Git e possono essere elaborati con Codex o con
+`Aggiorna portfolio.command`.
 
 Per sostituire una galleria, la relativa cartella sorgente deve contenere la
 selezione completa nel suo ordine finale. Le descrizioni alternative non visibili
