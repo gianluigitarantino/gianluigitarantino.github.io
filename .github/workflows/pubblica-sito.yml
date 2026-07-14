@@ -75,6 +75,9 @@ jobs:
           node --check script.js
           node strumenti/controlla-sito.mjs
 
+      - name: Genera il rapporto sui file inutilizzati
+        run: node strumenti/rapporto-file-inutilizzati.mjs
+
       - name: Configura GitHub Pages
         uses: actions/configure-pages@v5
 
