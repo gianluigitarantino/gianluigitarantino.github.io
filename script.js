@@ -166,6 +166,9 @@ class SliderManager {
         this.startX = 0;
         this.isClick = true;
         this.touchStartVals = { x: 0, y: 0 };
+        this.wheelAccumulator = 0;
+        this.wheelGestureLocked = false;
+        this.wheelResetTimeout = null;
         this.navUp = null;
         this.navDown = null;
         this.init();
@@ -180,8 +183,8 @@ class SliderManager {
         this.slider.addEventListener('click', event => this.handleClick(event));
         this.slider.addEventListener('touchstart', event => this.handleTouchStart(event), { passive: true });
         this.slider.addEventListener('touchend', event => this.handleTouchEnd(event));
-        this.slider.addEventListener('keydown', event => this.handleKey(event));
-        this.slider.addEventListener('wheel', event => this.handleWheel(event), { passive: false });
+        document.addEventListener('keydown', event => this.handleKey(event));
+        document.addEventListener('wheel', event => this.handleWheel(event), { passive: false });
         window.addEventListener('resize', () => { this.refreshArrows(); this.update(); });
         this.refreshArrows();
         this.update();
@@ -202,6 +205,9 @@ class SliderManager {
     }
 
     isScrollMode() { return document.body.classList.contains('scroll-mode'); }
+    isInteractiveTarget(target) {
+        return Boolean(target?.closest?.('a, button, input, textarea, select, option, [contenteditable="true"]'));
+    }
     next() { if (!this.isScrollMode() && this.currentIndex < this.totalSlides - 1) { this.currentIndex++; this.update(); this.preloadAdjacent(); } }
     prev() { if (!this.isScrollMode() && this.currentIndex > 0) { this.currentIndex--; this.update(); this.preloadAdjacent(); } }
 
@@ -274,17 +280,31 @@ class SliderManager {
         if (window.innerWidth <= CONFIG.breakpoints.mobile && Math.abs(dy) > 50) dy > 0 ? this.prev() : this.next();
     }
     handleKey(event) {
-        if (this.isScrollMode()) return;
+        if (this.isScrollMode() || event.defaultPrevented || this.isInteractiveTarget(event.target)) return;
+        if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
         if (event.key === 'ArrowRight' || event.key === 'ArrowDown') { event.preventDefault(); this.next(); }
         if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') { event.preventDefault(); this.prev(); }
     }
     handleWheel(event) {
         if (window.innerWidth <= CONFIG.breakpoints.mobile || this.isScrollMode()) return;
-        if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) {
-            event.preventDefault();
-            clearTimeout(this.wheelTimeout);
-            this.wheelTimeout = setTimeout(() => event.deltaX > 0 ? this.next() : this.prev(), 50);
-        }
+        if (event.defaultPrevented || this.isInteractiveTarget(event.target)) return;
+
+        const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? window.innerWidth : 1;
+        const deltaX = event.deltaX * unit;
+        const deltaY = event.deltaY * unit;
+        if (Math.abs(deltaX) <= Math.abs(deltaY) || Math.abs(deltaX) < 2) return;
+
+        if (event.cancelable) event.preventDefault();
+        this.wheelAccumulator += deltaX;
+        clearTimeout(this.wheelResetTimeout);
+        this.wheelResetTimeout = setTimeout(() => {
+            this.wheelAccumulator = 0;
+            this.wheelGestureLocked = false;
+        }, 180);
+
+        if (this.wheelGestureLocked || Math.abs(this.wheelAccumulator) < 30) return;
+        this.wheelGestureLocked = true;
+        this.wheelAccumulator > 0 ? this.next() : this.prev();
     }
 }
 
