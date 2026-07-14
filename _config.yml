@@ -11,9 +11,11 @@ exclude:
   - README.md
   - SEO-AZIONI-ESTERNE.md
   - LEGGIMI-PUBBLICARE-FOTO.md
+  - CONFIGURAZIONE-ALT-AUTOMATICI.md
   - Aggiorna portfolio.command
   - carica-foto
   - foto-sorgenti
+  - dati
   - strumenti
   - node_modules
   - .github

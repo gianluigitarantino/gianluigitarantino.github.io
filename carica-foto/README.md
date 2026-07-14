@@ -44,6 +44,7 @@ Dentro la cartella scelta:
 4. premere **Commit changes** e confermare il salvataggio su `main`.
 
 Il resto viene eseguito automaticamente.
+Non occorre scrivere didascalie o alt text, né modificare le pagine del sito.
 
 ## 4. Controllare la pubblicazione
 

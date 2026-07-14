@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { createHash } from "node:crypto";
 import { access, mkdir, readFile, readdir, rename, rm, stat, writeFile } from "node:fs/promises";
 import { constants as fsConstants } from "node:fs";
 import os from "node:os";
@@ -14,7 +15,8 @@ const sourcesDirectory = configuredSourcesDirectory
   ? path.resolve(rootDirectory, configuredSourcesDirectory)
   : path.join(rootDirectory, "foto-sorgenti");
 const imagesDirectory = path.join(rootDirectory, "immagini");
-const descriptionsPath = path.join(sourcesDirectory, "descrizioni.json");
+const manualDescriptionsPath = path.join(sourcesDirectory, "descrizioni.json");
+const generatedDescriptionsPath = path.join(rootDirectory, "dati", "alt-text.json");
 const deleteSourcesAfterProcessing = process.env.PORTFOLIO_CLEAR_SOURCES === "1";
 
 const configuredMinimumEdge = Number.parseInt(
@@ -217,18 +219,34 @@ async function readSources(sectionName) {
     }
     seen.add(source.orderNumber);
     source.path = path.join(directory, source.filename);
+    source.sha256 = createHash("sha256")
+      .update(await readFile(source.path))
+      .digest("hex");
   }
 
   return parsed;
 }
 
 async function readDescriptions() {
-  if (!(await exists(descriptionsPath))) return {};
-  try {
-    return JSON.parse(await readFile(descriptionsPath, "utf8"));
-  } catch (error) {
-    fail(`Il file foto-sorgenti/descrizioni.json non è valido: ${error.message}`);
+  const descriptions = { generated: {}, manual: {} };
+
+  if (await exists(generatedDescriptionsPath)) {
+    try {
+      descriptions.generated = JSON.parse(await readFile(generatedDescriptionsPath, "utf8"));
+    } catch (error) {
+      fail(`Il file dati/alt-text.json non è valido: ${error.message}`);
+    }
   }
+
+  if (await exists(manualDescriptionsPath)) {
+    try {
+      descriptions.manual = JSON.parse(await readFile(manualDescriptionsPath, "utf8"));
+    } catch (error) {
+      fail(`Il file foto-sorgenti/descrizioni.json non è valido: ${error.message}`);
+    }
+  }
+
+  return descriptions;
 }
 
 function orientedDimensions(metadata) {
@@ -417,6 +435,7 @@ async function processImage({ sharp, sectionName, source, stagingDirectory }) {
     fullWidth: full.width,
     fullHeight: full.height,
     smallWidth,
+    sha256: source.sha256,
   };
 }
 
@@ -429,8 +448,14 @@ function escapeAttribute(value) {
 }
 
 function altText({ sectionName, image, language, descriptions }) {
-  const described = descriptions?.[sectionName]?.[image.orderKey]?.[language];
-  if (typeof described === "string" && described.trim()) return described.trim();
+  const manual = descriptions?.manual?.[sectionName]?.[image.orderKey]?.[language];
+  if (typeof manual === "string" && manual.trim()) return manual.trim();
+
+  const generated = descriptions?.generated?.[sectionName]?.[image.orderKey];
+  if (generated?.sha256 === image.sha256) {
+    const described = generated?.[language];
+    if (typeof described === "string" && described.trim()) return described.trim();
+  }
   return sections[sectionName].fallbackAlt[language];
 }
 
