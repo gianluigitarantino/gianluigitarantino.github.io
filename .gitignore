@@ -8,3 +8,7 @@ foto-sorgenti/*
 
 # Dipendenze temporanee usate dall'automazione online.
 node_modules/
+
+# Sito compilato temporaneamente da Jekyll durante i controlli GitHub.
+_site/
+.jekyll-cache/

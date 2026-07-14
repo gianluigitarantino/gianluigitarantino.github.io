@@ -70,6 +70,20 @@ jobs:
       - name: Aggiorna e controlla la sitemap
         run: node strumenti/genera-sitemap.mjs
 
+      - name: Controlla tecnicamente il sito
+        run: |
+          node --check script.js
+          node strumenti/controlla-sito.mjs
+
+      - name: Configura GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Genera il sito con Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./
+          destination: ./_site
+
       - name: Salva fotografie, alt text e sitemap
         shell: bash
         run: |
@@ -82,15 +96,6 @@ jobs:
             git commit -m "Aggiorna fotografie, alt text e sitemap [skip ci]"
             git push origin main
           fi
-
-      - name: Configura GitHub Pages
-        uses: actions/configure-pages@v5
-
-      - name: Genera il sito con Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./
-          destination: ./_site
 
       - name: Prepara il sito per la pubblicazione
         uses: actions/upload-pages-artifact@v4

@@ -6,36 +6,13 @@ import { constants as fsConstants } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
+import { pageGroups, siteUrl } from "./configurazione-sito.mjs";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const rootDirectory = path.resolve(scriptDirectory, "..");
 const sitemapPath = path.join(rootDirectory, "sitemap.xml");
 const statePath = path.join(rootDirectory, "dati", "sitemap-state.json");
-const siteUrl = "https://www.gianluigitarantino.com";
 const today = new Date().toISOString().slice(0, 10);
-
-const pageGroups = [
-  {
-    it: { file: "index.html", path: "/" },
-    en: { file: "en-home.html", path: "/en/" },
-  },
-  {
-    it: { file: "architettura.html", path: "/architettura/" },
-    en: { file: "en-architecture.html", path: "/en/architecture/" },
-  },
-  {
-    it: { file: "interior.html", path: "/interior/" },
-    en: { file: "en-interiors.html", path: "/en/interiors/" },
-  },
-  {
-    it: { file: "personale.html", path: "/personale/" },
-    en: { file: "en-personal.html", path: "/en/personal/" },
-  },
-  {
-    it: { file: "profilo.html", path: "/profilo/" },
-    en: { file: "en-about.html", path: "/en/about/" },
-  },
-];
 
 function fail(message) {
   throw new Error(message);
