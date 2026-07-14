@@ -54,13 +54,16 @@ le gallerie italiane e inglesi.
    `home`, `architettura`, `interior` oppure `personale`.
 3. Numerare i file nell'ordine desiderato: `01.jpg`, `02.jpg`, `03.jpg`.
    È possibile aggiungere un nome, per esempio `01-cortile.jpg`.
-4. Fare doppio clic su `Aggiorna portfolio.command`.
-5. Controllare le modifiche in GitHub Desktop, creare il commit e usare Push.
+4. Scrivere a Codex indicando la sezione e chiedere: `Controlla e pubblica`.
 
 Lo script crea un JPG di fallback e due WebP responsive, applica l'orientamento,
 converte in sRGB, elimina i metadati superflui, aggiorna dimensioni, preload,
 lazy loading e pagine in entrambe le lingue. I file dentro `foto-sorgenti/` sono
 esclusi da Git e restano soltanto sul computer.
+
+Codex controlla i file, esegue lo script, verifica le modifiche e completa commit e
+push. GitHub Desktop e `Aggiorna portfolio.command` restano disponibili come
+procedura alternativa per lavorare autonomamente.
 
 Per sostituire una galleria, la relativa cartella sorgente deve contenere la
 selezione completa nel suo ordine finale. Le descrizioni alternative non visibili

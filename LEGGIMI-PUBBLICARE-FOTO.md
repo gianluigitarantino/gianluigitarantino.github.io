@@ -1,9 +1,11 @@
 # LEGGIMI — Come pubblicare le fotografie
 
-Questa è la procedura completa da seguire ogni volta che si aggiornano le fotografie
-su `gianluigitarantino.com`.
+Questa guida va usata ogni volta che si aggiornano le fotografie su
+`gianluigitarantino.com`.
 
-## 1. Preparare i JPG
+## Procedura consigliata: pubblicare con Codex
+
+### 1. Preparare i JPG
 
 Esportare le fotografie con queste impostazioni:
 
@@ -15,17 +17,15 @@ Esportare le fotografie con queste impostazioni:
 
 Non creare WebP o AVIF: vengono prodotti automaticamente.
 
-## 2. Aprire la cartella del sito
+### 2. Aprire la cartella delle fotografie
 
-In GitHub Desktop selezionare il repository e usare **Repository → Show in Finder**.
-
-Il percorso locale è:
+Nel Finder premere **Comando + Maiuscole + G** e incollare:
 
 ```text
-/Users/gianluigitarantino/Documents/Codex/2026-07-13/ho/gianluigitarantino.github.io
+/Users/gianluigitarantino/Documents/Codex/2026-07-13/ho/gianluigitarantino.github.io/foto-sorgenti
 ```
 
-Aprire `foto-sorgenti` e scegliere la cartella corretta:
+Scegliere la cartella corretta:
 
 - `home`: homepage;
 - `architettura`: pagina Architettura;
@@ -34,7 +34,7 @@ Aprire `foto-sorgenti` e scegliere la cartella corretta:
 
 Non inserire manualmente fotografie nella cartella `immagini`.
 
-## 3. Inserire la selezione completa
+### 3. Inserire la selezione completa
 
 La cartella della sezione deve contenere **tutta la galleria finale**, non soltanto
 le nuove fotografie. Se contiene un solo JPG, online resterà una sola fotografia.
@@ -52,41 +52,57 @@ foto-sorgenti/architettura/
 Per cambiare l'ordine basta cambiare i numeri. La homepage è indipendente: se la
 stessa fotografia deve apparire anche lì, inserirne una copia nella cartella `home`.
 
-## 4. Generare il sito
+### 4. Chiedere a Codex di pubblicare
 
-Tornare nella cartella principale e fare doppio clic su:
+Dopo aver inserito i JPG, scrivere a Codex indicando la sezione:
 
 ```text
-Aggiorna portfolio.command
+Ho inserito le fotografie in architettura. Controlla e pubblica.
 ```
 
-Attendere il messaggio **Operazione completata**. Il comando ridimensiona le
-fotografie, crea JPG e WebP ottimizzati e aggiorna le pagine italiane e inglesi.
+Non è necessario aprire `Aggiorna portfolio.command` o GitHub Desktop.
 
-Se compare un errore, non pubblicare: conservare il messaggio e chiedere a Codex.
+Codex eseguirà:
 
-## 5. Pubblicare con GitHub Desktop
+1. controllo del repository e dei nomi dei file;
+2. verifica di formato e dimensioni;
+3. ottimizzazione delle fotografie;
+4. aggiornamento delle pagine italiane e inglesi;
+5. controllo delle modifiche;
+6. commit e push su GitHub;
+7. conferma dell'avvenuta pubblicazione.
 
-1. Aprire GitHub Desktop e controllare le modifiche.
-2. Nel campo **Summary** scrivere, per esempio, `Aggiorna fotografie architettura`.
-3. Premere **Commit to main**.
-4. Premere **Push origin**.
-5. Attendere qualche minuto e controllare il sito online.
+### 5. Controllare il sito
+
+Dopo la conferma di Codex, attendere qualche minuto e controllare la sezione online.
+Se qualcosa non convince, chiedere a Codex di correggerla.
+
+## Procedura alternativa senza Codex
+
+Se si desidera procedere autonomamente:
+
+1. fare doppio clic su `Aggiorna portfolio.command`;
+2. attendere il messaggio **Operazione completata**;
+3. aprire GitHub Desktop;
+4. scrivere un titolo nel campo **Summary**;
+5. premere **Commit to main**;
+6. premere **Push origin**;
+7. controllare il sito dopo qualche minuto.
 
 ## Da ricordare
 
-- I file dentro `foto-sorgenti` restano solo sul Mac: conservarne anche un backup.
+- I JPG dentro `foto-sorgenti` restano solo sul Mac: conservarne anche un backup.
+- La cartella della sezione deve sempre contenere la selezione completa.
 - Non caricare immagini o modificare le gallerie dal sito web di GitHub.
-- Se qualcosa è stato modificato da GitHub web, eseguire **Fetch origin** e
-  **Pull origin** in GitHub Desktop prima di continuare.
-- Codex serve per modificare il sito; GitHub Desktop serve per pubblicare.
+- Se qualcosa è stato modificato da GitHub web, segnalarlo a Codex prima di pubblicare.
+- GitHub Desktop è facoltativo: serve solo per lavorare autonomamente senza Codex.
+- La scorciatoia alla guida si trova anche in `Documenti/Codex`.
 
-## Controllo finale rapido
+## Controllo rapido consigliato
 
 - [ ] JPG in sRGB, circa 4000 px sul lato lungo
 - [ ] Sezione corretta e selezione completa
 - [ ] Numerazione nell'ordine desiderato
-- [ ] Messaggio `Operazione completata`
-- [ ] Commit to main
-- [ ] Push origin
+- [ ] Messaggio a Codex con il nome della sezione
+- [ ] Conferma di pubblicazione ricevuta
 - [ ] Controllo del sito online
