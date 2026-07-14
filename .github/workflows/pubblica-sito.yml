@@ -67,7 +67,10 @@ jobs:
           PORTFOLIO_RECOMMENDED_MINIMUM_EDGE: "2048"
         run: node strumenti/prepara-portfolio.mjs
 
-      - name: Salva fotografie e alt text generati
+      - name: Aggiorna e controlla la sitemap
+        run: node strumenti/genera-sitemap.mjs
+
+      - name: Salva fotografie, alt text e sitemap
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
@@ -76,7 +79,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "Nessuna modifica da salvare."
           else
-            git commit -m "Aggiorna fotografie e alt text [skip ci]"
+            git commit -m "Aggiorna fotografie, alt text e sitemap [skip ci]"
             git push origin main
           fi
 

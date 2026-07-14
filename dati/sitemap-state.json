@@ -1,0 +1,55 @@
+{
+  "_version": 1,
+  "pages": {
+    "/": {
+      "source": "index.html",
+      "fingerprint": "357da0b4dc39fe06833c6e96726e22a0f471e83f73b589787b8a86d1c44f0f88",
+      "lastmod": "2026-07-13"
+    },
+    "/en/": {
+      "source": "en-home.html",
+      "fingerprint": "dcad0d3366d0383e16bda3d0f586c1b905edd19e84e707a94075cfd1ebd84c92",
+      "lastmod": "2026-07-13"
+    },
+    "/architettura/": {
+      "source": "architettura.html",
+      "fingerprint": "cf1b0143f67439d996fd1011f14f2c2d2f01d0d40f7c4835d3826bf69fa7726b",
+      "lastmod": "2026-07-13"
+    },
+    "/en/architecture/": {
+      "source": "en-architecture.html",
+      "fingerprint": "760148f11d554a289f56c78de2c7fc4656cd3741cbd96d5831774f74e6a95d52",
+      "lastmod": "2026-07-13"
+    },
+    "/interior/": {
+      "source": "interior.html",
+      "fingerprint": "027e8858fc0898106dd149204aec81c6dcbcf9f6964af7d19f3c7b99cb881baa",
+      "lastmod": "2026-07-13"
+    },
+    "/en/interiors/": {
+      "source": "en-interiors.html",
+      "fingerprint": "6e40f3b38cd2e0b3f7d0d33ae0cb20762787ecb37d33b20a31394b57e784b138",
+      "lastmod": "2026-07-13"
+    },
+    "/personale/": {
+      "source": "personale.html",
+      "fingerprint": "384bca0acccdeeaed1023d815b05153a6a753a740e1d8cfda31870e86a038642",
+      "lastmod": "2026-07-13"
+    },
+    "/en/personal/": {
+      "source": "en-personal.html",
+      "fingerprint": "133a240966a9f411af1d131ca782b810ae2cec80e14331228ab4037bd69cc1d5",
+      "lastmod": "2026-07-13"
+    },
+    "/profilo/": {
+      "source": "profilo.html",
+      "fingerprint": "2f607464f8b2e123a9463d99babc382b757565ae21d29998babc7d1d39c40838",
+      "lastmod": "2026-07-13"
+    },
+    "/en/about/": {
+      "source": "en-about.html",
+      "fingerprint": "ea6751d1f2376c48e1d331324889eaaa26f46d587000c653f901b462e6083c2b",
+      "lastmod": "2026-07-13"
+    }
+  }
+}
