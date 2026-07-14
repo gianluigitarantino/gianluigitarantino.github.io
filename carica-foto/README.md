@@ -37,11 +37,16 @@ Le cartelle disponibili sono:
 - profilo sRGB;
 - lato lungo da 2048 a 3000 px;
 - qualità circa 85–90;
+- peso consigliato inferiore a 10 MiB per file;
 - nomi `01.jpg`, `02.jpg`, `03.jpg` e così via.
 
 La cartella deve ricevere **tutta la galleria finale**, non soltanto le nuove foto.
 L'automazione crea i file ottimizzati, aggiorna italiano e inglese, elimina i JPG
 temporanei dalla cartella di caricamento e pubblica il sito.
+
+Il peso finale è controllato automaticamente: massimo 1,5 MiB per il JPG di
+fallback, 1,25 MiB per il WebP grande e 400 KiB per il WebP da 960 px. Se questi
+limiti non possono essere rispettati, la galleria esistente non viene sostituita.
 
 ## Importante
 

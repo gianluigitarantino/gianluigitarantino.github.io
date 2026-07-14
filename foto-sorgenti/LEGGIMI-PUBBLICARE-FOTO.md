@@ -14,6 +14,7 @@ Preparare copie già destinate al sito con queste caratteristiche:
 - profilo colore sRGB;
 - qualità circa 85–90;
 - lato lungo da 2048 a 3000 px;
+- peso consigliato inferiore a 10 MiB per file;
 - nomi in ordine: `01.jpg`, `02.jpg`, `03.jpg` e così via.
 
 La selezione deve essere **completa**. Se si carica un solo JPG, la pagina mostrerà
@@ -72,6 +73,12 @@ GitHub avvia automaticamente il workflow **Pubblica sito e fotografie**, che:
 5. salva le modifiche nel repository;
 6. genera e pubblica GitHub Pages.
 
+I file pubblicati hanno limiti automatici: 1,5 MiB per il JPG di fallback, 1,25 MiB
+per il WebP grande e 400 KiB per il WebP da 960 px. Se una fotografia richiede
+ulteriore compressione, lo script adatta la qualità. Se il limite non può essere
+rispettato senza scendere sotto la qualità minima, la pubblicazione si ferma e la
+galleria online rimane invariata.
+
 Lo stato si vede nella scheda **Actions** del repository. Un segno verde indica che
 l'operazione è riuscita. La pubblicazione del sito può richiedere alcuni minuti.
 
@@ -112,7 +119,7 @@ In assenza di Codex ma usando il Mac configurato:
 
 ## Controllo rapido online
 
-- [ ] JPG in sRGB, lato lungo da 2048 a 3000 px
+- [ ] JPG in sRGB, lato lungo da 2048 a 3000 px, preferibilmente sotto 10 MiB
 - [ ] Selezione completa della sezione
 - [ ] File numerati nell'ordine desiderato
 - [ ] Cartella online corretta

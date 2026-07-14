@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { access, mkdir, readFile, readdir, rename, rm, writeFile } from "node:fs/promises";
+import { access, mkdir, readFile, readdir, rename, rm, stat, writeFile } from "node:fs/promises";
 import { constants as fsConstants } from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -65,6 +65,29 @@ const imageSizes = {
       ? configuredMinimumEdge
       : 2500,
   recommendedMaximumEdge: 6000,
+};
+
+const mebibyte = 1024 * 1024;
+const imageFileLimits = {
+  recommendedSourceMaximumBytes: 10 * mebibyte,
+  jpeg: {
+    maximumBytes: 1.5 * mebibyte,
+    initialQuality: 88,
+    minimumQuality: 64,
+    qualityStep: 4,
+  },
+  fullWebp: {
+    maximumBytes: 1.25 * mebibyte,
+    initialQuality: 84,
+    minimumQuality: 72,
+    qualityStep: 4,
+  },
+  smallWebp: {
+    maximumBytes: 400 * 1024,
+    initialQuality: 82,
+    minimumQuality: 64,
+    qualityStep: 4,
+  },
 };
 
 function fail(message) {
@@ -207,7 +230,53 @@ function containedDimensions(width, height, maximumEdge) {
   };
 }
 
+function readableFileSize(bytes) {
+  if (bytes >= mebibyte) return `${(bytes / mebibyte).toFixed(2)} MiB`;
+  return `${Math.round(bytes / 1024)} KiB`;
+}
+
+async function encodeWithinLimit({
+  createPipeline,
+  destination,
+  encode,
+  label,
+  limits,
+}) {
+  let quality = limits.initialQuality;
+
+  while (quality >= limits.minimumQuality) {
+    const buffer = await encode(createPipeline(), quality);
+    if (buffer.length <= limits.maximumBytes) {
+      await writeFile(destination, buffer);
+      if (quality < limits.initialQuality) {
+        console.log(
+          `    ${label}: qualità adattata a ${quality}, ${readableFileSize(buffer.length)}.`,
+        );
+      }
+      return { bytes: buffer.length, quality };
+    }
+
+    if (quality === limits.minimumQuality) {
+      fail(
+        `${label} pesa ${readableFileSize(buffer.length)} anche alla qualità minima. ` +
+          `Il limite è ${readableFileSize(limits.maximumBytes)}: usa un JPG meno complesso o più piccolo.`,
+      );
+    }
+    quality = Math.max(limits.minimumQuality, quality - limits.qualityStep);
+  }
+
+  fail(`Impossibile ottimizzare ${label}.`);
+}
+
 async function processImage({ sharp, sectionName, source, stagingDirectory }) {
+  const sourceStats = await stat(source.path);
+  if (sourceStats.size > imageFileLimits.recommendedSourceMaximumBytes) {
+    console.warn(
+      `  Nota: ${source.filename} pesa ${readableFileSize(sourceStats.size)}; ` +
+        `per un caricamento più rapido sono consigliati al massimo 10 MiB.`,
+    );
+  }
+
   const metadata = await sharp(source.path).metadata();
   if (!["jpeg", "jpg"].includes(metadata.format)) {
     fail(`${source.filename} non è un vero file JPEG.`);
@@ -245,22 +314,38 @@ async function processImage({ sharp, sectionName, source, stagingDirectory }) {
       .toColourspace("srgb");
 
   const tasks = [
-    fullPipeline()
-      .jpeg({ quality: 88, progressive: true, mozjpeg: true })
-      .toFile(path.join(stagingDirectory, jpegName)),
-    fullPipeline()
-      .webp({ quality: 84, effort: 5, smartSubsample: true })
-      .toFile(path.join(stagingDirectory, fullWebpName)),
+    encodeWithinLimit({
+      createPipeline: fullPipeline,
+      destination: path.join(stagingDirectory, jpegName),
+      encode: (pipeline, quality) =>
+        pipeline.jpeg({ quality, progressive: true, mozjpeg: true }).toBuffer(),
+      label: jpegName,
+      limits: imageFileLimits.jpeg,
+    }),
+    encodeWithinLimit({
+      createPipeline: fullPipeline,
+      destination: path.join(stagingDirectory, fullWebpName),
+      encode: (pipeline, quality) =>
+        pipeline.webp({ quality, effort: 6, smartSubsample: true }).toBuffer(),
+      label: fullWebpName,
+      limits: imageFileLimits.fullWebp,
+    }),
   ];
 
   if (smallWidth !== full.width) {
     tasks.push(
-      sharp(source.path)
-        .rotate()
-        .resize({ width: smallWidth, withoutEnlargement: true })
-        .toColourspace("srgb")
-        .webp({ quality: 82, effort: 5, smartSubsample: true })
-        .toFile(path.join(stagingDirectory, smallWebpName)),
+      encodeWithinLimit({
+        createPipeline: () =>
+          sharp(source.path)
+            .rotate()
+            .resize({ width: smallWidth, withoutEnlargement: true })
+            .toColourspace("srgb"),
+        destination: path.join(stagingDirectory, smallWebpName),
+        encode: (pipeline, quality) =>
+          pipeline.webp({ quality, effort: 6, smartSubsample: true }).toBuffer(),
+        label: smallWebpName,
+        limits: imageFileLimits.smallWebp,
+      }),
     );
   }
 

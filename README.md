@@ -49,7 +49,8 @@ I precedenti indirizzi dei servizi reindirizzano a `/profilo/` in italiano e a `
 
 La procedura principale funziona online da qualsiasi computer e anche da iPhone:
 
-1. Esportare la selezione completa in JPG sRGB, lato lungo da 2048 a 3000 px.
+1. Esportare la selezione completa in JPG sRGB, lato lungo da 2048 a 3000 px e
+   preferibilmente sotto 10 MiB per file.
 2. Numerare i file nell'ordine desiderato: `01.jpg`, `02.jpg`, `03.jpg`.
 3. Caricarli nella sezione corretta dentro `carica-foto/` usando GitHub web.
 4. Premere `Commit changes`.
@@ -63,6 +64,11 @@ Il workflow `.github/workflows/pubblica-sito.yml` installa Sharp, ottimizza le
 immagini, aggiorna le pagine in entrambe le lingue, salva i risultati e distribuisce
 direttamente GitHub Pages. I JPG temporanei vengono rimossi dopo un'elaborazione
 riuscita. `carica-foto/` è esclusa dalla build Jekyll.
+
+Lo script applica limiti anche ai file pubblicati: 1,5 MiB per il JPG di fallback,
+1,25 MiB per il WebP grande e 400 KiB per il WebP da 960 px. Se necessario riduce
+automaticamente la qualità entro una soglia prudente; se non riesce a rispettare
+il limite, interrompe la pubblicazione senza sostituire la galleria esistente.
 
 Il flusso locale resta disponibile: gli originali dentro `foto-sorgenti/` sono
 esclusi da Git e possono essere elaborati con Codex o con
