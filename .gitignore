@@ -1,0 +1,6 @@
+# I JPG originali restano solo sul Mac. Lo script pubblica esclusivamente
+# le versioni ottimizzate nella cartella immagini/.
+foto-sorgenti/
+
+# File di servizio creati automaticamente da macOS.
+.DS_Store
