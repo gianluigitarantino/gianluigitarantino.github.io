@@ -1,60 +1,75 @@
-# Caricamento online delle fotografie
+# GUIDA — Come pubblicare le fotografie
 
-Questa cartella permette di aggiornare il sito da qualsiasi computer o da iPhone,
-senza Codex, Terminale o GitHub Desktop.
+Questa è la procedura da seguire per sostituire le fotografie del sito da un
+computer o da iPhone. Non servono Codex, Terminale o GitHub Desktop.
 
-## Procedura
+## 1. Preparare la galleria
 
-1. Aprire la cartella della sezione da aggiornare.
-2. Usare **Add file → Upload files**.
-3. Caricare la selezione completa dei JPG nell'ordine finale.
-4. Premere **Commit changes**.
-5. Attendere il completamento del workflow **Pubblica sito e fotografie** nella
-   scheda **Actions**.
+Preparare **tutta la selezione finale** della sezione, non soltanto le fotografie
+nuove.
+
+I file devono essere:
+
+- JPG;
+- profilo colore sRGB;
+- qualità circa 85–90;
+- lato lungo da 2048 a 3000 px;
+- preferibilmente sotto 10 MiB ciascuno;
+- numerati nell'ordine desiderato: `01.jpg`, `02.jpg`, `03.jpg` e così via.
+
+Se si carica un solo JPG, la galleria verrà sostituita con una sola fotografia.
+
+## 2. Aprire la cartella corretta
+
+Accedere con un account GitHub autorizzato a modificare il repository e aprire:
+
+https://github.com/gianluigitarantino/gianluigitarantino.github.io/tree/main/carica-foto
+
+Scegliere una cartella:
+
+- `home`: homepage;
+- `architettura`: pagina Architettura;
+- `interior`: pagina Interior;
+- `personale`: pagina Personale.
+
+Aggiornare una sezione alla volta.
+
+## 3. Caricare i file
+
+Dentro la cartella scelta:
+
+1. premere **Add file → Upload files**;
+2. selezionare tutti i JPG della galleria finale;
+3. controllare nomi, ordine e sezione;
+4. premere **Commit changes** e confermare il salvataggio su `main`.
+
+Il resto viene eseguito automaticamente.
+
+## 4. Controllare la pubblicazione
+
+Aprire:
+
+https://github.com/gianluigitarantino/gianluigitarantino.github.io/actions
+
+Attendere il segno verde accanto a **Pubblica sito e fotografie**, quindi
+controllare la sezione aggiornata su:
+
+https://www.gianluigitarantino.com
+
+La pubblicazione può richiedere alcuni minuti. Se compare un segno rosso, non
+ripetere il caricamento: chiedere a Codex di controllare il problema.
 
 ## Da iPhone
 
-1. Convertire o esportare le fotografie in JPG e salvarle nell'app **File**.
-2. Aprire questa cartella con **Safari**.
-3. Se **Add file** non compare, premere **aA → Richiedi sito desktop**.
-4. Caricare dall'app File tutta la galleria numerata, quindi premere
-   **Commit changes**.
-5. Controllare che il workflow nella scheda **Actions** diventi verde.
+1. esportare o convertire le fotografie in JPG;
+2. salvarle nell'app **File**, già numerate;
+3. aprire GitHub con **Safari**;
+4. se **Add file** non compare, premere **aA → Richiedi sito desktop**;
+5. seguire la stessa procedura indicata sopra.
 
-Non caricare HEIC direttamente dall'app Foto: l'automazione accetta JPG e JPEG.
-L'upload web consente fino a 100 file contemporaneamente, ciascuno sotto 25 MiB.
-
-Le cartelle disponibili sono:
-
-- `home` per la homepage;
-- `architettura` per Architettura;
-- `interior` per Interior;
-- `personale` per Personale.
-
-## Preparazione dei file
-
-- formato JPG;
-- profilo sRGB;
-- lato lungo da 2048 a 3000 px;
-- qualità circa 85–90;
-- peso consigliato inferiore a 10 MiB per file;
-- nomi `01.jpg`, `02.jpg`, `03.jpg` e così via.
-
-La cartella deve ricevere **tutta la galleria finale**, non soltanto le nuove foto.
-L'automazione crea i file ottimizzati, aggiorna italiano e inglese, elimina i JPG
-temporanei dalla cartella di caricamento e pubblica il sito.
-
-L'automazione genera AVIF e WebP responsive con JPG di fallback. La qualità visiva
-viene prima del peso: le soglie sono obiettivi e possono essere superate per
-fotografie complesse, senza scendere sotto qualità 82 per il JPG e 78 per il WebP.
-Solo il superamento del tetto di sicurezza blocca la pubblicazione, lasciando
-intatta la galleria esistente. I tetti sono 2 MiB per il JPG, 1,75 MiB per il WebP
-grande, 600 KiB per il WebP da 960 px, 1,5 MiB per l'AVIF grande e 450 KiB per
-l'AVIF da 960 px.
+Non caricare direttamente file HEIC dall'app Foto.
 
 ## Importante
 
-Questo è un repository pubblico. Caricare qui soltanto copie già destinate al sito,
-mai originali d'archivio, file riservati o fotografie alla massima risoluzione.
-I file caricati possono rimanere nella cronologia Git anche dopo la rimozione
-automatica.
+Il repository è pubblico. Caricare soltanto copie già destinate al sito, mai RAW,
+originali d'archivio, file riservati o fotografie alla massima risoluzione.

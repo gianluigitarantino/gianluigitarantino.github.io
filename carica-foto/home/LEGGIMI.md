@@ -4,8 +4,8 @@ Usa **Add file → Upload files** e carica la selezione completa con nomi `01.jp
 `02.jpg`, `03.jpg` e così via. Poi premi **Commit changes**.
 
 Carica soltanto JPG in sRGB già destinati al sito, con lato lungo da 2048 a 3000 px
-e preferibilmente sotto 10 MiB per file. GitHub elaborerà e pubblicherà
-automaticamente la nuova homepage in AVIF, WebP e JPG, dando priorità alla qualità.
+e preferibilmente sotto 10 MiB per file. GitHub pubblicherà automaticamente la
+nuova homepage.
 
 Da iPhone usa Safari e scegli i JPG dall'app File. Non caricare HEIC direttamente
 dall'app Foto. Se **Add file** non compare, premi **aA → Richiedi sito desktop**.

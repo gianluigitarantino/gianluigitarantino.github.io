@@ -1,133 +1,75 @@
-# LEGGIMI — Come pubblicare le fotografie
+# GUIDA — Come pubblicare le fotografie
 
-Il sito può essere aggiornato da qualsiasi computer con un browser e anche da
-iPhone. Il Mac abituale, Codex, il Terminale e GitHub Desktop non sono necessari
-per la procedura online.
+Questa è la procedura da seguire per sostituire le fotografie del sito da un
+computer o da iPhone. Non servono Codex, Terminale o GitHub Desktop.
 
-## Procedura consigliata: caricamento online
+## 1. Preparare la galleria
 
-### 1. Preparare la galleria
+Preparare **tutta la selezione finale** della sezione, non soltanto le fotografie
+nuove.
 
-Preparare copie già destinate al sito con queste caratteristiche:
+I file devono essere:
 
-- formato JPG;
+- JPG;
 - profilo colore sRGB;
 - qualità circa 85–90;
 - lato lungo da 2048 a 3000 px;
-- peso consigliato inferiore a 10 MiB per file;
-- nomi in ordine: `01.jpg`, `02.jpg`, `03.jpg` e così via.
+- preferibilmente sotto 10 MiB ciascuno;
+- numerati nell'ordine desiderato: `01.jpg`, `02.jpg`, `03.jpg` e così via.
 
-La selezione deve essere **completa**. Se si carica un solo JPG, la pagina mostrerà
-una sola fotografia.
+Se si carica un solo JPG, la galleria verrà sostituita con una sola fotografia.
 
-Questo repository è pubblico: non caricare originali d'archivio, file riservati o
-fotografie alla massima risoluzione.
+## 2. Aprire la cartella corretta
 
-### 2. Aprire il punto di caricamento
+Accedere con un account GitHub autorizzato a modificare il repository e aprire:
 
-Accedere a GitHub e aprire:
-
-```text
 https://github.com/gianluigitarantino/gianluigitarantino.github.io/tree/main/carica-foto
-```
 
-Scegliere la cartella corretta:
+Scegliere una cartella:
 
 - `home`: homepage;
 - `architettura`: pagina Architettura;
 - `interior`: pagina Interior;
 - `personale`: pagina Personale.
 
-### 3. Caricare i JPG
+Aggiornare una sezione alla volta.
 
-Dentro la cartella della sezione:
+## 3. Caricare i file
+
+Dentro la cartella scelta:
 
 1. premere **Add file → Upload files**;
-2. trascinare o selezionare tutti i JPG della galleria finale;
-3. controllare che i nomi inizino con `01`, `02`, `03` e così via;
-4. premere **Commit changes**.
+2. selezionare tutti i JPG della galleria finale;
+3. controllare nomi, ordine e sezione;
+4. premere **Commit changes** e confermare il salvataggio su `main`.
 
-È preferibile aggiornare una sezione alla volta.
+Il resto viene eseguito automaticamente.
 
-### Da iPhone
+## 4. Controllare la pubblicazione
 
-1. esportare o convertire prima le immagini in JPG;
-2. salvarle nell'app **File**, già numerate `01.jpg`, `02.jpg`, `03.jpg`;
-3. aprire il collegamento di caricamento con **Safari**;
+Aprire:
+
+https://github.com/gianluigitarantino/gianluigitarantino.github.io/actions
+
+Attendere il segno verde accanto a **Pubblica sito e fotografie**, quindi
+controllare la sezione aggiornata su:
+
+https://www.gianluigitarantino.com
+
+La pubblicazione può richiedere alcuni minuti. Se compare un segno rosso, non
+ripetere il caricamento: chiedere a Codex di controllare il problema.
+
+## Da iPhone
+
+1. esportare o convertire le fotografie in JPG;
+2. salvarle nell'app **File**, già numerate;
+3. aprire GitHub con **Safari**;
 4. se **Add file** non compare, premere **aA → Richiedi sito desktop**;
-5. usare **Add file → Upload files** e scegliere i JPG dall'app File;
-6. premere **Commit changes** e controllare il risultato nella scheda **Actions**.
+5. seguire la stessa procedura indicata sopra.
 
-Non caricare direttamente file HEIC dall'app Foto: l'automazione accetta JPG e
-JPEG. GitHub permette dal browser fino a 100 file alla volta e richiede che ogni
-file sia inferiore a 25 MiB.
+Non caricare direttamente file HEIC dall'app Foto.
 
-### 4. Attendere la pubblicazione
+## Importante
 
-GitHub avvia automaticamente il workflow **Pubblica sito e fotografie**, che:
-
-1. controlla nomi, formato e dimensioni;
-2. crea JPG e WebP ottimizzati;
-3. aggiorna le pagine italiane e inglesi;
-4. elimina i file temporanei dalla cartella di caricamento;
-5. salva le modifiche nel repository;
-6. genera e pubblica GitHub Pages.
-
-L'automazione genera AVIF e WebP responsive con JPG di fallback. La qualità visiva
-ha priorità sul peso: 1,5 MiB per il JPG, 1,25 MiB per il WebP grande e 400 KiB per
-il WebP da 960 px sono obiettivi, non limiti assoluti. Lo script non scende sotto
-qualità 82 per il JPG e 78 per il WebP; per fotografie complesse tollera un peso
-maggiore entro un tetto di sicurezza. I tetti sono 2 MiB per il JPG, 1,75 MiB per
-il WebP grande, 600 KiB per il WebP da 960 px, 1,5 MiB per l'AVIF grande e 450 KiB
-per l'AVIF da 960 px. L'AVIF usa una scala distinta e non scende sotto qualità 68.
-Se anche il tetto viene superato, la pubblicazione si ferma e la galleria online
-rimane invariata.
-
-Lo stato si vede nella scheda **Actions** del repository. Un segno verde indica che
-l'operazione è riuscita. La pubblicazione del sito può richiedere alcuni minuti.
-
-Se compare un segno rosso, non ripetere il caricamento: i JPG restano disponibili
-e si può chiedere a Codex di controllare e riavviare il processo.
-
-## Se il Mac non è disponibile
-
-Il sito, l'automazione, le guide e tutte le fotografie già pubblicate rimangono su
-GitHub. Da un altro computer o da iPhone basta accedere al proprio account GitHub
-e seguire la procedura online. Non è necessario ricostruire il sito o installare
-programmi.
-
-Questa automazione protegge la possibilità di gestire il sito, non sostituisce il
-backup dell'archivio fotografico originale. Conservare gli originali anche su un
-servizio cloud o su un secondo disco.
-
-## Procedura alternativa con Codex sul Mac
-
-Se si usa il Mac abituale:
-
-1. esportare JPG in sRGB, qualità 90 e lato lungo di circa 4000 px;
-2. inserirli nella sezione corretta dentro `foto-sorgenti`;
-3. scrivere a Codex, per esempio:
-   `Ho inserito le fotografie in architettura. Controlla e pubblica.`
-
-Codex eseguirà ottimizzazione, verifica, commit e push.
-
-## Procedura manuale con GitHub Desktop
-
-In assenza di Codex ma usando il Mac configurato:
-
-1. inserire la selezione completa dentro `foto-sorgenti`;
-2. fare doppio clic su `Aggiorna portfolio.command`;
-3. attendere **Operazione completata**;
-4. aprire GitHub Desktop;
-5. eseguire **Commit to main** e **Push origin**.
-
-## Controllo rapido online
-
-- [ ] JPG in sRGB, lato lungo da 2048 a 3000 px, preferibilmente sotto 10 MiB
-- [ ] Selezione completa della sezione
-- [ ] File numerati nell'ordine desiderato
-- [ ] Cartella online corretta
-- [ ] Da iPhone: JPG salvati nell'app File, non HEIC
-- [ ] Commit changes
-- [ ] Workflow verde nella scheda Actions
-- [ ] Controllo del sito online
+Il repository è pubblico. Caricare soltanto copie già destinate al sito, mai RAW,
+originali d'archivio, file riservati o fotografie alla massima risoluzione.

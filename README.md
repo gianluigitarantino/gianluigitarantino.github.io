@@ -1,92 +1,75 @@
-# gianluigitarantino.com
+# GUIDA — Come pubblicare le fotografie
 
-Portfolio statico di Gianluigi Tarantino, fotografo di architettura, interni e hospitality.
+Questa è la procedura da seguire per sostituire le fotografie del sito da un
+computer o da iPhone. Non servono Codex, Terminale o GitHub Desktop.
 
-**Per pubblicare o sostituire le fotografie:** seguire
-[LEGGIMI-PUBBLICARE-FOTO.md](LEGGIMI-PUBBLICARE-FOTO.md).
+## 1. Preparare la galleria
 
-## Stack e hosting
+Preparare **tutta la selezione finale** della sezione, non soltanto le fotografie
+nuove.
 
-- HTML, CSS e JavaScript vanilla
-- GitHub Pages con Jekyll
-- GitHub Actions per elaborazione immagini e pubblicazione
-- Dominio pubblico: `https://www.gianluigitarantino.com`
-- URL puliti gestiti tramite front matter `permalink`
-- Redirect dai precedenti URL `.html` tramite `jekyll-redirect-from`
+I file devono essere:
 
-## Pagine pubbliche
+- JPG;
+- profilo colore sRGB;
+- qualità circa 85–90;
+- lato lungo da 2048 a 3000 px;
+- preferibilmente sotto 10 MiB ciascuno;
+- numerati nell'ordine desiderato: `01.jpg`, `02.jpg`, `03.jpg` e così via.
 
-Italiano:
+Se si carica un solo JPG, la galleria verrà sostituita con una sola fotografia.
 
-- `/`
-- `/architettura/`
-- `/interior/`
-- `/personale/`
-- `/profilo/`
+## 2. Aprire la cartella corretta
 
-English:
+Accedere con un account GitHub autorizzato a modificare il repository e aprire:
 
-- `/en/`
-- `/en/architecture/`
-- `/en/interiors/`
-- `/en/personal/`
-- `/en/about/`
+https://github.com/gianluigitarantino/gianluigitarantino.github.io/tree/main/carica-foto
 
-I precedenti indirizzi dei servizi reindirizzano a `/profilo/` in italiano e a `/en/about/` in inglese.
+Scegliere una cartella:
 
-## Regole
+- `home`: homepage;
+- `architettura`: pagina Architettura;
+- `interior`: pagina Interior;
+- `personale`: pagina Personale.
 
-- Nei link interni, nelle canonical e nella sitemap usare solo URL puliti con slash finale.
-- La homepage deve puntare a `/`, mai a `/index.html`.
-- Ogni pagina deve mantenere un `<title>`, una meta description e una canonical unici.
-- Ogni lingua deve avere un URL separato, contenere una sola lingua e dichiarare le versioni reciproche con `hreflang` (`it`, `en` e `x-default`).
-- Il selettore lingua deve collegare direttamente le due pagine equivalenti.
-- Le immagini del portfolio devono avere WebP responsive, JPG di fallback, dimensioni dichiarate e alt text descrittivi.
-- Non aggiungere framework o dipendenze client-side senza una necessità reale.
-- Non aggiungere `.nojekyll`: disabiliterebbe i permalink e i redirect.
+Aggiornare una sezione alla volta.
 
-## Aggiornare le fotografie
+## 3. Caricare i file
 
-La procedura principale funziona online da qualsiasi computer e anche da iPhone:
+Dentro la cartella scelta:
 
-1. Esportare la selezione completa in JPG sRGB, lato lungo da 2048 a 3000 px e
-   preferibilmente sotto 10 MiB per file.
-2. Numerare i file nell'ordine desiderato: `01.jpg`, `02.jpg`, `03.jpg`.
-3. Caricarli nella sezione corretta dentro `carica-foto/` usando GitHub web.
-4. Premere `Commit changes`.
+1. premere **Add file → Upload files**;
+2. selezionare tutti i JPG della galleria finale;
+3. controllare nomi, ordine e sezione;
+4. premere **Commit changes** e confermare il salvataggio su `main`.
 
-Da iPhone usare Safari e salvare prima i JPG nell'app File. Se il pulsante
-`Add file` non è visibile, scegliere `aA → Richiedi sito desktop`. Non caricare
-direttamente file HEIC dall'app Foto: convertirli o esportarli prima in JPG.
-L'upload web accetta fino a 100 file contemporaneamente, ciascuno sotto 25 MiB.
+Il resto viene eseguito automaticamente.
 
-Il workflow `.github/workflows/pubblica-sito.yml` installa Sharp, ottimizza le
-immagini, aggiorna le pagine in entrambe le lingue, salva i risultati e distribuisce
-direttamente GitHub Pages. I JPG temporanei vengono rimossi dopo un'elaborazione
-riuscita. `carica-foto/` è esclusa dalla build Jekyll.
+## 4. Controllare la pubblicazione
 
-Lo script genera AVIF e WebP responsive con JPG di fallback. Il peso indicato è un
-obiettivo, non un vincolo che prevale sulla resa fotografica: la qualità non scende
-sotto 82 per il JPG e 78 per il WebP. Le fotografie complesse possono superare
-l'obiettivo entro un tetto di sicurezza; oltre quel tetto la pubblicazione si
-interrompe senza sostituire la galleria esistente. I tetti sono 2 MiB per il JPG,
-1,75 MiB per il WebP grande, 600 KiB per il WebP da 960 px, 1,5 MiB per l'AVIF
-grande e 450 KiB per l'AVIF da 960 px. L'AVIF usa una scala distinta e non scende
-sotto qualità 68.
+Aprire:
 
-Il flusso locale resta disponibile: gli originali dentro `foto-sorgenti/` sono
-esclusi da Git e possono essere elaborati con Codex o con
-`Aggiorna portfolio.command`.
+https://github.com/gianluigitarantino/gianluigitarantino.github.io/actions
 
-Per sostituire una galleria, la relativa cartella sorgente deve contenere la
-selezione completa nel suo ordine finale. Le descrizioni alternative non visibili
-possono essere definite facoltativamente in `foto-sorgenti/descrizioni.json`,
-seguendo il modello `strumenti/descrizioni.example.json`. Se il file non è
-presente, lo script usa una descrizione neutra e non visibile.
+Attendere il segno verde accanto a **Pubblica sito e fotografie**, quindi
+controllare la sezione aggiornata su:
 
-## SEO
+https://www.gianluigitarantino.com
 
-- Sitemap: `/sitemap.xml`
-- Robots: `/robots.txt`
-- Dati strutturati JSON-LD presenti nelle pagine principali
-- Le attività esterne necessarie sono elencate in `SEO-AZIONI-ESTERNE.md`
+La pubblicazione può richiedere alcuni minuti. Se compare un segno rosso, non
+ripetere il caricamento: chiedere a Codex di controllare il problema.
+
+## Da iPhone
+
+1. esportare o convertire le fotografie in JPG;
+2. salvarle nell'app **File**, già numerate;
+3. aprire GitHub con **Safari**;
+4. se **Add file** non compare, premere **aA → Richiedi sito desktop**;
+5. seguire la stessa procedura indicata sopra.
+
+Non caricare direttamente file HEIC dall'app Foto.
+
+## Importante
+
+Il repository è pubblico. Caricare soltanto copie già destinate al sito, mai RAW,
+originali d'archivio, file riservati o fotografie alla massima risoluzione.
