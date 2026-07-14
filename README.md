@@ -2,6 +2,9 @@
 
 Portfolio statico di Gianluigi Tarantino, fotografo di architettura, interni e hospitality.
 
+**Per pubblicare o sostituire le fotografie:** seguire
+[LEGGIMI-PUBBLICARE-FOTO.md](LEGGIMI-PUBBLICARE-FOTO.md).
+
 ## Stack e hosting
 
 - HTML, CSS e JavaScript vanilla
