@@ -1,7 +1,7 @@
 # Caricamento online delle fotografie
 
-Questa cartella permette di aggiornare il sito da qualsiasi computer, senza Codex,
-Terminale o GitHub Desktop.
+Questa cartella permette di aggiornare il sito da qualsiasi computer o da iPhone,
+senza Codex, Terminale o GitHub Desktop.
 
 ## Procedura
 
@@ -11,6 +11,18 @@ Terminale o GitHub Desktop.
 4. Premere **Commit changes**.
 5. Attendere il completamento del workflow **Pubblica sito e fotografie** nella
    scheda **Actions**.
+
+## Da iPhone
+
+1. Convertire o esportare le fotografie in JPG e salvarle nell'app **File**.
+2. Aprire questa cartella con **Safari**.
+3. Se **Add file** non compare, premere **aA → Richiedi sito desktop**.
+4. Caricare dall'app File tutta la galleria numerata, quindi premere
+   **Commit changes**.
+5. Controllare che il workflow nella scheda **Actions** diventi verde.
+
+Non caricare HEIC direttamente dall'app Foto: l'automazione accetta JPG e JPEG.
+L'upload web consente fino a 100 file contemporaneamente, ciascuno sotto 25 MiB.
 
 Le cartelle disponibili sono:
 

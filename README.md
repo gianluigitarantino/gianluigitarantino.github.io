@@ -47,12 +47,17 @@ I precedenti indirizzi dei servizi reindirizzano a `/profilo/` in italiano e a `
 
 ## Aggiornare le fotografie
 
-La procedura principale funziona online da qualsiasi computer:
+La procedura principale funziona online da qualsiasi computer e anche da iPhone:
 
 1. Esportare la selezione completa in JPG sRGB, lato lungo da 2048 a 3000 px.
 2. Numerare i file nell'ordine desiderato: `01.jpg`, `02.jpg`, `03.jpg`.
 3. Caricarli nella sezione corretta dentro `carica-foto/` usando GitHub web.
 4. Premere `Commit changes`.
+
+Da iPhone usare Safari e salvare prima i JPG nell'app File. Se il pulsante
+`Add file` non è visibile, scegliere `aA → Richiedi sito desktop`. Non caricare
+direttamente file HEIC dall'app Foto: convertirli o esportarli prima in JPG.
+L'upload web accetta fino a 100 file contemporaneamente, ciascuno sotto 25 MiB.
 
 Il workflow `.github/workflows/pubblica-sito.yml` installa Sharp, ottimizza le
 immagini, aggiorna le pagine in entrambe le lingue, salva i risultati e distribuisce

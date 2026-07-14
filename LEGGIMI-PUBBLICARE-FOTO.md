@@ -1,7 +1,8 @@
 # LEGGIMI — Come pubblicare le fotografie
 
-Il sito può essere aggiornato da qualsiasi computer con un browser. Il Mac abituale,
-Codex, il Terminale e GitHub Desktop non sono necessari per la procedura online.
+Il sito può essere aggiornato da qualsiasi computer con un browser e anche da
+iPhone. Il Mac abituale, Codex, il Terminale e GitHub Desktop non sono necessari
+per la procedura online.
 
 ## Procedura consigliata: caricamento online
 
@@ -47,6 +48,19 @@ Dentro la cartella della sezione:
 
 È preferibile aggiornare una sezione alla volta.
 
+### Da iPhone
+
+1. esportare o convertire prima le immagini in JPG;
+2. salvarle nell'app **File**, già numerate `01.jpg`, `02.jpg`, `03.jpg`;
+3. aprire il collegamento di caricamento con **Safari**;
+4. se **Add file** non compare, premere **aA → Richiedi sito desktop**;
+5. usare **Add file → Upload files** e scegliere i JPG dall'app File;
+6. premere **Commit changes** e controllare il risultato nella scheda **Actions**.
+
+Non caricare direttamente file HEIC dall'app Foto: l'automazione accetta JPG e
+JPEG. GitHub permette dal browser fino a 100 file alla volta e richiede che ogni
+file sia inferiore a 25 MiB.
+
 ### 4. Attendere la pubblicazione
 
 GitHub avvia automaticamente il workflow **Pubblica sito e fotografie**, che:
@@ -67,8 +81,9 @@ e si può chiedere a Codex di controllare e riavviare il processo.
 ## Se il Mac non è disponibile
 
 Il sito, l'automazione, le guide e tutte le fotografie già pubblicate rimangono su
-GitHub. Da un altro computer basta accedere al proprio account GitHub e seguire la
-procedura online. Non è necessario ricostruire il sito o installare programmi.
+GitHub. Da un altro computer o da iPhone basta accedere al proprio account GitHub
+e seguire la procedura online. Non è necessario ricostruire il sito o installare
+programmi.
 
 Questa automazione protegge la possibilità di gestire il sito, non sostituisce il
 backup dell'archivio fotografico originale. Conservare gli originali anche su un
@@ -101,6 +116,7 @@ In assenza di Codex ma usando il Mac configurato:
 - [ ] Selezione completa della sezione
 - [ ] File numerati nell'ordine desiderato
 - [ ] Cartella online corretta
+- [ ] Da iPhone: JPG salvati nell'app File, non HEIC
 - [ ] Commit changes
 - [ ] Workflow verde nella scheda Actions
 - [ ] Controllo del sito online
