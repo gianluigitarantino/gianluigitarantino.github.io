@@ -101,19 +101,6 @@ img { max-width: 100%; }
 #voci_menu a:focus, #voci_menu a:visited, #voci_menu a:active { color: var(--ink); }
 #voci_menu a:hover, #voci_menu a.active, #voci_menu a[aria-current="page"] { color: var(--accent); }
 
-.page-copy { max-width: 310px; margin-top: 28px; color: var(--muted); }
-.page-copy > summary { display: none; }
-.page-copy__content h1 {
-  margin: 0 0 10px;
-  font-size: 15px;
-  line-height: 1.35;
-  letter-spacing: 0.02em;
-  font-weight: 450;
-  color: var(--ink);
-}
-.page-copy__content p { margin: 0 0 11px; font-size: 12.8px; line-height: 1.52; font-weight: 300; }
-.page-copy__link a { border-bottom: 1px solid rgba(90, 85, 78, 0.28); padding-bottom: 1px; }
-
 #slide_counter { margin-top: 28px; font-size: 14px; font-weight: 300; color: var(--muted); letter-spacing: 0.1em; }
 #lingua { margin-top: 24px; }
 #lingua > span { font-weight: 300; color: var(--soft); font-size: 14px; line-height: 1.6; letter-spacing: 0.15em; }
@@ -235,14 +222,13 @@ img { max-width: 100%; }
 .slider:focus-visible { outline: 1px solid var(--soft); outline-offset: 4px; }
 
 @media (hover: hover) and (pointer: fine) and (min-width: 1025px) {
-  body, a, button, summary, .slider { cursor: none !important; }
+  body, a, button, .slider { cursor: none !important; }
 }
 
 @media (max-width: 1200px) {
   #menu { padding-left: 22px; min-width: 250px; }
   #logo > span:first-child { font-size: 28px; }
   #logo > span:last-child, #voci_menu { font-size: 14.5px; }
-  .page-copy__content p { font-size: 12px; }
   .content-page { padding-inline: 24px; }
 }
 
@@ -259,26 +245,6 @@ img { max-width: 100%; }
   #voci_menu { margin-top: 10px; font-size: 12.5px; line-height: 1.55; }
   #contatti { margin: 24px 0 14px; font-size: 12px; }
   #piva_policy { padding: 0 10px 10px; font-size: 10.5px; }
-
-  .page-copy { margin-top: 7px; max-width: none; }
-  .page-copy > summary { display: inline-block; list-style: none; color: var(--soft); font-size: 11px; font-weight: 300; letter-spacing: 0.12em; cursor: pointer; }
-  .page-copy > summary::-webkit-details-marker { display: none; }
-  .page-copy__content {
-    position: absolute;
-    top: 100%;
-    left: 10px;
-    right: 10px;
-    z-index: 120;
-    max-height: calc(100dvh - 160px);
-    overflow-y: auto;
-    padding: 18px 16px 22px;
-    text-align: left;
-    background: var(--paper);
-    border-top: 1px solid rgba(90, 85, 78, 0.16);
-    box-shadow: 0 18px 30px rgba(90, 85, 78, 0.08);
-  }
-  .page-copy__content h1 { font-size: 18px; }
-  .page-copy__content p { font-size: 13px; line-height: 1.58; }
 
   .slider { width: 100%; flex: 1 1 auto; min-height: 0; margin: 0; padding: 0 10px; display: flex; flex-direction: column; justify-content: center; }
   .slides { flex-direction: column; height: 100%; }

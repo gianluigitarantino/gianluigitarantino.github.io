@@ -12,7 +12,6 @@ const CONFIG = {
         pivaPolicy: '#piva_policy',
         contatti: '#contatti',
         topbar: '#topbar',
-        pageCopy: '.page-copy',
         customCursor: '.custom-cursor',
         navArrowUp: '.nav-arrow.up',
         navArrowDown: '.nav-arrow.down'
@@ -28,18 +27,15 @@ class LayoutManager {
             slider: document.querySelector(CONFIG.selectors.slider),
             contentPage: document.querySelector(CONFIG.selectors.contentPage),
             piva: document.querySelector(CONFIG.selectors.pivaPolicy),
-            contatti: document.querySelector(CONFIG.selectors.contatti),
-            pageCopies: [...document.querySelectorAll(CONFIG.selectors.pageCopy)]
+            contatti: document.querySelector(CONFIG.selectors.contatti)
         };
         this.heightCheckTarget = this.els.slider || this.els.contentPage;
-        this.lastMode = null;
         this.init();
     }
 
     init() {
         this.handleResize();
         this.setupActiveLink();
-        this.setupPageCopyDismissal();
         window.addEventListener('resize', () => this.handleResize());
         window.addEventListener('load', () => this.handleResize());
         if (this.heightCheckTarget && 'ResizeObserver' in window) {
@@ -50,18 +46,9 @@ class LayoutManager {
     handleResize() {
         if (!this.els.wrapper) return;
         const isMobile = window.innerWidth <= CONFIG.breakpoints.mobile;
-        const mode = isMobile ? 'mobile' : 'desktop';
 
         if (isMobile) this.setupMobileLayout();
         else this.restoreDesktopLayout();
-
-        if (mode !== this.lastMode) {
-            this.els.pageCopies.forEach(copy => {
-                if (isMobile) copy.removeAttribute('open');
-                else copy.setAttribute('open', '');
-            });
-            this.lastMode = mode;
-        }
         this.checkHeightConstraint();
     }
 
@@ -127,18 +114,6 @@ class LayoutManager {
         });
     }
 
-    setupPageCopyDismissal() {
-        document.addEventListener('keydown', event => {
-            if (event.key === 'Escape') this.els.pageCopies.forEach(copy => copy.removeAttribute('open'));
-        });
-        document.addEventListener('click', event => {
-            if (window.innerWidth > CONFIG.breakpoints.mobile) return;
-            this.els.pageCopies.forEach(copy => {
-                if (copy.open && !copy.contains(event.target)) copy.removeAttribute('open');
-            });
-        });
-    }
-
     checkHeightConstraint() {
         if (!this.els.slider) return;
         const availableHeight = window.innerHeight - 180;
@@ -154,7 +129,7 @@ class CursorManager {
 
     init() {
         document.addEventListener('mousemove', event => this.moveCursor(event));
-        document.querySelectorAll('a, button, summary').forEach(element => {
+        document.querySelectorAll('a, button').forEach(element => {
             element.addEventListener('mouseenter', () => this.activate());
             element.addEventListener('mouseleave', () => this.deactivate());
         });
