@@ -70,6 +70,24 @@
       "it": "Lampade sferiche e struttura a vista in un interno contemporaneo",
       "en": "Spherical lights and exposed structure in a contemporary interior",
       "model": "existing-reviewed"
+    },
+    "04": {
+      "sha256": "68bbc577725f8842dd15eae759aed53ecbc975f2fe4931fb0e41eca5f769951d",
+      "it": "Camera dai toni chiari con letto, panca in legno, nicchie e grandi archi intonacati",
+      "en": "Light-toned bedroom with a bed, wooden bench, niches and broad plastered arches",
+      "model": "codex-visual-review"
+    },
+    "05": {
+      "sha256": "594e3722708da9463b61354dfde5ec1b32e5d4b608439ba8d275c62c75f71940",
+      "it": "Camera dai toni chiari con porta vetrata, specchio, nicchie e arredi in legno",
+      "en": "Light-toned bedroom with a glazed door, mirror, niches and wooden furniture",
+      "model": "codex-visual-review"
+    },
+    "06": {
+      "sha256": "f8e28f86d2758543a743d0dae06f0a214302b081e4c45dc28d18df5e18fa5aaf",
+      "it": "Vaso nero e bianco in una nicchia tra pareti intonacate e profili curvi",
+      "en": "Black-and-white vase in a niche between plastered walls and curved profiles",
+      "model": "codex-visual-review"
     }
   },
   "personale": {
