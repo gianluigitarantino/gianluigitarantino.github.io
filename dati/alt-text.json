@@ -50,6 +50,24 @@
       "it": "Finestre verticali su una facciata in cemento del Barbican Estate",
       "en": "Vertical windows on a concrete façade at the Barbican Estate",
       "model": "existing-reviewed"
+    },
+    "04": {
+      "sha256": "e5177942eb64c31d26807f5f7a695c802da26133683a7a5301f87e994220c9ee",
+      "it": "Complesso residenziale contemporaneo con balconi e terrazze, visto oltre un parco alberato",
+      "en": "Contemporary residential complex with balconies and terraces beyond a tree-lined park",
+      "model": "codex-visual-review"
+    },
+    "05": {
+      "sha256": "8b0337f221e01c82778cc1a687a92c3495abba8345a4ab05bb1d86e3c5973a7f",
+      "it": "Edificio residenziale incorniciato da volumi bassi, con facciata in pietra e pannelli azzurri",
+      "en": "Residential building framed by lower volumes, with stone cladding and blue panels",
+      "model": "codex-visual-review"
+    },
+    "06": {
+      "sha256": "db5230ad5437e6779b4122c56f845cb5999beb4248833ef88c63f7d3886b5186",
+      "it": "Dettaglio di una facciata residenziale rivestita in pietra, con balconi vetrati e telai metallici",
+      "en": "Detail of a residential façade with stone cladding, glazed balconies and metal frames",
+      "model": "codex-visual-review"
     }
   },
   "interior": {

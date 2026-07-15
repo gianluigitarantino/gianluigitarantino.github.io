@@ -44,6 +44,8 @@ function fail(message) {
   throw new Error(message);
 }
 
+class ApiQuotaError extends Error {}
+
 async function exists(filePath) {
   try {
     await access(filePath, fsConstants.F_OK);
@@ -327,6 +329,12 @@ async function requestAltText(sectionName, source) {
 
   if (!response.ok) {
     const apiMessage = payload?.error?.message ? `: ${payload.error.message}` : "";
+    const quotaMessage = payload?.error?.message ?? "";
+    if (response.status === 429 && /quota|billing|plan/i.test(quotaMessage)) {
+      throw new ApiQuotaError(
+        `Analisi di ${source.filename} non riuscita (HTTP ${response.status})${apiMessage}`,
+      );
+    }
     fail(`Analisi di ${source.filename} non riuscita (HTTP ${response.status})${apiMessage}`);
   }
 
@@ -407,6 +415,9 @@ async function main() {
   const cache = await readCache();
   const selections = [];
   let newAnalyses = 0;
+  let completedAnalyses = 0;
+  let skippedForQuota = 0;
+  let quotaUnavailable = false;
 
   for (const sectionName of Object.keys(sections)) {
     const sources = useExistingImages
@@ -454,9 +465,20 @@ async function main() {
       if (cachedAltIsValid(cached, source)) {
         updatedSection[source.orderKey] = cached;
         console.log(`  ${source.filename}: alt text già disponibile`);
+      } else if (quotaUnavailable) {
+        skippedForQuota += 1;
+        console.warn(`  ${source.filename}: uso temporaneamente l'alt text generico`);
       } else {
         console.log(`  ${source.filename}: analisi visiva in corso`);
-        updatedSection[source.orderKey] = await requestAltText(sectionName, source);
+        try {
+          updatedSection[source.orderKey] = await requestAltText(sectionName, source);
+          completedAnalyses += 1;
+        } catch (error) {
+          if (!(error instanceof ApiQuotaError)) throw error;
+          quotaUnavailable = true;
+          skippedForQuota += 1;
+          console.warn(`  ${source.filename}: credito API esaurito, uso temporaneamente l'alt text generico`);
+        }
       }
     }
 
@@ -469,7 +491,12 @@ async function main() {
 
   await atomicWrite(cachePath, `${JSON.stringify(cache, null, 2)}\n`);
   await Promise.all(pageUpdates.map(({ pagePath, updated }) => atomicWrite(pagePath, updated)));
-  console.log(`\nAlt text pronti. Nuove fotografie analizzate: ${newAnalyses}.`);
+  console.log(`\nAlt text pronti. Nuove fotografie analizzate: ${completedAnalyses}.`);
+  if (skippedForQuota) {
+    console.warn(
+      `Alt text generico usato per ${skippedForQuota} fotografie: la pubblicazione continua anche senza credito API.`,
+    );
+  }
   if (useExistingImages) console.log("Pagine italiane e inglesi aggiornate senza ricomprimere le fotografie.");
 }
 
